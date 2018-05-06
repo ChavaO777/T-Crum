@@ -45,10 +45,10 @@
           </div>
 
           <div class="form-group"></div>
-          
+
           <div>
             <label class="bmd-label-floating" for="profilePicture">Agregar una imagen</label>
-            <input class="btn btn-primary" type="file" name="fileupload" value="fileupload" id="fileupload" accept="image/*">
+            <input class="btn btn-primary" type="file" name="fileupload" value="fileupload" [(ngModel)]="member.photo_URL" id="fileupload" accept="image/*">
           </div>
           <button type="submit" class="btn btn-primary pull-right">Registrarme</button>
           <div class="clearfix"></div>
