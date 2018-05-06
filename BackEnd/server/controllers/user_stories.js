@@ -19,7 +19,6 @@ module.exports = {
     if (!req.body.sprint_id)
       return res.status(400).send({message: 'sprint_id attribute can not be empty.'});
 
-
     return User_story
       .create({
         weight: req.body.weight,
@@ -53,15 +52,15 @@ module.exports = {
           { model: Sprint, as: 'sprint' },
         ],
       })
-      .then(user_story => {
-        if (!user_story) {
+      .then(User_story => {
+        if (!User_story) {
           return res.status(400).send({
             message: 'User_story not found',
           });
         }
-        return res.status(200).send(user_story);
+        return res.status(200).send(User_story);
       })
-      .catch(error => res.status(400).send(user_story));
+      .catch(error => res.status(400).send(User_story));
   },
   update(req, res) {
 
@@ -91,8 +90,8 @@ module.exports = {
       .findById(req.params.id, {
         include: [ { model: Sprint, as: 'sprint'}]
       })
-      .then(user_story => {
-        if (!user_story) {
+      .then(User_story => {
+        if (!User_story) {
           return res.status(400).send({
             message: 'User_story not found',
           });
@@ -105,7 +104,7 @@ module.exports = {
             priority: req.body.priority || User_story.priority,
             sprint_id: req.params.sprint_id || User_story.sprint_id,
           })
-          .then(() => res.status(200).send(user_story))  // Send back the updated tuple.
+          .then(() => res.status(200).send(User_story))  // Send back the updated tuple.
           .catch((error) => res.status(400).send(error));
       })
       .catch((error) => res.status(400).send(error));
@@ -113,8 +112,8 @@ module.exports = {
   destroy(req, res) {
     return User_story
       .findById(req.params.id)
-      .then(user_story => {
-        if (!user_story) {
+      .then(User_story => {
+        if (!User_story) {
           return res.status(400).send({
             message: 'User Story not found',
           });

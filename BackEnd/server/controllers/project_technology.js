@@ -70,10 +70,10 @@ module.exports = {
           });
         }
         return Project_technology
-          .update({
-            technology_id: req.body.technology_id,
-            project_id: req.body.project_id,
-            version: req.body.version
+          .update({ //Warning: it seems that FKs can't be updated. They're also PKs.
+            technology_id: req.body.technology_id || Project_technology.technology_id,
+            project_id: req.body.project_id || Project_technology.project_id,
+            version: req.body.version || Project_technology.version,
           })
           .then(() => res.status(200).send(Project_technology))  // Send back the updated tuple.
           .catch((error) => res.status(400).send(error));
