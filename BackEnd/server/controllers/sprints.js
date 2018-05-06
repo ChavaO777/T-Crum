@@ -100,7 +100,7 @@ module.exports = {
                         comment: req.body.comment || Sprint.comment,
                         project_id: req.body.project_id || Sprint.project_id,
                     })
-                    .then(() => res.status(200).send(Sprint)) // Send back the updated member
+                    .then(() => res.status(200).send(Sprint)) // Send back the updated sprint
                     .catch((error) => res.status(400).send(error));
             })
             .catch((error) => res.status(400).send(error));

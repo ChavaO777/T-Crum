@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
-    const Member_task = sequelize.define('Member_tasks', {
+    const User_task = sequelize.define('User_tasks', {
         id: {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
             type: DataTypes.INTEGER
         },
-        member_id: {
+        user_id: {
             allowNull: false,
             type: DataTypes.STRING
         },
@@ -16,5 +16,5 @@ module.exports = (sequelize, DataTypes) => {
         },
     });
 
-    return Member_task;
+    return User_task;
 };

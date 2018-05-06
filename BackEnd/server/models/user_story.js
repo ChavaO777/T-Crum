@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
 
       allowNull: false,
       autoIncrement: true,
-      primaryKey:true,
+      primaryKey: true,
       type: DataTypes.INTEGER
     },
     weight: {
@@ -30,25 +30,33 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  
-//Relation between User_story and Sprint
-  User_story.associate = function (models) {
-    
-    User_story.belongsTo(models.Sprint, {
-      foreignKey: {name: 'sprint_id', allowNull: false},
-      onDelete: 'CASCADE',
-      as: 'sprint'
-    }),
-    User_story.hasMany(models.Acceptance_criteria, {
-      foreignKey: {name: 'user_story_id', allowNull: false}, //Is this the foreign key??
-      onDelete: 'CASCADE',
-    }),
-    User_story.hasMany(models.Task, {
-      foreignKey: {name: 'user_story_id', allowNull: false}, //Is this the foreign key??
-      onDelete: 'CASCADE',
-      as: 'Tasks'
-    })
-};
-return User_story;
-};
 
+  //Relation between User_story and Sprint
+  User_story.associate = function (models) {
+
+    User_story.belongsTo(models.Sprint, {
+        foreignKey: {
+          name: 'sprint_id',
+          allowNull: false
+        },
+        onDelete: 'CASCADE',
+        as: 'sprint'
+      }),
+      User_story.hasMany(models.Acceptance_criteria, {
+        foreignKey: {
+          name: 'user_story_id',
+          allowNull: false
+        }, //Is this the foreign key??
+        onDelete: 'CASCADE',
+      }),
+      User_story.hasMany(models.Task, {
+        foreignKey: {
+          name: 'user_story_id',
+          allowNull: false
+        }, //Is this the foreign key??
+        onDelete: 'CASCADE',
+        as: 'Tasks'
+      })
+  };
+  return User_story;
+};

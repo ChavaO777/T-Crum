@@ -1,6 +1,6 @@
 const tasks = require('../models').Task;
 const User_story = require('../models').User_story;
-const Member = require('../models').Member;
+const User = require('../models').User;
 
 module.exports = {
   create(req, res) {
@@ -50,8 +50,8 @@ module.exports = {
             as: 'user_story'
           },
           {
-            model: Member,
-            as: 'members'
+            model: User,
+            as: 'users'
           }
         ],
       })
@@ -74,8 +74,8 @@ module.exports = {
             as: 'user_story'
           },
           {
-            model: Member,
-            as: 'members'
+            model: User,
+            as: 'users'
           }
         ],
       })
@@ -89,7 +89,7 @@ module.exports = {
       })
       .catch(error => res.status(400).send(tasks));
   },
-  listTaskWithUsers(req, res) //All users (members) that participate in a particular task
+  listTaskWithUsers(req, res) //All users that participate in a particular task
   {
     if (!req.params.id || isNaN(req.params.id)){
       return res.status(400).send({
@@ -99,7 +99,7 @@ module.exports = {
 
     return tasks.findById(req.params.id, {
         include: [{
-          model: Member,
+          model: User,
           as: 'users'
         }]
       })

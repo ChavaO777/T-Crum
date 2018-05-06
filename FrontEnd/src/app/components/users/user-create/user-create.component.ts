@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { CrudService } from '../../../services/crud.service';
 import { Router } from '@angular/router';
-import { Member } from '../../../models/member.model';
+import { User } from '../../../models/user.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
-  selector: 'app-member-create',
-  templateUrl: './member-create.component.html',
-  styleUrls: ['./member-create.component.css']
+  selector: 'app-user-create',
+  templateUrl: './user-create.component.html',
+  styleUrls: ['./user-create.component.css']
 })
-export class MemberCreateComponent implements OnInit {
-  member: Member;
+export class UserCreateComponent implements OnInit {
+  user: User;
   //A string to store the password confirmation
   passwordConfirmation: string; 
 
@@ -23,20 +23,20 @@ export class MemberCreateComponent implements OnInit {
       this.router.navigate(['home'])
     }
     this.passwordConfirmation = '';
-    this.member = new Member('', '', '', '', '', null, null, '');
+    this.user = new User('', '', '', '', '', null, null, '');
   }
 
   /**
-   * Method to create a member with the parameters
+   * Method to create a user with the parameters
    * that are asked for in the registration view.
    */
-  createMember() {
+  createUser() {
 
     if (this.validateNonEmptyFields() && this.areEqualPasswords()) {
 
-      this.crud.registerMember(this.member)
+      this.crud.registerUser(this.user)
         .subscribe(
-          (res: Member) => {
+          (res: User) => {
 
             /*  
               Ideally, a errorMessage of success should be displayed
@@ -67,10 +67,10 @@ export class MemberCreateComponent implements OnInit {
    * return false.
    */
   validateNonEmptyFields() {
-    if (!this.member.id || 
-        !this.member.name || 
-        !this.member.department_major || 
-        !this.member.password || 
+    if (!this.user.id || 
+        !this.user.name || 
+        !this.user.department_major || 
+        !this.user.password || 
         !this.passwordConfirmation) {
           this.errorHandler.showErrorMessage('Debes introducir tu matrícula, nombre, carrera o departamento, contraseña y la confirmación de la misma.');
       return false;
@@ -89,7 +89,8 @@ export class MemberCreateComponent implements OnInit {
    */
   areEqualPasswords() {
 
-    if (this.member.password == this.passwordConfirmation) {
+    if (this.user.password == this.passwordConfirmation) {
+
       return true;
     }
     else {

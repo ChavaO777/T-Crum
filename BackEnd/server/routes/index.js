@@ -3,15 +3,15 @@ const authMiddleware = require('../middlewares/authentication');
 const tasksController = require('../controllers').tasks;
 const logsController = require('../controllers').logs;
 const sprintsController = require('../controllers').sprints;
-const membersController = require('../controllers').members;
+const usersController = require('../controllers').users;
 const acceptance_criteriaController = require('../controllers').acceptance_criteria;
-const member_taskController = require('../controllers').member_task;
-const member_projectController = require('../controllers').member_project;
+const user_taskController = require('../controllers').user_task;
+const user_projectController = require('../controllers').user_project;
 const projectsController = require('../controllers').projects;
 const project_technologyController = require('../controllers').project_technology;
 const userStoriesController = require('../controllers').user_stories;
 const authenticationController = require('../controllers').authentication;
-const technologiesController = require('../controllers').technology;
+const technologiesController = require('../controllers').technologies;
 
 module.exports = (app) => {
   app.get('/api', (req, res) => res.status(200).send({
@@ -24,7 +24,7 @@ module.exports = (app) => {
   //Routes for the TASKS table
   app.post('/api/tasks', tasksController.create);  
   app.get('/api/tasks', tasksController.list);
-  app.get('/api/tasks-members/:id', tasksController.listTaskWithUsers);
+  app.get('/api/tasks-users/:id', tasksController.listTaskWithUsers);
   app.get('/api/tasks/:id', tasksController.retrieve);
   app.put('/api/tasks/:id', tasksController.update);
   app.delete('/api/tasks/:id', tasksController.destroy);
@@ -41,14 +41,14 @@ module.exports = (app) => {
   app.put('/api/sprints/:id', sprintsController.update);
   app.delete('/api/sprints/:id', sprintsController.destroy);
 
-  //Routes for the MEMBERS table
-  app.post('/api/members', membersController.create);
-  app.get('/api/members', membersController.list);
-  app.get('/api/members/:id', membersController.retrieve);
-  app.put('/api/members/:id', membersController.update);
-  app.delete('/api/members/:id', membersController.destroy);
+  //Routes for the USERS table
+  app.post('/api/users', usersController.create);
+  app.get('/api/users', usersController.list);
+  app.get('/api/users/:id', usersController.retrieve);
+  app.put('/api/users/:id', usersController.update);
+  app.delete('/api/users/:id', usersController.destroy);
 
-  //Routes for the Project table
+  //Routes for the PROJECTS table
   app.post('/api/projects', projectsController.create);  
   app.get('/api/projects', projectsController.list);
   app.get('/api/projects/:id', projectsController.retrieve);
@@ -62,21 +62,21 @@ module.exports = (app) => {
   app.put('/api/acceptance-criteria/:id', acceptance_criteriaController.update);
   app.delete('/api/acceptance-criteria/:id', acceptance_criteriaController.destroy);
 
-  //Routes for the MEMBER_TASK table
-  app.post('/api/member-task', member_taskController.create);  
-  app.get('/api/member-task', member_taskController.list);
-  app.get('/api/member-task/:id', member_taskController.retrieve);
-  app.put('/api/member-task/:id', member_taskController.update);
-  app.delete('/api/member-task/:id', member_taskController.destroy);
+  //Routes for the USER_TASKS table
+  app.post('/api/user-task', user_taskController.create);  
+  app.get('/api/user-task', user_taskController.list);
+  app.get('/api/user-task/:id', user_taskController.retrieve);
+  app.put('/api/user-task/:id', user_taskController.update);
+  app.delete('/api/user-task/:id', user_taskController.destroy);
 
-  //Routes for the MEMBER_PROJECT table
-  app.post('/api/member-project', member_projectController.create);  
-  app.get('/api/member-project', member_projectController.list);
-  app.get('/api/member-project/:id', member_projectController.retrieve);
-  app.put('/api/member-project/:id', member_projectController.update);
-  app.delete('/api/member-project/:id', member_projectController.destroy);
+  //Routes for the USER_PROJECT table
+  app.post('/api/user-project', user_projectController.create);  
+  app.get('/api/user-project', user_projectController.list);
+  app.get('/api/user-project/:id', user_projectController.retrieve);
+  app.put('/api/user-project/:id', user_projectController.update);
+  app.delete('/api/user-project/:id', user_projectController.destroy);
 
-  //Routes for the PROJECT_TECHNOLOGY table
+  //Routes for the PROJECT_TECHNOLOGIES table
   app.post('/api/project-technology', project_technologyController.create);  
   app.get('/api/project-technology', project_technologyController.list);
   app.get('/api/project-technology/:id', project_technologyController.retrieve);

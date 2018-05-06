@@ -4,7 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Project } from '../../../models/project.model';
 import { Router, NavigationExtras } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
-import { Member } from '../../../models/member.model';
+import { User } from '../../../models/user.model';
 import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class ProjectListComponent implements OnInit {
       this.getAllProjects();
     }
     else{
-      this.getMemberProjects();
+      this.getUserProjects();
     }
     
   }
@@ -41,10 +41,10 @@ export class ProjectListComponent implements OnInit {
     )
   }
 
-  getMemberProjects(){
-    this.crud.retrieve(this.crud.models.MEMBER, this.auth.getMember().id)
+  getUserProjects(){
+    this.crud.retrieve(this.crud.models.USER, this.auth.getUser().id)
     .subscribe(
-      (res:Member)=>{
+      (res:User)=>{
         console.log(res.projects);
         this.projects = res.projects;
       },
