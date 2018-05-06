@@ -5,14 +5,14 @@ const Project = require('../models').Project;
 const bcrypt = require('bcrypt-nodejs');
 //const Validation = require('../helpers/validations').Validation;
 
-function isAValidUserId(memberId) {
+function isAValidUserId(userId) {
 
-    var memberIdStr = String(memberId).toLowerCase();
-    var memberIdStrSize = memberIdStr.length;
-    var memberIdFirstChar = memberIdStr.charAt(0);
+    var userIdStr = String(userId).toLowerCase();
+    var userIdStrSize = userIdStr.length;
+    var userIdFirstChar = userIdStr.charAt(0);
 
     //All student or professor ids have 9 characters and start with 'A' or 'L'
-    return memberIdStrSize == 9 && (memberIdFirstChar == 'a' || memberIdFirstChar == 'l');
+    return userIdStrSize == 9 && (userIdFirstChar == 'a' || userIdFirstChar == 'l');
 }
 
 function isAValidDepartment_Major(department_major) {
