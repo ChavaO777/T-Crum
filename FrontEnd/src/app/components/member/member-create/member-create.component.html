@@ -22,7 +22,7 @@
           <span>
             <b> Success</b> {{message}}</span>
         </div>
-        <form (submit)="createMember()">
+        <form (submit)="createMember()" enctype="multipart/form-data">
           <div class="form-group">
             <label class="bmd-label-floating" for="id">Matricula</label>
             <input class="form-control" type="text" id="id" name="id" [(ngModel)]="member.id">
@@ -43,9 +43,17 @@
             <label class="bmd-label-floating" for="passwordConfirmation">Confirmar contraseña</label>
             <input class="form-control" type="password" id="passwordConfirmation" name="passwordConfirmation" [(ngModel)]="passwordConfirmation">
           </div>
+
+          <div class="form-group"></div>
+          
+          <div>
+            <label class="bmd-label-floating" for="profilePicture">Agregar una imagen</label>
+            <input class="btn btn-primary" type="file" name="fileupload" value="fileupload" id="fileupload" accept="image/*">
+          </div>
           <button type="submit" class="btn btn-primary pull-right">Registrarme</button>
           <div class="clearfix"></div>
         </form>
+
       </div>
     </div>
   </div>
