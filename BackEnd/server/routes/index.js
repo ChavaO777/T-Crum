@@ -41,21 +41,6 @@ module.exports = (app) => {
   app.put('/api/sprints/:id', authMiddleware.ensureAuth, sprintsController.update);
   app.delete('/api/sprints/:id', authMiddleware.ensureAuth, sprintsController.destroy);
 
-<<<<<<< HEAD
-  //Routes for the MEMBERS table
-  app.post('/api/members', membersController.create);
-  app.get('/api/members', authMiddleware.ensureAuth, membersController.list);
-  app.get('/api/members/:id', authMiddleware.ensureAuth, membersController.retrieve);
-  app.put('/api/members/:id', authMiddleware.ensureAuth, membersController.update);
-  app.delete('/api/members/:id', authMiddleware.ensureAuth, membersController.destroy);
-
-  //Routes for the Project table
-  app.post('/api/projects', authMiddleware.ensureAuth, authMiddleware.ensureRoot, projectsController.create);  
-  app.get('/api/projects', authMiddleware.ensureAuth, projectsController.list);
-  app.get('/api/projects/:id', authMiddleware.ensureAuth, projectsController.retrieve);
-  app.put('/api/projects/:id', authMiddleware.ensureAuth, authMiddleware.ensureRoot, projectsController.update);
-  app.delete('/api/projects/:id', authMiddleware.ensureAuth, authMiddleware.ensureRoot, projectsController.destroy);
-=======
   //Routes for the USERS table
   app.post('/api/users', usersController.create);
   app.get('/api/users', usersController.list);
@@ -69,7 +54,6 @@ module.exports = (app) => {
   app.get('/api/projects/:id', projectsController.retrieve);
   app.put('/api/projects/:id', projectsController.update);
   app.delete('/api/projects/:id', projectsController.destroy);
->>>>>>> ec0acf2fe431ab3a9e5ef9b79556a1f53bdc9641
   
   //Routes for the ACCEPTANCE_CRITERIA table
   app.post('/api/acceptance-criteria', authMiddleware.ensureAuth, acceptance_criteriaController.create);  
@@ -78,28 +62,6 @@ module.exports = (app) => {
   app.put('/api/acceptance-criteria/:id', authMiddleware.ensureAuth, acceptance_criteriaController.update);
   app.delete('/api/acceptance-criteria/:id', authMiddleware.ensureAuth, acceptance_criteriaController.destroy);
 
-<<<<<<< HEAD
-  //Routes for the MEMBER_TASK table
-  app.post('/api/member-task', authMiddleware.ensureAuth, member_taskController.create);  
-  app.get('/api/member-task', authMiddleware.ensureAuth, member_taskController.list);
-  app.get('/api/member-task/:id', authMiddleware.ensureAuth, member_taskController.retrieve);
-  app.put('/api/member-task/:id', authMiddleware.ensureAuth, member_taskController.update);
-  app.delete('/api/member-task/:id', authMiddleware.ensureAuth, member_taskController.destroy);
-
-  //Routes for the MEMBER_PROJECT table
-  app.post('/api/member-project', authMiddleware.ensureAuth, member_projectController.create);  
-  app.get('/api/member-project', authMiddleware.ensureAuth, member_projectController.list);
-  app.get('/api/member-project/:id', authMiddleware.ensureAuth, member_projectController.retrieve);
-  app.put('/api/member-project/:id', authMiddleware.ensureAuth, member_projectController.update);
-  app.delete('/api/member-project/:id', authMiddleware.ensureAuth, member_projectController.destroy);
-
-  //Routes for the PROJECT_TECHNOLOGY table
-  app.post('/api/project-technology', authMiddleware.ensureAuth, authMiddleware.ensureRoot, project_technologyController.create);  
-  app.get('/api/project-technology', authMiddleware.ensureAuth, project_technologyController.list);
-  app.get('/api/project-technology/:id', authMiddleware.ensureAuth, project_technologyController.retrieve);
-  app.put('/api/project-technology/:id', authMiddleware.ensureAuth, authMiddleware.ensureRoot, project_technologyController.update);
-  app.delete('/api/project-technology/:id', authMiddleware.ensureAuth, authMiddleware.ensureRoot, project_technologyController.destroy);
-=======
   //Routes for the USER_TASKS table
   app.post('/api/user-task', user_taskController.create);  
   app.get('/api/user-task', user_taskController.list);
@@ -120,7 +82,6 @@ module.exports = (app) => {
   app.get('/api/project-technology/:id', project_technologyController.retrieve);
   app.put('/api/project-technology/:id', project_technologyController.update);
   app.delete('/api/project-technology/:id', project_technologyController.destroy);
->>>>>>> ec0acf2fe431ab3a9e5ef9b79556a1f53bdc9641
 
   //Routes for the USER_STORIES table
   app.post('/api/user-stories', authMiddleware.ensureAuth, userStoriesController.create);  

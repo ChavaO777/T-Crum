@@ -14,7 +14,8 @@ module.exports = {
           password: '$2a$10$Ke6Aa11a.k2fu3UZ1zEL9.UqM63U720h/EwJ.DZMoXIA8ZRMNPY6y',
           createdAt: Sequelize.fn('NOW'),
           updatedAt: Sequelize.fn('NOW'),
-          system_role: 'root'
+          system_role: 'root',
+          confirmed: true
         },
         {
           id: "a00000000",
@@ -24,7 +25,8 @@ module.exports = {
           password: '$2a$10$Ke6Aa11a.k2fu3UZ1zEL9.UqM63U720h/EwJ.DZMoXIA8ZRMNPY6y',
           createdAt: Sequelize.fn('NOW'),
           updatedAt: Sequelize.fn('NOW'),
-          system_role: 'user'
+          system_role: 'user',
+          confirmed: true
         },
         {
           id: "a11111111",
@@ -34,7 +36,8 @@ module.exports = {
           password: '$2a$10$Ke6Aa11a.k2fu3UZ1zEL9.UqM63U720h/EwJ.DZMoXIA8ZRMNPY6y',
           createdAt: Sequelize.fn('NOW'),
           updatedAt: Sequelize.fn('NOW'),
-          system_role: 'user'
+          system_role: 'user',
+          confirmed: true
         },
         {
           id: "a22222222",
@@ -44,7 +47,8 @@ module.exports = {
           password: '$2a$10$Ke6Aa11a.k2fu3UZ1zEL9.UqM63U720h/EwJ.DZMoXIA8ZRMNPY6y',
           createdAt: Sequelize.fn('NOW'),
           updatedAt: Sequelize.fn('NOW'),
-          system_role: 'user'
+          system_role: 'user',
+          confirmed: true
         },
         {
           id: "a33333333",
@@ -54,7 +58,8 @@ module.exports = {
           password: '$2a$10$Ke6Aa11a.k2fu3UZ1zEL9.UqM63U720h/EwJ.DZMoXIA8ZRMNPY6y',
           createdAt: Sequelize.fn('NOW'),
           updatedAt: Sequelize.fn('NOW'),
-          system_role: 'user'
+          system_role: 'user',
+          confirmed: true
         },
         {
           id: "a44444444",
@@ -64,7 +69,8 @@ module.exports = {
           password: '$2a$10$Ke6Aa11a.k2fu3UZ1zEL9.UqM63U720h/EwJ.DZMoXIA8ZRMNPY6y',
           createdAt: Sequelize.fn('NOW'),
           updatedAt: Sequelize.fn('NOW'),
-          system_role: 'user'
+          system_role: 'user',
+          confirmed: true
         }
       ], {});
   },

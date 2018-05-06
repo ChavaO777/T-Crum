@@ -20,6 +20,14 @@ module.exports = (sequelize, DataTypes) => {
         system_role: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        uuid: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV1,
+        },
+        confirmed: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
     });
 

@@ -1,4 +1,3 @@
-'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Users', {
@@ -35,6 +34,12 @@ module.exports = {
         allowNull: false,
         type: Sequelize.ENUM,
         values: ['root', 'user']
+      },
+      uuid: {
+        type: Sequelize.UUID
+      },
+      confirmed: {
+        type: Sequelize.BOOLEAN
       }
     });
   },
