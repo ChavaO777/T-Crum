@@ -58,15 +58,24 @@ module.exports = {
 
         var db  = require('../models/index').db;
 
-        db.serialize.query('SELECT ', { type: db.sequelize.QueryTypes.SELECT })
-        .then(results => {
-            // SELECT query - use then
-        })
-        .catch(error => res.status(400).send(error));
+        db.serialize.query('SELECT insertproject('  + req.body.vision +
+                                                ',' + req.body.name + 
+                                                ',' + req.body.begin_date +
+                                                ',' + req.body.end_date + 
+                                                ',' + req.body.background + 
+                                                ',' + req.body.risks +
+                                                ',' + req.body.reach +
+                                                ',' + db.sequelize.fn('NOW') + 
+                                                ',' + db.sequelize.fn('NOW') + 
+                                                ',' + req.body.scrum_master_id + ')'
 
-        return Project
-        .findById(, {})
-        .then(Project => res.status(200).send(Project))
+                            , { type: db.sequelize.QueryTypes.SELECT })
+        .then(results => {
+            return Project
+            .findById(results[0].insertproject, {})
+            .then(Project => res.status(200).send(Project))
+            .catch(error => res.status(400).send(error));
+        })
         .catch(error => res.status(400).send(error));
 
         /*return Project
@@ -81,7 +90,8 @@ module.exports = {
                 scrum_master_id: req.body.scrum_master_id
             })
             .then(Project => res.status(200).send(Project))
-            .catch(error => res.status(400).send(error));*/
+            .catch(error => res.status(400).send(error));
+        */
     },
 
     list(req, res) {
