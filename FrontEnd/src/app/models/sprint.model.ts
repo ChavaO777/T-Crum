@@ -1,5 +1,4 @@
 import { Project } from "./project.model";
-import { Member } from "./member.model";
 
 export class Sprint {
     constructor(

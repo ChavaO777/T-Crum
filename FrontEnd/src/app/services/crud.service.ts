@@ -12,11 +12,11 @@ export class CrudService {
     TASK: "tasks",
     SPRINT: "sprints",
     PROJECT: "projects",
-    MEMBER: "members",
+    USER: "users",
     USER_STORY: "user-stories",
     ACCEPTANCE_CRITERIA: "acceptance-criteria",
-    MEMBER_TASK: "member-task",
-    MEMBER_PROJECT: "member-project",
+    USER_TASK: "user-task",
+    USER_PROJECT: "user-project",
     PROJECT_TECHNOLOGY: "project-technology",
     LOGS: "logs",
     TECHNOLOGY: "technologies" 
@@ -52,9 +52,9 @@ export class CrudService {
     );
   }
 
-  registerMember(body:any) {
+  registerUser(body:any) {
     return this.http.post(
-      this.URL + "/" + this.models.MEMBER,
+      this.URL + "/" + this.models.USER,
       body,
       { headers: this.headers }
     );
