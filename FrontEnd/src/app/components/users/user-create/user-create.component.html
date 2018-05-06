@@ -22,22 +22,22 @@
           <span>
             <b> Success</b> {{message}}</span>
         </div>
-        <form (submit)="createMember()">
+        <form (submit)="createUser()">
           <div class="form-group">
             <label class="bmd-label-floating" for="id">Matricula</label>
-            <input class="form-control" type="text" id="id" name="id" [(ngModel)]="member.id">
+            <input class="form-control" type="text" id="id" name="id" [(ngModel)]="user.id">
           </div>
           <div class="form-group">
             <label class="bmd-label-floating" for="name">Nombre</label>
-            <input class="form-control" type="text" id="name" name="name" [(ngModel)]="member.name">
+            <input class="form-control" type="text" id="name" name="name" [(ngModel)]="user.name">
           </div>
           <div class="form-group">
             <label class="bmd-label-floating" for="department_major">Departamento o carrera (ej. ITC)</label>
-            <input class="form-control" type="text" id="department_major" name="department_major" [(ngModel)]="member.department_major">
+            <input class="form-control" type="text" id="department_major" name="department_major" [(ngModel)]="user.department_major">
           </div>
           <div class="form-group">
             <label class="bmd-label-floating" for="password">Contraseña</label>
-            <input class="form-control" type="password" id="password" name="password" [(ngModel)]="member.password">
+            <input class="form-control" type="password" id="password" name="password" [(ngModel)]="user.password">
           </div>
           <div class="form-group">
             <label class="bmd-label-floating" for="passwordConfirmation">Confirmar contraseña</label>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CrudService } from '../../../services/crud.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Project } from '../../../models/project.model';
-import { Member } from '../../../models/member.model';
+import { User } from '../../../models/user.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,16 +14,16 @@ export class ProjectCreateComponent implements OnInit {
 
   message: string;
   project: Project;
-  members: Member[];
+  users: User[];
 
   constructor(private crud:CrudService, private router:Router) { }
 
   ngOnInit() {
-    this.crud.list(this.crud.models.MEMBER)
+    this.crud.list(this.crud.models.USER)
     .subscribe(
-      (res:Member[])=>{
+      (res:User[])=>{
         console.log(res);
-        this.members = res;
+        this.users = res;
       },
       (err:HttpErrorResponse) => {
         if(err.error){

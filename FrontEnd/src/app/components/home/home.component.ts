@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
       password: 'secret'
     };
 
-    this.crud.create(this.crud.models.MEMBER, body)
+    this.crud.create(this.crud.models.USER, body)
     .subscribe(
       (res:Response) => {
         this.message = "Success";

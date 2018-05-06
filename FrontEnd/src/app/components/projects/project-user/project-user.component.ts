@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { Member } from '../../../models/member.model';
+import { User } from '../../../models/user.model';
 import { CrudService } from '../../../services/crud.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Project } from '../../../models/project.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-project-member',
-  templateUrl: './project-member.component.html',
-  styleUrls: ['./project-member.component.css']
+  selector: 'app-project-user',
+  templateUrl: './project-user.component.html',
+  styleUrls: ['./project-user.component.css']
 })
-export class ProjectMemberComponent implements OnInit {
+export class ProjectUserComponent implements OnInit {
 
   message: string;
   project: Project;
   project_roles: string[];
   project_role: string;
-  member_id: string;
-  members: Member[];
-  projectMembers: Member[];
+  user_id: string;
+  users: User[];
+  projectUsers: User[];
 
   constructor(private crud: CrudService, private route: ActivatedRoute) { }
 
@@ -27,20 +27,20 @@ export class ProjectMemberComponent implements OnInit {
     this.message = '';
     this.project_roles = ['Scrum Master', 'Developer', 'Architect', 'Product Owner', 'Tester', 'Designer'];
     this.project_role = '';
-    this.member_id = '';
-    this.getAllMembers();
+    this.user_id = '';
+    this.getAllUsers();
 
     let id = this.route.snapshot.params.id;
-    this.getProjectMembers(id);
+    this.getProjectUsers(id);
   }
 
-  getAllMembers() {
+  getAllUsers() {
 
-    this.crud.list(this.crud.models.MEMBER)
+    this.crud.list(this.crud.models.USER)
       .subscribe(
-        (res: Member[]) => {
+        (res: User[]) => {
           console.log(res);
-          this.members = res;
+          this.users = res;
         },
         (err: HttpErrorResponse) => {
           if (err.error) {
@@ -53,15 +53,15 @@ export class ProjectMemberComponent implements OnInit {
       )
   }
 
-  getProjectMembers(id: number) {
+  getProjectUsers(id: number) {
 
     this.crud.retrieve(this.crud.models.PROJECT, id)
       .subscribe(
         (res: Project) => {
           console.log(res);
           this.project = res;
-          this.projectMembers = res.members;
-          console.log(this.projectMembers);
+          this.projectUsers = res.users;
+          console.log(this.projectUsers);
         },
         (err: HttpErrorResponse) => {
           if (err.error) {
@@ -76,7 +76,7 @@ export class ProjectMemberComponent implements OnInit {
 
   allFieldsAreSelected() {
 
-    if (!this.member_id || !this.project_role) {
+    if (!this.user_id || !this.project_role) {
 
       this.message = 'Debes seleccionar un miembro y su rol correspondiente.';
       return false;
@@ -85,23 +85,23 @@ export class ProjectMemberComponent implements OnInit {
     return true;
   }
 
-  addMember() {
+  addUser() {
 
     if (this.allFieldsAreSelected()) {
 
       let body = {
 
-        member_id: this.member_id,
+        user_id: this.user_id,
         project_id: this.project.id,
         project_role: this.project_role
       }
 
-      this.crud.create(this.crud.models.MEMBER_PROJECT, body)
+      this.crud.create(this.crud.models.USER_PROJECT, body)
         .subscribe(
           res => {
             this.project_role = '';
-            this.member_id = '';
-            this.getProjectMembers(this.project.id);
+            this.user_id = '';
+            this.getProjectUsers(this.project.id);
           },
           (err: HttpErrorResponse) => {
             console.log(err);

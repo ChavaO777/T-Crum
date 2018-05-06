@@ -10,7 +10,7 @@ import { LogoutComponent } from './components/authentication/logout/logout.compo
 import { HomeComponent } from './components/home/home.component';
 import { TechnologiesListComponent } from './components/technologies/technologies-list/technologies-list.component';
 import { AcceptanceCriteriaEditComponent } from './components/acceptance-criteria/acceptance-criteria-edit/acceptance-criteria-edit.component';
-import { MemberCreateComponent } from './components/member/member-create/member-create.component';
+import { UserCreateComponent } from './components/users/user-create/user-create.component';
 import { TechnologiesUpdateComponent } from './components/technologies/technologies-update/technologies-update.component';
 import { ProjectCreateComponent } from './components/projects/project-create/project-create.component';
 import { ProjectUpdateComponent } from './components/projects/project-update/project-update.component';
@@ -32,7 +32,7 @@ const routes: Routes = [
   // General
   { path:'login', component: LoginComponent},
   { path: 'logout', component: LogoutComponent},
-  {path: 'register', component: MemberCreateComponent},
+  {path: 'register', component: UserCreateComponent},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
 
   // Technologies

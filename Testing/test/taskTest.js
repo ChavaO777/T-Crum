@@ -616,7 +616,7 @@ describe('Task model', () => {
 			};
 
 			var insertedTaskID;
-			var insertedMemberTaskID;
+			var insertedUserTaskID;
 
 			//Make insertion through post
 			request.post(postOptionsTask, (error, response, body) => {
@@ -628,12 +628,12 @@ describe('Task model', () => {
                 insertedTaskID = newTask.id;
             });
 
-			// Define POST request parameters and body for a new member_task pointing to the newly inserted task
-            let postOptionsMember_task = {
-                url: URL + '/member-task',
+			// Define POST request parameters and body for a new user_task pointing to the newly inserted task
+            let postOptionsUser_task = {
+                url: URL + '/user-task',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
-					member_id: 1,
+					user_id: 1,
 					task_id: insertedTaskID
                 })
 			};	
@@ -644,8 +644,8 @@ describe('Task model', () => {
 				expect(response.statusCode).to.be.equal(200); 
 
 				//Save id
-                let newMemberTask = JSON.parse(body);
-                insertedMemberTaskID = newMemberTask.id;
+                let newUserTask = JSON.parse(body);
+                insertedUserTaskID = newUserTask.id;
             });
 
 			// Make delete request for the task
@@ -656,7 +656,7 @@ describe('Task model', () => {
 			
 			//Verify cascade delete by checking for the existence of the newly inserted
 			// Make get request to get the deleted project
-            request.get( URL + '/member-task/' + insertedMemberTaskID, (error, response, body) => {
+            request.get( URL + '/user-task/' + insertedUserTaskID, (error, response, body) => {
 				//Should fail to find it
                 expect(response.statusCode).to.be.equal(400); 
 			});
