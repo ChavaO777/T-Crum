@@ -3,6 +3,7 @@ import { Technology } from '../../../models/technology.model';
 import { CrudService } from '../../../services/crud.service';
 import { HttpResponse } from 'selenium-webdriver/http';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
   selector: 'app-technologies-list',
@@ -10,15 +11,13 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./technologies-list.component.css']
 })
 export class TechnologiesListComponent implements OnInit {
-  message: string;
   technologies: Technology[];
   newTechnology: Technology;
   
-  constructor(private crud:CrudService) { }
+  constructor(private errorHandler:ErrorHandlerService, private crud:CrudService) { }
 
   ngOnInit() {
     this.newTechnology = new Technology('', null, null);
-    this.message = "";
     this.updateList();
   }
 
@@ -31,15 +30,7 @@ export class TechnologiesListComponent implements OnInit {
       },
       (err: HttpErrorResponse) => {
         console.log(err.message);
-        if(err.message){
-          this.message = err.message;
-        }
-        else if(err.error){
-          this.message = err.error.message;
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     )
   }
@@ -62,12 +53,7 @@ export class TechnologiesListComponent implements OnInit {
         this.technologies = res;
       },
       (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message;
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       } 
     )
   }

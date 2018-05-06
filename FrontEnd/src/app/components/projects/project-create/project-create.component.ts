@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Project } from '../../../models/project.model';
 import { Member } from '../../../models/member.model';
 import { Router } from '@angular/router';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
   selector: 'app-project-create',
@@ -11,12 +12,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./project-create.component.css']
 })
 export class ProjectCreateComponent implements OnInit {
-
-  message: string;
   project: Project;
   members: Member[];
 
-  constructor(private crud:CrudService, private router:Router) { }
+  constructor(private errorHandler:ErrorHandlerService, private crud:CrudService, private router:Router) { }
 
   ngOnInit() {
     this.crud.list(this.crud.models.MEMBER)
@@ -26,12 +25,7 @@ export class ProjectCreateComponent implements OnInit {
         this.members = res;
       },
       (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     )
     this.project = new Project('','',null,null, '', '', '', '');
@@ -47,13 +41,7 @@ export class ProjectCreateComponent implements OnInit {
           this.router.navigate(['projects']);
         },
         (err:HttpErrorResponse) => {
-          if(err.error){
-            this.message = err.error.message
-            
-          }
-          else{
-            this.message = err.error.errors[0].message;
-          }
+          this.errorHandler.handleError(err);
         }
       )
         
@@ -63,11 +51,10 @@ export class ProjectCreateComponent implements OnInit {
 
   validate(){
     if(!this.project.vision && !this.project.name && !this.project.begin_date && !this.project.end_date && !this.project.background && !this.project.risks && !this.project.reach && !this.project.scrum_master_id){
-      this.message = 'Debes introducir todos los campos';
+      this.errorHandler.showErrorMessage('Debes introducir todos los campos');
       return false;
     }
     else{
-      this.message = null;
       return true;
     }
   }

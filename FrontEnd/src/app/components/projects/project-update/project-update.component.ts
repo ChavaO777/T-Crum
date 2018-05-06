@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Project } from '../../../models/project.model';
 import { Member } from '../../../models/member.model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
   selector: 'app-project-update',
@@ -12,21 +13,19 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ProjectUpdateComponent implements OnInit {
 
-  message: string;
   project: Project;
   members: Member[];
   id: number;
   begin_date: string;
   end_date: string;
 
-  constructor(private crud:CrudService, private router:Router, private route:ActivatedRoute) { }
+  constructor(private errorHandler:ErrorHandlerService, private crud:CrudService, private router:Router, private route:ActivatedRoute) { }
 
   
   ngOnInit() {
     this.project =  new Project(null, null, null, null, null, null, null, null);
     this.begin_date = "";
     this.end_date = "";
-    this.message = "";
 
     this.id = parseInt(this.route.snapshot.paramMap.get("id"));
     this.crud.list(this.crud.models.MEMBER)
@@ -36,12 +35,7 @@ export class ProjectUpdateComponent implements OnInit {
         this.members = res;
       },
       (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message;
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     )
 
@@ -52,12 +46,7 @@ export class ProjectUpdateComponent implements OnInit {
         this.project = res;
       },
       (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message;
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     )
   }
@@ -72,13 +61,7 @@ export class ProjectUpdateComponent implements OnInit {
           this.router.navigate(['projects']);
         },
         (err:HttpErrorResponse) => {
-          if(err.error){
-            this.message = err.error.message
-            
-          }
-          else{
-            this.message = err.error.errors[0].message;
-          }
+          this.errorHandler.handleError(err);
         }
       )
         
@@ -88,11 +71,10 @@ export class ProjectUpdateComponent implements OnInit {
 
   validate(){
     if(!this.project.vision && !this.project.name && !this.project.begin_date && !this.project.end_date && !this.project.background && !this.project.risks && !this.project.reach && !this.project.scrum_master_id){
-      this.message = 'Debes introducir todos los campos';
+      this.errorHandler.showErrorMessage('Debes introducir todos los campos');
       return false;
     }
     else{
-      this.message = null;
       return true;
     }
   }

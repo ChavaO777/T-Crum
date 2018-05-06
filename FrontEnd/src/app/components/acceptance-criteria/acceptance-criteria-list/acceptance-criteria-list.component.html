@@ -1,19 +1,5 @@
 <div class="row">
   <div class="col-md-12">
-      <div *ngIf="message && message != 'Criterio de evaluación eliminado exitosamente'" class="alert alert-danger">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <i class="material-icons">close</i>
-          </button>
-          <span>
-              <b> Error</b> {{message}}</span>
-      </div>
-      <div *ngIf="message && message == 'Criterio de evaluación eliminado exitosamente'" class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <i class="material-icons">close</i>
-        </button>
-        <span>
-            <b> Success</b> {{message}}</span>
-    </div>
     <div class="card">
       <div class="card-header card-header-primary">
         <h4 class="card-title">Criterios de aceptación</h4>
