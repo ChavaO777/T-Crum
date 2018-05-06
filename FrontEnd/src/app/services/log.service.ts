@@ -19,7 +19,7 @@ export class LogService {
   record(model:string, operation:string) {
     let body = {
       query: model + " " + operation,
-      member_id: this.auth.getMember().id
+      user_id: this.auth.getUser().id
     }
 
     return this.http.post(
