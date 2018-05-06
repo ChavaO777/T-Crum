@@ -1,5 +1,5 @@
 ####################################
-#############  VIEWS   ##############
+#############  VIEWS   #############
 ####################################
 
 ##Displays all the members' names with all the projects' names he is involved in
@@ -42,7 +42,7 @@ $totalProjects$ LANGUAGE plpgsql;
 #########  PROCEDURES   ############
 ####################################
 CREATE OR REPLACE FUNCTION insertProject(p_vision text, p_name text,
-		p_begin_date timestamp, p_end_date timestamp, p_background
+		p_begin_date timestamp, p_end_daqte timestamp, p_background
 		text, p_risks text, p_reach text, p_createdAt timestamp,
 		p_updatedAt timestamp, p_scrum_master_id VARCHAR)
 RETURNS void AS $noReturn$
