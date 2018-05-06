@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CrudService } from '../../../services/crud.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 
 @Component({
@@ -11,14 +12,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class TaskCreateComponent implements OnInit {
 
-  message: string;
-
   duration: number;
   name: string;
   completed: string;
   user_story_id: number;
 
-  constructor(private crud:CrudService, private router:Router, private route: ActivatedRoute) { }
+  constructor(private errorHandler:ErrorHandlerService, private crud:CrudService, private router:Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     //this.message = "Creation component ready";
@@ -46,17 +45,11 @@ export class TaskCreateComponent implements OnInit {
     this.crud.create (this.crud.models.TASK, body)  
     .subscribe (
       (res: Response) => {
-        //this.message = "Tarea insertada correctamente";
-        console.log("Tarea insertada correctamente");
+        this.errorHandler.showInformativeMessage('Tarea insertada correctamente');
         this.router.navigate(['tasks']);
       },
       (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message;
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     );
   }

@@ -26,25 +26,29 @@ module.exports = {
     //Method for creating a user
     create(req, res) {
 
-        if (!req.body.id || !isAValidUserId(req.body.id))
+        if (!req.body.id || !isAValidUserId(req.body.id)){
             return res.status(400).send({
                 message: 'The attribute id must match the format of a student or professor id: 9 characters long and starting with a letter A or L'
             });
+        }
 
-        if (!req.body.department_major)
+        if (!req.body.department_major){
             return res.status(400).send({
                 message: 'The attribute department_major is invalid. It must match a value in the enum.'
             });
+        }
 
-        if (!req.body.name)
+        if (!req.body.name){
             return res.status(400).send({
                 message: 'The attribute name cannot be null or empty.'
             });
+        }
 
-        if (!req.body.password)
+        if (!req.body.password){
             return res.status(400).send({
                 message: 'The attribute password cannot be null or empty.'
             });
+        }
 
         bcrypt.hash(req.body.password, null, null, (err, hash) => {
             let hashed = hash;
@@ -148,10 +152,11 @@ module.exports = {
     update(req, res) {
 
         //If I'm trying to update the department_major, it has to exist in the department_major enum
-        if (req.body.department_major && !isAValidDepartment_Major(req.body.department_major))
+        if (req.body.department_major && !isAValidDepartment_Major(req.body.department_major)){
             return res.status(400).send({
                 message: 'The attribute department_major is invalid. It must match a value in the enum.'
             });
+        }
 
         return User
             .findById(req.params.id, {})

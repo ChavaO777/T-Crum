@@ -5,23 +5,9 @@
     <div class="card">
       <div class="card-header card-header-primary">
         <h4 class="card-title">Regístrate</h4>
-        <p class="card-category">Ingresa tu información</p>
+        <p class="card-category">Ingresa tu información.</p>
       </div>
       <div class="card-body">
-        <div *ngIf="message" class="alert alert-danger">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <i class="material-icons">close</i>
-          </button>
-          <span>
-            <b> Error</b> {{message}}</span>
-        </div>
-        <div *ngIf="message" class="alert alert-success">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <i class="material-icons">close</i>
-          </button>
-          <span>
-            <b> Success</b> {{message}}</span>
-        </div>
         <form (submit)="createUser()">
           <div class="form-group">
             <label class="bmd-label-floating" for="id">Matricula</label>

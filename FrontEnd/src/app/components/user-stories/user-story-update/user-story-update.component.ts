@@ -3,6 +3,7 @@ import { CrudService } from '../../../services/crud.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User_story } from '../../../models/user_story.model';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
   selector: 'app-user-story-update',
@@ -10,8 +11,6 @@ import { User_story } from '../../../models/user_story.model';
   styleUrls: ['./user-story-update.component.css']
 })
 export class UserStoryUpdateComponent implements OnInit {
-
-  message: string;
   
   id: number;
   weight: number;
@@ -20,11 +19,10 @@ export class UserStoryUpdateComponent implements OnInit {
   priority: number;
   sprint_id: number;
 
-  constructor(private crud:CrudService, private router:Router, private route: ActivatedRoute) { }
+  constructor(private errorHandler:ErrorHandlerService, private crud:CrudService, private router:Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
 
-    console.log("Update user story component READY");
     this.id = parseInt(this.route.snapshot.params.id);
 
     this.crud.retrieve(this.crud.models.USER_STORY, this.id)
@@ -39,12 +37,7 @@ export class UserStoryUpdateComponent implements OnInit {
         this.sprint_id = res.sprint_id;
       },
       (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message;
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     );
 
@@ -52,7 +45,6 @@ export class UserStoryUpdateComponent implements OnInit {
 
   updateUserStory()
   {
-    console.log ("Updating user story")
 
     let body = {
       id: this.id,
@@ -66,18 +58,10 @@ export class UserStoryUpdateComponent implements OnInit {
     this.crud.update (this.crud.models.USER_STORY, this.id, body)  
     .subscribe (
       (res: Response) => {
-        //this.message = "Tarea insertada correctamente";
-        console.log("User Story successfully updated");
-
         this.router.navigate(['home']);
       },
       (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message;
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     );
   }
