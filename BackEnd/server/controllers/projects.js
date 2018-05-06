@@ -1,6 +1,6 @@
 const Project = require('../models').Project;
 const Sprint = require('../models').Sprint;
-const Member = require('../models').Member;
+const User = require('../models').User;
 const Technology = require('../models').Technology;
 
 module.exports = {
@@ -79,14 +79,14 @@ module.exports = {
                         required: false
                     },
                     {
-                        model: Member,
+                        model: User,
                         as: 'scrum_master',
                         required: false,
                         attributes: ['id', 'department_major', 'name', 'photo_URL', 'system_role', 'createdAt', 'updatedAt']
                     },
                     {
-                        model: Member,
-                        as: 'members',
+                        model: User,
+                        as: 'users',
                         through: {
 
                             attributes: ['project_role'],
@@ -125,14 +125,14 @@ module.exports = {
                         required: false
                     },
                     {
-                        model: Member,
+                        model: User,
                         as: 'scrum_master',
                         required: false,
                         attributes: ['id', 'department_major', 'name', 'photo_URL', 'system_role', 'createdAt', 'updatedAt']
                     },
                     {
-                        model: Member,
-                        as: 'members',
+                        model: User,
+                        as: 'users',
                         through: {
 
                             attributes: ['project_role'],

@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     user_story_id: {
-      allowNull : false,
+      allowNull: false,
       type: DataTypes.INTEGER,
       onDelete: 'CASCADE',
       references: {
@@ -34,9 +34,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
 
-  Acceptance_criteria.associate = function(models) {
-    Acceptance_criteria.belongsTo (models.User_story, {
-      foreignKey: 'user_story_id', 
+  Acceptance_criteria.associate = function (models) {
+    Acceptance_criteria.belongsTo(models.User_story, {
+      foreignKey: 'user_story_id',
       onDelete: 'CASCADE',
       as: 'user_story',
     });

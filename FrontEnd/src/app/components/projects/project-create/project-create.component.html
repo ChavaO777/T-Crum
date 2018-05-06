@@ -40,7 +40,7 @@
             <div class="form-group">
                 <label class="bmd-label-floating" for="scrum_master_id">Scrum Master</label>
                 <select class="form-control" id="scrum_master_id" name="scrum_master_id" [(ngModel)]="project.scrum_master_id">
-                    <option *ngFor="let member of members" value="{{member.id}}">{{member.id}} || {{member.name}} </option>
+                    <option *ngFor="let user of users" value="{{user.id}}">{{user.id}} || {{user.name}} </option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary pull-right">Ingresar</button>

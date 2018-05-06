@@ -7,13 +7,13 @@
       </div>
       <div class="card-body">
         <div class="col-md-12">
-          <form (submit)="addMember()">
+          <form (submit)="addUser()">
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <label class="bmd-label-floating" for="member_id">Miembro</label>
-                  <select class="form-control" id="member_id" name="member_id" [(ngModel)]="member_id">
-                    <option *ngFor="let member of members" value="{{member.id}}">{{member.id}} || {{member.name}}</option>
+                  <label class="bmd-label-floating" for="user_id">Miembro</label>
+                  <select class="form-control" id="user_id" name="user_id" [(ngModel)]="user_id">
+                    <option *ngFor="let user of users" value="{{user.id}}">{{user.id}} || {{user.name}}</option>
                   </select>
                 </div>
               </div>
@@ -41,12 +41,12 @@
               <th></th>
             </thead>
             <tbody>
-              <tr *ngFor="let member of projectMembers">
-                <td class="text-primary">{{member.id}}</td>
-                <td>{{member.name}}</td>
-                <td>{{member.Member_projects.project_role}}</td>
+              <tr *ngFor="let user of projectUsers">
+                <td class="text-primary">{{user.id}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.User_projects.project_role}}</td>
                 <td>
-                  <!-- <button class="btn btn-danger pull-right text-white text-center" (click)="deleteMember(member.id)">
+                  <!-- <button class="btn btn-danger pull-right text-white text-center" (click)="deleteUser(user.id)">
                     <i class="material-icons">delete</i>
                   </button> -->
                 </td>

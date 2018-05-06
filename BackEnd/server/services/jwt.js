@@ -4,10 +4,10 @@ const moment = require('moment');
 const KEY = 'clave_secreta_proyecto';
 const expirationTime = 600;
 
-exports.createToken = (member) => {
+exports.createToken = (user) => {
 	let payload = {
-		id: member.id,
-		system_role: member.system_role,
+		id: user.id,
+		system_role: user.system_role,
 		iat: moment().unix(),
 		exp: moment().add(expirationTime, 'second').unix
 	};

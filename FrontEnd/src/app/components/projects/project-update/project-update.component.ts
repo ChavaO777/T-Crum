@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CrudService } from '../../../services/crud.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Project } from '../../../models/project.model';
-import { Member } from '../../../models/member.model';
+import { User } from '../../../models/user.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ErrorHandlerService } from '../../../services/error-handler.service';
 
@@ -14,7 +14,7 @@ import { ErrorHandlerService } from '../../../services/error-handler.service';
 export class ProjectUpdateComponent implements OnInit {
 
   project: Project;
-  members: Member[];
+  users: User[];
   id: number;
   begin_date: string;
   end_date: string;
@@ -28,11 +28,11 @@ export class ProjectUpdateComponent implements OnInit {
     this.end_date = "";
 
     this.id = parseInt(this.route.snapshot.paramMap.get("id"));
-    this.crud.list(this.crud.models.MEMBER)
+    this.crud.list(this.crud.models.USER)
     .subscribe(
-      (res:Member[])=>{
+      (res:User[])=>{
         console.log(res);
-        this.members = res;
+        this.users = res;
       },
       (err:HttpErrorResponse) => {
         this.errorHandler.handleError(err);

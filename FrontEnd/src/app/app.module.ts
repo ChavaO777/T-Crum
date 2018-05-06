@@ -14,7 +14,7 @@ import { LoginComponent } from './components/authentication/login/login.componen
 import { LogoutComponent } from './components/authentication/logout/logout.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavComponent } from './components/nav/nav.component';
-import { MemberCreateComponent } from './components/member/member-create/member-create.component';
+import { UserCreateComponent } from './components/users/user-create/user-create.component';
 import { TechnologiesListComponent } from './components/technologies/technologies-list/technologies-list.component';
 import { AcceptanceCriteriaEditComponent } from './components/acceptance-criteria/acceptance-criteria-edit/acceptance-criteria-edit.component';
 import { TechnologiesCreateComponent } from './components/technologies/technologies-create/technologies-create.component';
@@ -36,7 +36,7 @@ import { ProjectSprintCreateComponent } from './components/projects/project-spri
 import { UserStoryUpdateComponent } from './components/user-stories/user-story-update/user-story-update.component';
 import { UserStoryRetrieveComponent } from './components/user-stories/user-story-retrieve/user-story-retrieve.component';
 import { ProjectTechnologyComponent } from './components/projects/project-technology/project-technology.component';
-import { ProjectMemberComponent } from './components/projects/project-member/project-member.component';
+import { ProjectUserComponent } from './components/projects/project-user/project-user.component';
 //Angular material
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -53,14 +53,13 @@ import { ErrorHandlerService } from './services/error-handler.service';
     ProjectListComponent,
     UserStoryListComponent,
     TaskListComponent,
-    MemberCreateComponent,
+    UserCreateComponent,
     SprintListComponent,
     TechnologiesListComponent,
     AcceptanceCriteriaCreateComponent,
     AcceptanceCriteriaEditComponent,
     TechnologiesCreateComponent,
     TechnologiesUpdateComponent,
-    MemberCreateComponent,
     ProjectCreateComponent,
     ProjectUpdateComponent,
     ProjectRetrieveComponent,
@@ -78,7 +77,7 @@ import { ErrorHandlerService } from './services/error-handler.service';
     ProjectSprintCreateComponent,
     ProjectSprintCreateComponent,
     ProjectTechnologyComponent,
-    ProjectMemberComponent
+    ProjectUserComponent
   ],
   imports: [
     BrowserModule,

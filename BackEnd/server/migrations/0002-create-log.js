@@ -19,12 +19,12 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      member_id: {
+      user_id: {
         type: Sequelize.STRING,
         allowNull:false,
         onDelete: 'CASCADE',
         references: {
-          model: 'Members',
+          model: 'Users', //The table name, not the model name
           key: 'id',
           as: 'member_id',
         }

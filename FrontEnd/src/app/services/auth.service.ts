@@ -18,9 +18,9 @@ export class AuthService {
 
   // Make the post request with the id and password provided, if successful, sets session data
   login(id:string, password:string) {
-    let member;
+    let user;
     let body = {
-      member_id: id,
+      user_id: id,
       password: password
     }
 
@@ -36,14 +36,14 @@ export class AuthService {
     const expiresAt = moment().add(res.expirationTime, 'second');
      
     localStorage.setItem('token', res.token);
-    localStorage.setItem('member', JSON.stringify(res.member));
+    localStorage.setItem('user', JSON.stringify(res.user));
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
   }
 
   // Delete session data
   logout(){
     localStorage.removeItem('token');
-    localStorage.removeItem('member');
+    localStorage.removeItem('user');
     localStorage.removeItem('expires_at');
   }
 
@@ -54,7 +54,7 @@ export class AuthService {
 
   isRoot(){
     if(this.isLoggedIn()){
-      return this.getMember().system_role == "root";
+      return this.getUser().system_role == "root";
     }
     else{
       return false;
@@ -66,9 +66,9 @@ export class AuthService {
     return moment(JSON.parse(localStorage.getItem('expires_at')));
   }
 
-  // get the logged in member
-  getMember(){
-    return JSON.parse(localStorage.getItem('member'))
+  // get the logged-in user
+  getUser(){
+    return JSON.parse(localStorage.getItem('user'))
   }
 
   getToken(){

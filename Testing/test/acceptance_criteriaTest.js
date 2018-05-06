@@ -392,7 +392,7 @@ describe('Acceptance_criteria model', () => {
         });
 
 
-        // Try to delete a non-existent member, response: unsuccesful
+        // Try to delete a non-existent user, response: unsuccesful
         it('Non-existing acceptance_criteria', (done) => {
             request.delete(URL + '/acceptance-criteria/0', (error, response, body) => {
                 expect(response.statusCode).to.be.equal(400); //response should be unsuccesful
