@@ -1,11 +1,11 @@
-const Member = require('../models').Member;
+const User = require('../models').User;
 const Task = require('../models').Task;
 const Log = require('../models').Log;
 const Project = require('../models').Project;
 const bcrypt = require('bcrypt-nodejs');
 //const Validation = require('../helpers/validations').Validation;
 
-function isAValidMemberId(memberId) {
+function isAValidUserId(memberId) {
 
     var memberIdStr = String(memberId).toLowerCase();
     var memberIdStrSize = memberIdStr.length;
@@ -23,10 +23,10 @@ function isAValidDepartment_Major(department_major) {
 
 module.exports = {
 
-    //Method for creating a member
+    //Method for creating a user
     create(req, res) {
 
-        if (!req.body.id || !isAValidMemberId(req.body.id))
+        if (!req.body.id || !isAValidUserId(req.body.id))
             return res.status(400).send({
                 message: 'The attribute id must match the format of a student or professor id: 9 characters long and starting with a letter A or L'
             });
@@ -49,7 +49,7 @@ module.exports = {
         bcrypt.hash(req.body.password, null, null, (err, hash) => {
             let hashed = hash;
 
-            return Member
+            return User
                 .create({
                     id: String(req.body.id).toLowerCase(), //Store this as lower case
                     department_major: req.body.department_major,
@@ -58,15 +58,15 @@ module.exports = {
                     password: hashed,
                     system_role: 'user'
                 })
-                .then(member => res.status(201).send(member))
+                .then(user => res.status(201).send(user))
                 .catch(error => res.status(400).send(error));
         });
     },
 
-    //Method for listing members
+    //Method for listing users
     list(req, res) {
 
-        return Member
+        return User
             .findAll( {
 
                 include: [
@@ -94,14 +94,14 @@ module.exports = {
                     },
                 ],
             })
-            .then(members => res.status(200).send(members))
+            .then(users => res.status(200).send(users))
             .catch(error => res.status(400).send(error));
     },
 
-    //Method for retrieving a single member
+    //Method for retrieving a single user
     retrieve(req, res) {
 
-        return Member
+        return User
             .findById(req.params.id, {
 
                 include: [
@@ -129,22 +129,22 @@ module.exports = {
                     },
                 ],
             })
-            .then(member => {
+            .then(user => {
 
-                if (!member) {
+                if (!user) {
 
                     return res.status(404).send({
 
-                        message: 'Member Not Found',
+                        message: 'User Not Found',
                     });
                 }
 
-                return res.status(200).send(member);
+                return res.status(200).send(user);
             })
             .catch(error => res.status(404).send(error));
     },
 
-    //Method to update a member
+    //Method to update a user
     update(req, res) {
 
         //If I'm trying to update the department_major, it has to exist in the department_major enum
@@ -153,52 +153,52 @@ module.exports = {
                 message: 'The attribute department_major is invalid. It must match a value in the enum.'
             });
 
-        return Member
+        return User
             .findById(req.params.id, {})
-            .then(member => {
+            .then(user => {
 
-                if (!member) {
+                if (!user) {
 
                     return res.status(404).send({
 
-                        message: 'Member Not Found',
+                        message: 'User Not Found',
                     });
                 }
 
-                return member
+                return user
                     .update({
 
-                        department_major: req.body.department_major || member.deparment_major,
-                        name: req.body.name || member.name,
-                        photo_URL: req.body.photo_URL || member.photo_URL,
-                        password: req.body.password || member.password,
+                        department_major: req.body.department_major || user.deparment_major,
+                        name: req.body.name || user.name,
+                        photo_URL: req.body.photo_URL || user.photo_URL,
+                        password: req.body.password || user.password,
                     })
-                    .then(() => res.status(200).send(member)) // Send back the updated member
+                    .then(() => res.status(200).send(user)) // Send back the updated user
                     .catch((error) => res.status(400).send(error));
             })
             .catch((error) => res.status(400).send(error));
     },
 
-    //Method to delete a member
+    //Method to delete a user
     destroy(req, res) {
 
-        return Member
+        return User
             .findById(req.params.id)
-            .then(member => {
+            .then(user => {
 
-                if (!member) {
+                if (!user) {
 
                     return res.status(400).send({
 
-                        message: 'Member Not Found',
+                        message: 'User Not Found',
                     });
                 }
 
-                return member
+                return user
                     .destroy()
                     .then(() => res.status(200).send({
 
-                        message: 'Member deleted successfully',
+                        message: 'User deleted successfully',
                     }))
                     .catch(error => res.status(400).send(error));
             })

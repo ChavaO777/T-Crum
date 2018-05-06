@@ -1,4 +1,4 @@
-const user_stories = require('../models').User_story;
+const User_story = require('../models').User_story;
 const Sprint = require('../models').Sprint;
 
 module.exports = {
@@ -20,7 +20,7 @@ module.exports = {
       return res.status(400).send({message: 'sprint_id attribute can not be empty.'});
 
 
-    return user_stories
+    return User_story
       .create({
         weight: req.body.weight,
         scrum_board_status: req.body.scrum_board_status,
@@ -28,17 +28,17 @@ module.exports = {
         priority: req.body.priority,
         sprint_id: req.body.sprint_id,
       })
-      .then(user_stories => res.status(200).send(user_stories))
+      .then(user_story => res.status(200).send(user_story))
       .catch(error => res.status(400).send(error));
   },
   list(req, res) {
-    return user_stories
+    return User_story
             .findAll({
               include: [
                 { model: Sprint, as: 'sprint' }  
               ],
             })
-            .then(user_stories => res.status(200).send(user_stories))
+            .then(user_story => res.status(200).send(user_story))
             .catch(error => res.status(400).send(error));
   },
   retrieve(req, res){
@@ -47,21 +47,21 @@ module.exports = {
             return res.status(400).send({message: 'The request must contain the parameter id field.'});
           }
 
-    return user_stories
+    return User_story
       .findById(req.params.id, {
         include: [
           { model: Sprint, as: 'sprint' },
         ],
       })
-      .then(user_stories => {
-        if (!user_stories) {
+      .then(user_story => {
+        if (!user_story) {
           return res.status(400).send({
             message: 'User_story not found',
           });
         }
-        return res.status(200).send(user_stories);
+        return res.status(200).send(user_story);
       })
-      .catch(error => res.status(400).send(user_stories));
+      .catch(error => res.status(400).send(user_story));
   },
   update(req, res) {
 
@@ -87,39 +87,39 @@ module.exports = {
       return res.status(400).send({message: 'project_id attribute can not be empty and must be an integer.'});
 */
 
-    return user_stories
+    return User_story
       .findById(req.params.id, {
         include: [ { model: Sprint, as: 'sprint'}]
       })
-      .then(user_stories => {
-        if (!user_stories) {
+      .then(user_story => {
+        if (!user_story) {
           return res.status(400).send({
             message: 'User_story not found',
           });
         }
-        return user_stories
+        return User_story
           .update({
-            weight: req.body.weight || user_stories.weight,
-            scrum_board_status: req.body.scrum_board_status || user_stories.scrum_board_status,
-            description: req.body.description || user_stories.description,
-            priority: req.body.priority || user_stories.priority,
-            sprint_id: req.params.sprint_id || user_stories.sprint_id,
+            weight: req.body.weight || User_story.weight,
+            scrum_board_status: req.body.scrum_board_status || User_story.scrum_board_status,
+            description: req.body.description || User_story.description,
+            priority: req.body.priority || User_story.priority,
+            sprint_id: req.params.sprint_id || User_story.sprint_id,
           })
-          .then(() => res.status(200).send(user_stories))  // Send back the updated tuple.
+          .then(() => res.status(200).send(user_story))  // Send back the updated tuple.
           .catch((error) => res.status(400).send(error));
       })
       .catch((error) => res.status(400).send(error));
   },
   destroy(req, res) {
-    return user_stories
+    return User_story
       .findById(req.params.id)
-      .then(user_stories => {
-        if (!user_stories) {
+      .then(user_story => {
+        if (!user_story) {
           return res.status(400).send({
             message: 'User Story not found',
           });
         }
-        return user_stories
+        return User_story
           .destroy()
           .then(() => res.status(200).send({message: 'Successful Delete YAY!.'}))
           .catch(error => res.status(400).send(error));

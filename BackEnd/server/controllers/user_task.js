@@ -1,4 +1,4 @@
-const member_task = require('../models').Member_task;
+const User_task = require('../models').User_task;
 
 module.exports = {
   create(req, res) {
@@ -9,7 +9,7 @@ module.exports = {
     if (!req.body.task_id || !Numbers.isInteger(req.body.task_id))
       return res.status(400).send({message: 'The post body must contain a valid task_id field.'});
 
-    return member_task
+    return Member_task
       .create({
         member_id: req.body.member_id,
         task_id: req.body.task_id,
@@ -18,7 +18,7 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
   list(req, res) {
-    return member_task
+    return Member_task
       .findAll( {
       })
       .then(member_task => res.status(200).send(member_task))
@@ -29,13 +29,13 @@ module.exports = {
     if (!req.params.id || !Numbers.isInteger(req.params.id))
       return res.status(400).send({message: 'The post body must contain a valid id field.'});
 
-    return member_task
+    return Member_task
       .findById(req.params.id, {
       })
       .then(member_task => {
         if (!member_task) {
           return res.status(400).send({
-            message: 'Member_task not found',
+            message: 'User_task not found',
           });
         }
         return res.status(200).send(member_task);
@@ -50,16 +50,16 @@ module.exports = {
     if (!req.body.task_id || !Numbers.isInteger(req.body.task_id))
       return res.status(400).send({message: 'The post body must contain a valid task_id field.'});
 
-    return member_task
+    return Member_task
       .findById(req.params.id, {
       })
       .then(member_task => {
         if (!member_task) {
           return res.status(400).send({
-            message: 'Member_task not found',
+            message: 'User_task not found',
           });
         }
-        return member_task
+        return Member_task
           .update({
             member_id: req.body.member_id,
             task_id: req.body.task_id,
@@ -74,17 +74,17 @@ module.exports = {
     if (!req.params.id || !Numbers.isInteger(req.params.id))
       return res.status(400).send({message: 'The post body must contain a valid id field.'});
 
-    return member_task
+    return Member_task
       .findById(req.params.id)
       .then(member_task => {
         if (!member_task) {
           return res.status(400).send({
-            message: 'Member_task not found',
+            message: 'User_task not found',
           });
         }
-        return member_task
+        return Member_task
           .destroy()
-          .then(() => res.status(200).send({message: 'Member_task deleted.'}))
+          .then(() => res.status(200).send({message: 'User_task deleted.'}))
           .catch(error => res.status(400).send(error));
       })
       .catch(error => res.status(400).send(error));
