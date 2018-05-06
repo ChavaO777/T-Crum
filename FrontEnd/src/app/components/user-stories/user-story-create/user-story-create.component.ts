@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CrudService } from '../../../services/crud.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
   selector: 'app-user-story-create',
@@ -10,19 +11,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class UserStoryCreateComponent implements OnInit {
 
-  message: string;
-
   weight: number;
   scrum_board_status: number;
   description: string;
   priority: number;
   sprint_id: number;
 
-  constructor(private crud:CrudService, private router:Router, private route: ActivatedRoute) { }
+  constructor(private errorHandler:ErrorHandlerService, private crud:CrudService, private router:Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-
-    console.log("Creation component ready");
 
     this.weight = 0;
     this.scrum_board_status = 0;
@@ -32,8 +29,6 @@ export class UserStoryCreateComponent implements OnInit {
   }
 
   createUserStory(){
-
-    console.log("Creating user story");
 
     let body = {
       id: null,
@@ -47,17 +42,10 @@ export class UserStoryCreateComponent implements OnInit {
     this.crud.create(this.crud.models.USER_STORY, body)
     .subscribe(
       (res: Response) => {
-
-        console.log("User story successfully created");
         this.router.navigate(['user-stories']);
       },
       (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message;
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     )
     return false;

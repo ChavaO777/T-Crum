@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { User_story } from '../../../models/user_story.model';
 import { Acceptance_criteria } from '../../../models/acceptance_criteria.model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
   selector: 'app-user-story-retrieve',
@@ -12,15 +13,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class UserStoryRetrieveComponent implements OnInit {
 
-  message: string;
   user_story: User_story;
   id: number;
 
-  constructor(private crud:CrudService, private router:Router, private route:ActivatedRoute) { }
+  constructor(private errorHandler:ErrorHandlerService, private crud:CrudService, private router:Router, private route:ActivatedRoute) { }
 
   ngOnInit() {
     this.user_story =  new User_story(null, null, null, null, null);
-    this.message = "";
 
     this.id = parseInt(this.route.snapshot.params.id);
 
@@ -31,12 +30,7 @@ export class UserStoryRetrieveComponent implements OnInit {
         this.user_story = res;
       },
       (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message;
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     )
   }

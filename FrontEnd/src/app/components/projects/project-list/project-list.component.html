@@ -3,7 +3,7 @@
       <div class="card">
           <div class="card-header card-header-primary">
               <h4 class="card-title ">Proyectos</h4>
-              <p>Proyectos activos</p>
+              <p>Proyectos activos.</p>
           </div>
           <div class="card-body">
               <button  *ngIf="auth.isRoot()" class="btn btn-success pull-right" (click)="createProject()">Crear proyecto</button>
@@ -20,7 +20,7 @@
                             Fecha de inicio
                           </th>
                           <th>
-                            Fecha de termino
+                            Fecha de término
                           </th>
                           <th *ngIf="auth.isRoot()">
                             Scrum master

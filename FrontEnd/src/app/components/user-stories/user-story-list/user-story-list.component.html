@@ -7,20 +7,6 @@
               <p>Historias</p>
           </div>
           <div class="card-body">
-                <div *ngIf="message && message != 'Success'" class="alert alert-danger">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <i class="material-icons">close</i>
-                        </button>
-                        <span>
-                            <b> Error</b> {{message}}</span>
-                    </div>
-                    <div *ngIf="message && message == 'Success'" class="alert alert-success">
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <i class="material-icons">close</i>
-                      </button>
-                      <span>
-                          <b> Success</b> {{message}}</span>
-                  </div>
               <a class="btn btn-success pull-right" routerLink="/user-stories/create/{{sprint_id}}">Crear Historia</a>
               <div class="table-responsive">
                   <table class="table">
@@ -35,7 +21,7 @@
                               Estado Scrum
                           </th>
                           <th>
-                              Descripcion
+                              Descripción
                           </th>
                           <th>
                               Prioridad
