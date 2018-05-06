@@ -48,28 +48,18 @@ module.exports = {
   },
   update(req, res) {
 
-    if (!req.body.user_id)
-      return res.status(400).send({
-        message: 'The post body must contain a valid user_id field.'
-      });
-
-    if (!req.body.task_id || !Number.isNaN(req.body.task_id))
-      return res.status(400).send({
-        message: 'The post body must contain a valid task_id field.'
-      });
-
     return User_task
-      .findById(req.params.id, {})
+      .findById(req.params.id)
       .then(user_task => {
         if (!user_task) {
           return res.status(400).send({
             message: 'User_task not found',
           });
         }
-        return User_task
+        return user_task
           .update({
-            user_id: req.body.user_id,
-            task_id: req.body.task_id,
+            user_id: req.body.user_id || User_task.user_id,
+            task_id: req.body.task_id || User_task.task_id,
           })
           .then(() => res.status(200).send(user_task)) // Send back the updated tuple.
           .catch((error) => res.status(400).send(error));
@@ -78,7 +68,7 @@ module.exports = {
   },
   destroy(req, res) {
 
-    if (!req.params.id || !Number.isNaN(req.params.id))
+    if (!req.params.id)
       return res.status(400).send({
         message: 'The post body must contain a valid id field.'
       });
@@ -91,7 +81,7 @@ module.exports = {
             message: 'User_task not found',
           });
         }
-        return User_task
+        return user_task
           .destroy()
           .then(() => res.status(200).send({
             message: 'User_task deleted.'
