@@ -55,7 +55,21 @@ module.exports = {
                 message: 'Attribute scrum master cannot be empty'
             });
         }
+
+        var db  = require('../models/index').db;
+
+        db.serialize.query('SELECT ', { type: db.sequelize.QueryTypes.SELECT })
+        .then(results => {
+            // SELECT query - use then
+        })
+        .catch(error => res.status(400).send(error));
+
         return Project
+        .findById(, {})
+        .then(Project => res.status(200).send(Project))
+        .catch(error => res.status(400).send(error));
+
+        /*return Project
             .create({
                 vision: req.body.vision,
                 name: req.body.name,
@@ -67,7 +81,7 @@ module.exports = {
                 scrum_master_id: req.body.scrum_master_id
             })
             .then(Project => res.status(200).send(Project))
-            .catch(error => res.status(400).send(error));
+            .catch(error => res.status(400).send(error));*/
     },
 
     list(req, res) {

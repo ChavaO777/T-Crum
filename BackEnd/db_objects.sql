@@ -42,16 +42,24 @@ $totalProjects$ LANGUAGE plpgsql;
 #########  PROCEDURES   ############
 ####################################
 CREATE OR REPLACE FUNCTION insertProject(p_vision text, p_name text,
-		p_begin_date timestamp, p_end_daqte timestamp, p_background
-		text, p_risks text, p_reach text, p_createdAt timestamp,
-		p_updatedAt timestamp, p_scrum_master_id VARCHAR)
-RETURNS void AS $noReturn$
+	p_begin_date timestamp, p_end_date timestamp, p_background
+	text, p_risks text, p_reach text, p_createdAt timestamp,
+	p_updatedAt timestamp, p_scrum_master_id VARCHAR)
+RETURNS integer AS $insertedID$
+
+DECLARE
+	insertedID integer;
+
 BEGIN
 	INSERT INTO "Projects"(vision, name, begin_date, end_date,
-	 	background, risks, reach, "createdAt", "updatedAt",
-		scrum_master_id) 
+	background, risks, reach, "createdAt", "updatedAt",
+	scrum_master_id) 
 	VALUES (p_vision, p_name, p_begin_date, p_end_date,
-		p_background, p_risks, p_reach, p_createdAt, p_updatedAt, 
-		p_scrum_master_id);
+	p_background, p_risks, p_reach, p_createdAt, p_updatedAt, 
+	p_scrum_master_id);
+	SELECT currval(pg_get_serial_sequence('Projects','id')) 
+	INTO insertedID;
+
+	RETURN insertedID;
 END;
-$noReturn$ LANGUAGE plpgsql
+$insertedID$ LANGUAGE plpgsql;
