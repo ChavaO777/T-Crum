@@ -10,7 +10,7 @@ export class ErrorHandlerService {
 
   handleError(err){
     
-    if(err.error){
+    if(err.error.message){
       this.showErrorMessage(err.error.message);
     }
     else if(err.error.errors){
