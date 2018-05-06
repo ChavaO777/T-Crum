@@ -58,7 +58,7 @@ module.exports = {
 
         var db  = require('../models/index').db;
 
-        db.serialize.query('SELECT insertproject('  + req.body.vision +
+        db.serialize.query('SELECT insertProject('  + req.body.vision +
                                                 ',' + req.body.name + 
                                                 ',' + req.body.begin_date +
                                                 ',' + req.body.end_date + 
@@ -69,7 +69,7 @@ module.exports = {
                                                 ',' + db.sequelize.fn('NOW') + 
                                                 ',' + req.body.scrum_master_id + ')'
 
-                            , { type: db.sequelize.QueryTypes.SELECT })
+                            ,{ type: db.sequelize.QueryTypes.SELECT })
         .then(results => {
             return Project
             .findById(results[0].insertproject, {})

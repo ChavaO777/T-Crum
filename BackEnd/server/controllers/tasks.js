@@ -5,7 +5,7 @@ const Member = require('../models').Member;
 module.exports = {
   create(req, res) {
 
-    if (!req.body.duration || (isNaN(req.body.duration)))
+    if (!req.body.duration || (isNaN(req.body.duration) || req.body.duration < 0))
       return res.status(400).send({
         message: 'The post body must contain a valid duration field. '
       });
@@ -107,7 +107,7 @@ module.exports = {
   },
   update(req, res) {
 
-    if (!req.params.id || isNaN(req.params.id))
+    if (!req.params.id || isNaN(req.params.id) || req.body.duration < 0)
       return res.status(400).send({
         message: 'The id is invalid'
       });
