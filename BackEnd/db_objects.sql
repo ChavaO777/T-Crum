@@ -1,17 +1,3 @@
-##################
-#### FUNCTION ####
-##################
-CREATE OR REPLACE FUNCTION countProjects (id_input varchar)
-RETURNS integer AS $totalProjects$
-declare 
-    totalProjects integer;
-BEGIN
-    SELECT count(project_id) into totalProjects FROM "Member_projects" WHERE member_id = id_input;
-    RETURN totalProjects;
-END;
-$totalProjects$ LANGUAGE plpgsql;
-
-
 ####################################
 #############  VIEW   ##############
 ####################################
@@ -19,7 +5,8 @@ CREATE VIEW membersForProjects AS
 	SELECT m.name as "user_name", p.name as "project_name"
 	FROM ("Members" m INNER JOIN "Member_projects" mp 
 	ON m.id = mp.member_id ) INNER JOIN "Projects" p 
-	ON p.id = mp.project_id;
+	ON p.id = mp.project_id
+	ORDER BY m.name, p.name ASC;
 
 
 
