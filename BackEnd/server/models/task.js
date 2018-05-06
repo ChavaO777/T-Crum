@@ -30,11 +30,11 @@ module.exports = (sequelize, DataTypes) => {
       as: "user_story"
     });
 
-    Task.belongsToMany(models.Member, {
-      through: 'Member_tasks', 
+    Task.belongsToMany(models.User, {
+      through: 'User_tasks', 
       foreignKey: 'task_id', 
-      otherKey: 'member_id',
-      as: 'members'
+      otherKey: 'user_id',
+      as: 'users'
     });
   };
   return Task;

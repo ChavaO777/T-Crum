@@ -3,9 +3,9 @@
 module.exports = (sequelize, DataTypes) => {
 	const Technology = sequelize.define('Technology', {
 		id: {
-			allowNull: false, 
+			allowNull: false,
 			autoIncrement: true,
-			primaryKey: true, 
+			primaryKey: true,
 			type: DataTypes.INTEGER
 		},
 
@@ -18,13 +18,12 @@ module.exports = (sequelize, DataTypes) => {
 	Technology.associate = function (models) {
 
 		Technology.belongsToMany(models.Project, {
-				through: 'Project_technologies',
-				foreignKey: 'technology_id',
-				//otherKey: 'project_id'
-				as: 'projects'
-			})
-	  };
-	
+			through: 'Project_technologies',
+			foreignKey: 'technology_id',
+			//otherKey: 'project_id'
+			as: 'projects'
+		})
+	};
 
 	return Technology;
 };

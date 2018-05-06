@@ -39,18 +39,18 @@ module.exports = (sequelize, DataTypes) => {
 
   Project.associate = function (models) {
 
-    Project.belongsTo(models.Member, {
+    Project.belongsTo(models.User, {
 
       foreignKey: 'scrum_master_id',
       as: 'scrum_master',
       onDelete: 'CASCADE',
     }),
 
-    Project.belongsToMany(models.Member, {
-      through: 'Member_projects',
+    Project.belongsToMany(models.User, {
+      through: 'User_projects',
       foreignKey: 'project_id',
-      //otherKey: 'member_id',
-      as: 'members',
+      //otherKey: 'user_id',
+      as: 'users',
       onDelete: 'CASCADE',
     }),
 

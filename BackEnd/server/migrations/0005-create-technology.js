@@ -4,13 +4,13 @@ module.exports = {
 	up: (queryInterface, Sequelize) => {
 		return queryInterface.createTable('Technologies', {
 			id: {
-		    	allowNull: false,
-		    	autoIncrement: true,
-		    	primaryKey: true,
-		    	type: Sequelize.INTEGER
+				allowNull: false,
+				autoIncrement: true,
+				primaryKey: true,
+				type: Sequelize.INTEGER
 			},
 			name: {
-				allowNull: false, 
+				allowNull: false,
 				type: Sequelize.TEXT,
 			},
 			createdAt: {
@@ -20,10 +20,10 @@ module.exports = {
 			updatedAt: {
 				allowNull: false,
 				type: Sequelize.DATE
-			}  
+			}
 		});
 	},
 	down: (queryInterface, Sequelize) => {
-    	return queryInterface.dropTable('Technologies');
+		return queryInterface.dropTable('Technologies');
 	}
 };

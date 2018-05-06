@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
-    const Member_project = sequelize.define('Member_projects', {
+    const User_project = sequelize.define('User_projects', {
         id: {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
             type: DataTypes.INTEGER
         },
-        member_id: {
+        user_id: {
             allowNull: false,
             type: DataTypes.STRING
         },
@@ -20,5 +20,5 @@ module.exports = (sequelize, DataTypes) => {
         }
     });
 
-    return Member_project;
+    return User_project;
 };
