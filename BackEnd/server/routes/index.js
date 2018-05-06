@@ -11,7 +11,7 @@ const projectsController = require('../controllers').projects;
 const project_technologyController = require('../controllers').project_technology;
 const userStoriesController = require('../controllers').user_stories;
 const authenticationController = require('../controllers').authentication;
-const technologiesController = require('../controllers').technology;
+const technologiesController = require('../controllers').technologies;
 
 module.exports = (app) => {
   app.get('/api', (req, res) => res.status(200).send({
