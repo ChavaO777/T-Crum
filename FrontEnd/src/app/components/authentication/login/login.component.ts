@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
   selector: 'app-login',
@@ -8,11 +9,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  message:string;
   id: string;
   password: string;
 
-  constructor(private auth:AuthService, private router:Router) { }
+  constructor(private errorHandler:ErrorHandlerService, private auth:AuthService, private router:Router) { }
 
   ngOnInit() {
     if(this.auth.isLoggedIn()){
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['projects']);
         },
         err => {
-          this.message = err.error.message;
+          this.errorHandler.handleError(err);
           this.password = '';
         }
       );
@@ -43,11 +43,10 @@ export class LoginComponent implements OnInit {
 
   validate(){
     if(!this.id || !this.password){
-      this.message = 'Debes introducir tu matrícula y contraseña.';
+      this.errorHandler.showErrorMessage('Debes introducir tu matrícula y contraseña.');
       return false;
     }
     else{
-      this.message = '';
       return true;
     }
   }

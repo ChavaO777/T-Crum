@@ -4,6 +4,7 @@ import { CrudService } from '../../../services/crud.service';
 import { Router } from '@angular/router';
 import { Member } from '../../../models/member.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
   selector: 'app-member-create',
@@ -11,20 +12,16 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./member-create.component.css']
 })
 export class MemberCreateComponent implements OnInit {
-  errorMessage: string;
-  successMessage: string;
   member: Member;
   //A string to store the password confirmation
   passwordConfirmation: string; 
 
-  constructor(private auth: AuthService, private router: Router, private crud: CrudService) { }
+  constructor(private errorHandler: ErrorHandlerService, private auth: AuthService, private router: Router, private crud: CrudService) { }
 
   ngOnInit() {
     if (this.auth.isLoggedIn()) {
       this.router.navigate(['home'])
     }
-    this.errorMessage = '';
-    this.successMessage = '';
     this.passwordConfirmation = '';
     this.member = new Member('', '', '', '', '', null, null, '');
   }
@@ -47,18 +44,12 @@ export class MemberCreateComponent implements OnInit {
               successful. So far, we're only taking the user 
               to the login view.
             */
-            this.successMessage = 'The registration was successful!';
+            this.errorHandler.showInformativeMessage('¡El registro fue exitoso!');
             this.router.navigate(['login']);
           },
           (err: HttpErrorResponse) => {
-            console.log('Hello'); 
             console.log(err);
-            if (err.error) {
-              this.errorMessage = err.error.errorMessage;
-            }
-            else {
-              this.errorMessage = err.error.error[0].errorMessage;
-            }
+            this.errorHandler.handleError(err);
           }
         )
     }
@@ -81,11 +72,10 @@ export class MemberCreateComponent implements OnInit {
         !this.member.department_major || 
         !this.member.password || 
         !this.passwordConfirmation) {
-      this.errorMessage = 'Debes introducir tu matrícula, nombre, carrera o departamento, contraseña y la confirmación de la misma.';
+          this.errorHandler.showErrorMessage('Debes introducir tu matrícula, nombre, carrera o departamento, contraseña y la confirmación de la misma.');
       return false;
     }
     else {
-      this.errorMessage = '';
       return true;
     }
   }
@@ -100,12 +90,10 @@ export class MemberCreateComponent implements OnInit {
   areEqualPasswords() {
 
     if (this.member.password == this.passwordConfirmation) {
-
       return true;
     }
     else {
-
-      this.errorMessage = 'La contraseña no fue confirmada correctamente. Inténtalo de nuevo.'
+      this.errorHandler.showErrorMessage('La contraseña no fue confirmada correctamente. Inténtalo de nuevo.')
       return false;
     }
   }

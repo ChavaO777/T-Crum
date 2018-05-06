@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Project } from '../../../models/project.model';
 import { Member } from '../../../models/member.model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
   selector: 'app-project-retrieve',
@@ -12,16 +13,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ProjectRetrieveComponent implements OnInit {
 
-  message: string;
   project: Project;
   id: number;
 
-  constructor(private crud:CrudService, private router:Router, private route:ActivatedRoute) { }
+  constructor(private errorHandler:ErrorHandlerService, private crud:CrudService, private router:Router, private route:ActivatedRoute) { }
 
   ngOnInit() {
     this.project =  new Project(null, null, null, null, null, null, null, null, null);
     this.project.scrum_master = new Member(null, null, null, null, null, null, null);
-    this.message = "";
 
     this.id = parseInt(this.route.snapshot.paramMap.get("id"));
 
@@ -33,12 +32,7 @@ export class ProjectRetrieveComponent implements OnInit {
         console.log(this.project.scrum_master)
       },
       (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message;
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     )
   }

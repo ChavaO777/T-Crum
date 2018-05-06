@@ -37,6 +37,10 @@ import { UserStoryUpdateComponent } from './components/user-stories/user-story-u
 import { UserStoryRetrieveComponent } from './components/user-stories/user-story-retrieve/user-story-retrieve.component';
 import { ProjectTechnologyComponent } from './components/projects/project-technology/project-technology.component';
 import { ProjectMemberComponent } from './components/projects/project-member/project-member.component';
+//Angular material
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorHandlerService } from './services/error-handler.service';
 
 @NgModule({
   declarations: [
@@ -78,14 +82,17 @@ import { ProjectMemberComponent } from './components/projects/project-member/pro
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule
   ],
   providers: [
     AuthService,
     CrudService,
-    LogService
+    LogService,
+    ErrorHandlerService
   ],
   bootstrap: [AppComponent]
 })

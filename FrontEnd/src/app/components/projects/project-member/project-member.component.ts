@@ -4,6 +4,7 @@ import { CrudService } from '../../../services/crud.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Project } from '../../../models/project.model';
 import { ActivatedRoute } from '@angular/router';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
   selector: 'app-project-member',
@@ -12,7 +13,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProjectMemberComponent implements OnInit {
 
-  message: string;
   project: Project;
   project_roles: string[];
   project_role: string;
@@ -20,11 +20,9 @@ export class ProjectMemberComponent implements OnInit {
   members: Member[];
   projectMembers: Member[];
 
-  constructor(private crud: CrudService, private route: ActivatedRoute) { }
+  constructor(private errorHandler:ErrorHandlerService, private crud: CrudService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-
-    this.message = '';
     this.project_roles = ['Scrum Master', 'Developer', 'Architect', 'Product Owner', 'Tester', 'Designer'];
     this.project_role = '';
     this.member_id = '';
@@ -43,12 +41,7 @@ export class ProjectMemberComponent implements OnInit {
           this.members = res;
         },
         (err: HttpErrorResponse) => {
-          if (err.error) {
-            this.message = err.error.message;
-          }
-          else {
-            this.message = err.error.errors[0].message;
-          }
+          this.errorHandler.handleError(err);
         }
       )
   }
@@ -64,12 +57,7 @@ export class ProjectMemberComponent implements OnInit {
           console.log(this.projectMembers);
         },
         (err: HttpErrorResponse) => {
-          if (err.error) {
-            this.message = err.error.message;
-          }
-          else {
-            this.message = err.error.errors[0].message;
-          }
+          this.errorHandler.handleError(err);
         }
       )
   }
@@ -78,7 +66,7 @@ export class ProjectMemberComponent implements OnInit {
 
     if (!this.member_id || !this.project_role) {
 
-      this.message = 'Debes seleccionar un miembro y su rol correspondiente.';
+      this.errorHandler.showErrorMessage('Debes seleccionar un miembro y su rol correspondiente.');
       return false;
     }
 
@@ -104,13 +92,7 @@ export class ProjectMemberComponent implements OnInit {
             this.getProjectMembers(this.project.id);
           },
           (err: HttpErrorResponse) => {
-            console.log(err);
-            if (err.error) {
-              this.message = err.error.message;
-            }
-            else {
-              this.message = err.error.errors[0].message;
-            }
+            this.errorHandler.handleError(err);
           }
         )
     }
