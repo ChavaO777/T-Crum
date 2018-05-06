@@ -2,7 +2,10 @@
 #############  VIEW   ##############
 ####################################
 CREATE VIEW membersForProjects AS
-	SELECT m.name p.name
+	SELECT m.name as "user_name", p.name as "project_name"
+	FROM ("Members" m INNER JOIN "Member_projects" mp 
+	ON m.id = mp.member_id ) INNER JOIN "Projects" p 
+	ON p.id = mp.project_id;
 
 
 
