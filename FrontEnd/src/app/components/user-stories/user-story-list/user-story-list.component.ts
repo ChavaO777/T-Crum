@@ -15,10 +15,11 @@ export class UserStoryListComponent implements OnInit {
   sprint_id: number;
   user_stories: User_story[];
 
+
   constructor(private errorHandler:ErrorHandlerService, private crud:CrudService, private router:Router, private route:ActivatedRoute) { }
 
   ngOnInit() {
-    this.sprint_id = this.route.snapshot.params.id;
+    this.sprint_id = parseInt(this.route.snapshot.params.id);
     this.crud.retrieve(this.crud.models.SPRINT, this.sprint_id)
     .subscribe(
       (res:Sprint)=>{
@@ -28,7 +29,7 @@ export class UserStoryListComponent implements OnInit {
       (err:HttpErrorResponse) => {
         this.errorHandler.handleError(err);
       }
-    )
+    );
   }
 
   deleteUserStory(id: number){
