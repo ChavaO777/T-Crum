@@ -107,6 +107,32 @@ module.exports = {
          });
     },
 
+    confirm(req, res) {
+        console.log(req.params.uuid);
+
+        return User
+            .find({
+                where: {
+                    uuid: req.params.uuid
+                }
+            })
+            .then(user => {
+                if (!user) {
+                    return res.status(404).send({
+                        message: 'User not found',
+                    });
+                }
+                
+                return user
+                    .update({
+                        confirmed: true
+                    })
+                    .then(() => res.status(200).send(user)) // Send back the updated user
+                    .catch((error) => res.status(400).send(error));
+            })
+            .catch(error => res.status(404).send(error));
+    },
+
     //Method for listing users
     list(req, res) {
 

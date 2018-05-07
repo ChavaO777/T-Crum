@@ -15,7 +15,8 @@ module.exports = {
           createdAt: Sequelize.fn('NOW'),
           updatedAt: Sequelize.fn('NOW'),
           system_role: 'root',
-          confirmed: true
+          confirmed: true,
+          uuid: "cf8e17a0-518b-11e8-a3d8-3be89ca651f0"
         },
         {
           id: "a00000000",
@@ -26,7 +27,8 @@ module.exports = {
           createdAt: Sequelize.fn('NOW'),
           updatedAt: Sequelize.fn('NOW'),
           system_role: 'user',
-          confirmed: true
+          confirmed: true,
+          uuid: "cf8e17a0-518b-11e8-a3d8-3be89ca651f1"
         },
         {
           id: "a11111111",
@@ -37,7 +39,8 @@ module.exports = {
           createdAt: Sequelize.fn('NOW'),
           updatedAt: Sequelize.fn('NOW'),
           system_role: 'user',
-          confirmed: true
+          confirmed: true,
+          uuid: "cf8e17a0-518b-11e8-a3d8-3be89ca651f2"
         },
         {
           id: "a22222222",
@@ -48,7 +51,8 @@ module.exports = {
           createdAt: Sequelize.fn('NOW'),
           updatedAt: Sequelize.fn('NOW'),
           system_role: 'user',
-          confirmed: true
+          confirmed: true,
+          uuid: "cf8e17a0-518b-11e8-a3d8-3be89ca651f3"
         },
         {
           id: "a33333333",
@@ -59,7 +63,8 @@ module.exports = {
           createdAt: Sequelize.fn('NOW'),
           updatedAt: Sequelize.fn('NOW'),
           system_role: 'user',
-          confirmed: true
+          confirmed: true,
+          uuid: "cf8e17a0-518b-11e8-a3d8-3be89ca651f4"
         },
         {
           id: "a44444444",
@@ -70,7 +75,8 @@ module.exports = {
           createdAt: Sequelize.fn('NOW'),
           updatedAt: Sequelize.fn('NOW'),
           system_role: 'user',
-          confirmed: true
+          confirmed: true,
+          uuid: "cf8e17a0-518b-11e8-a3d8-3be89ca651f5"
         }
       ], {});
   },

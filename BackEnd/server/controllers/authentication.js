@@ -20,6 +20,10 @@ module.exports = {
                 res.status(400).send({ message: 'Authentication failed. User not found.'});
             }
 
+            if(!user.confirmed){
+                res.status(400).send({ message: 'Authentication failed. The account is not confirmed, check your email to confirm your account.'});
+            }
+
             bcrypt.compare(password, user.password, (error, check) => {
                 if(check){
                     // devolver miembro y token
