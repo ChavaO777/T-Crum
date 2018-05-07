@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Project } from '../../../models/project.model';
 import { Sprint } from '../../../models/sprint.model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
   selector: 'app-sprint-retrieve',
@@ -12,16 +13,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class SprintRetrieveComponent implements OnInit {
 
-  message: string;
   sprint: Sprint;
   id: number;
   
-  constructor(private crud:CrudService, private router:Router, private route:ActivatedRoute) { }
+  constructor(private errorHandler:ErrorHandlerService, private crud:CrudService, private router:Router, private route:ActivatedRoute) { }
 
   ngOnInit() {
     this.sprint = new Sprint(null, null, null, null, null, null);
-    this.sprint.project = new Project(null, null, null, null, null, null, null, null);
-    this.message = "";
+    this.sprint.project = new Project(null, null, null, null, null, null, null, null);"";
 
     this.id = parseInt(this.route.snapshot.paramMap.get("id"));
 
@@ -33,12 +32,7 @@ export class SprintRetrieveComponent implements OnInit {
         console.log(this.sprint.project);
       },
       (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message;
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     )
   }

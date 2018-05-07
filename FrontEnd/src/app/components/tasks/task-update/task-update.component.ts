@@ -3,6 +3,7 @@ import { CrudService } from '../../../services/crud.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Task } from '../../../models/task.model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 
 @Component({
@@ -12,23 +13,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class TaskUpdateComponent implements OnInit {
 
-  message: string;
-
   id: number;
   duration: number;
   name: string;
   completed: string;
   user_story_id: number;
 
-  constructor(private crud:CrudService, private router:Router, private route: ActivatedRoute) { }
+  constructor(private errorHandler:ErrorHandlerService, private crud:CrudService, private router:Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    //this.message = "Creation component ready";
-    console.log("Update component ready");
 
     this.id = parseInt(this.route.snapshot.params.id);
-    
-    //console.log (this.id);
 
     this.crud.retrieve(this.crud.models.TASK, this.id)
     .subscribe(
@@ -41,12 +36,7 @@ export class TaskUpdateComponent implements OnInit {
         this.user_story_id = res.user_story.id;
       },
       (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message;
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     );
 
@@ -54,7 +44,6 @@ export class TaskUpdateComponent implements OnInit {
 
   updateTask()
   {
-    console.log ("Updating task")
 
     let body = {
       id: this.id,
@@ -64,22 +53,42 @@ export class TaskUpdateComponent implements OnInit {
       user_story_id: this.user_story_id
     };
 
-    this.crud.update (this.crud.models.TASK, this.id, body)  
-    .subscribe (
-      (res: Response) => {
-        //this.message = "Tarea insertada correctamente";
-        console.log("Tarea actualizada correctamente");
+    if(this.validate()){
+      this.crud.update (this.crud.models.TASK, this.id, body)  
+      .subscribe (
+        (res: Response) => {
+          this.errorHandler.showInformativeMessage('Tarea actualizada correctamente');
+          this.router.navigate(['tasks']);
+        },
+        (err:HttpErrorResponse) => {
+          this.errorHandler.handleError(err);
+        }
+      );
+    }
+    
+  }
 
-        this.router.navigate(['tasks']);
-      },
-      (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message;
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
-      }
-    );
+  validate(){
+    if(!this.duration || this.duration < 1){
+      this.errorHandler.showErrorMessage('La duración debe ser un número positivo.');
+      return false;
+    }
+
+    if(!this.name){
+      this.errorHandler.showErrorMessage('Debes agregar un nombre a tu tarea.');
+      return false;
+    }
+
+    if(!this.user_story_id || this.user_story_id < 1){
+      this.errorHandler.showErrorMessage('El ID de historia de usuario debe ser un número positivo.');
+      return false;
+    }
+
+    if(!this.completed){
+      this.errorHandler.showErrorMessage('Todos lo campos deben estar llenos.');
+      return false;
+    }
+
+    return true;
   }
 }

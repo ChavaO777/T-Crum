@@ -3,16 +3,9 @@
       <div class="card">
           <div class="card-header card-header-primary">
               <h4 class="card-title ">Proyectos</h4>
-              <p>Proyectos activos</p>
+              <p>Proyectos activos.</p>
           </div>
           <div class="card-body">
-                <div *ngIf="message" class="alert alert-danger">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <i class="material-icons">close</i>
-                    </button>
-                    <span>
-                        <b> Error</b> {{message}}</span>
-                </div>
               <button  *ngIf="auth.isRoot()" class="btn btn-success pull-right" (click)="createProject()">Crear proyecto</button>
               <div class="table-responsive">
                   <table class="table">
@@ -27,7 +20,7 @@
                             Fecha de inicio
                           </th>
                           <th>
-                            Fecha de termino
+                            Fecha de término
                           </th>
                           <th *ngIf="auth.isRoot()">
                             Scrum master

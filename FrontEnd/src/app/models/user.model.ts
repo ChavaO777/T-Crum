@@ -2,7 +2,7 @@
 // import { Task } from "./task.model";
 import { Project } from "./project.model";
 
-export class Member {
+export class User {
     constructor(
 
         public department_major: string,

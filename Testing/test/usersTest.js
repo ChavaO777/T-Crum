@@ -1,27 +1,27 @@
 const expect = require('chai').expect;
 const request = require('request');
-const URL = 'http://localhost:8000/api';
+const URL = 'http://10.50.67.83:8000/api';
 
 /**
- * Tests for Member model and controller.
+ * Tests for User model and controller.
  */
 
 /** 
- * Function to find a member in a list of members
+ * Function to find a user in a list of users
  * 
- * @param members the list of members
- * @param member the member to look for
- * @returns true if the member was found. Else, false.
+ * @param users the list of users
+ * @param user the user to look for
+ * @returns true if the user was found. Else, false.
  */
-function findMember(members, member) {
+function findUser(users, user) {
 
     logs.array.forEach(element => {
         // check that the object we tried to insert is different to every object in the DB
-        if (element.id === member.id &&
-            element.department_major === member.department_major &&
-            element.name === member.name &&
-            element.photo_URL === member.photo_URL &&
-            element.password === member.password) {
+        if (element.id === user.id &&
+            element.department_major === user.department_major &&
+            element.name === user.name &&
+            element.photo_URL === user.photo_URL &&
+            element.password === user.password) {
 
             return true;
         }
@@ -31,12 +31,12 @@ function findMember(members, member) {
 }
 
 /**
- * Function to retrieve from the DB the password of a given member
+ * Function to retrieve from the DB the password of a given user
  * 
- * @param memberId the id of the member whose password is to be retrieved
- * @returns the password of the member stored in the DB
+ * @param userId the id of the user whose password is to be retrieved
+ * @returns the password of the user stored in the DB
  */
-function getMemberPassword(memberId){
+function getUserPassword(userId){
 
     //TODO: Look how to query the DB inside a test
     return "TEST_VALUE-FIX_THE_FUNCTION_LOGIC: THIS SHOULD BE THE PASSWORD IN THE DB";
@@ -54,7 +54,7 @@ function areEqualStrings(str1, str2){
     return str1.equal(str2);
 }
 
-describe('Member model', () => {
+describe('User model', () => {
 
     // Create operation
     describe('Create: #create(' +
@@ -65,7 +65,7 @@ describe('Member model', () => {
             it('valid request', (done) => {
                 // Define POST request parameters and body
                 let postOptions = {
-                    url: URL + '/members',
+                    url: URL + '/users',
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -81,12 +81,12 @@ describe('Member model', () => {
                 // Make post request
                 request.post(postOptions, (error, response, body) => {
                     expect(response.statusCode).to.be.equal(201); // if response is successful
-                    let newMember = JSON.parse(body);
+                    let newUser = JSON.parse(body);
 
                     // Make get request to get the inserted object
-                    request.get(URL + 'members/' + newMember.id, (error, response, body) => {
+                    request.get(URL + 'users/' + newUser.id, (error, response, body) => {
                         expect(response.statusCode).to.be.equal(200); // if response is successful
-                        expect(newMember).to.deep.equal(JSON.parse(body)); // check that the object we created and the one obtain are equal
+                        expect(newUser).to.deep.equal(JSON.parse(body)); // check that the object we created and the one obtain are equal
                     });
 
                     done();
@@ -98,7 +98,7 @@ describe('Member model', () => {
 
                 // Define POST request parameters and body
                 let postOptions = {
-                    url: URL + '/members',
+                    url: URL + '/users',
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -114,14 +114,14 @@ describe('Member model', () => {
                 // Make post request
                 request.post(postOptions, (error, response, body) => {
                     expect(response.statusCode).to.be.equal(400); // if response is successful
-                    let newMember = postOptions.body;
+                    let newUser = postOptions.body;
 
                     // Make get request to get the inserted object
-                    request.get(URL + 'members/', (error, response, body) => {
+                    request.get(URL + 'users/', (error, response, body) => {
                         expect(response.statusCode).to.be.equal(200); // if response is successful
 
                         let list = JSON.parse(body);
-                        let found = findMember(list, newMember);
+                        let found = findUser(list, newUser);
                         expect(found).to.be.false;
                     });
 
@@ -134,7 +134,7 @@ describe('Member model', () => {
 
                 // Define POST request parameters and body
                 let postOptions = {
-                    url: URL + '/members',
+                    url: URL + '/users',
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -150,14 +150,14 @@ describe('Member model', () => {
                 // Make post request
                 request.post(postOptions, (error, response, body) => {
                     expect(response.statusCode).to.be.equal(400); // if response is successful
-                    let newMember = postOptions.body;
+                    let newUser = postOptions.body;
 
                     // Make get request to get the inserted object
-                    request.get(URL + 'members/', (error, response, body) => {
+                    request.get(URL + 'users/', (error, response, body) => {
                         expect(response.statusCode).to.be.equal(200); // if response is successful
 
                         let list = JSON.parse(body);
-                        let found = findMember(list, newMember);
+                        let found = findUser(list, newUser);
                         expect(found).to.be.false;
                     });
 
@@ -170,7 +170,7 @@ describe('Member model', () => {
 
                 // Define POST request parameters and body
                 let postOptions = {
-                    url: URL + '/members',
+                    url: URL + '/users',
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -186,14 +186,14 @@ describe('Member model', () => {
                 // Make post request
                 request.post(postOptions, (error, response, body) => {
                     expect(response.statusCode).to.be.equal(400); // if response is successful
-                    let newMember = postOptions.body;
+                    let newUser = postOptions.body;
 
                     // Make get request to get the inserted object
-                    request.get(URL + 'members/', (error, response, body) => {
+                    request.get(URL + 'users/', (error, response, body) => {
                         expect(response.statusCode).to.be.equal(200); // if response is successful
 
                         let list = JSON.parse(body);
-                        let found = findMember(list, newMember);
+                        let found = findUser(list, newUser);
                         expect(found).to.be.false;
                     });
 
@@ -206,7 +206,7 @@ describe('Member model', () => {
 
                 // Define POST request parameters and body
                 let postOptions = {
-                    url: URL + '/members',
+                    url: URL + '/users',
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -222,15 +222,15 @@ describe('Member model', () => {
                 // Make post request
                 request.post(postOptions, (error, response, body) => {
                     expect(response.statusCode).to.be.equal(201); // if response is successful
-                    let newMember = JSON.parse(body);
+                    let newUser = JSON.parse(body);
 
                     // Make get request to get the inserted object
-                    request.get(URL + 'members/' + newMember.id, (error, response, body) => {
+                    request.get(URL + 'users/' + newUser.id, (error, response, body) => {
                         expect(response.statusCode).to.be.equal(200); // if response is successful
 
                         //Compare the password passed by the POST in the body and the 
-                        //password stored in the DB after the insertion of the member
-                        let storedPassword = getMemberPassword(newMember.id);
+                        //password stored in the DB after the insertion of the user
+                        let storedPassword = getUserPassword(newUser.id);
                         let areEqualPasswords = areEqualStrings(postOptions.password, storedPassword);
                         expect(areEqualPasswords).to.be.false;
                     });
@@ -243,10 +243,10 @@ describe('Member model', () => {
     //Retrieve operation
     describe('Retrieve: #retrieve() | parameters: id', () => {
 
-        // Successfully retrieve a member
-        it('Retrieve an existent member', (done) => {
+        // Successfully retrieve a user
+        it('Retrieve an existent user', (done) => {
             
-            let member = {
+            let user = {
 
                 id: 'A00000000',
                 department_major: 'ITC',
@@ -255,20 +255,20 @@ describe('Member model', () => {
                 //Should the password field be here as well?
             };
 
-            request.get(URL + '/members/' + member.id, (error, response, body) => {
+            request.get(URL + '/users/' + user.id, (error, response, body) => {
 
                 expect(response.statusCode).to.be.equal(200); //If response is successful
-                expect(JSON.parse(body)).to.be.deep(member);
+                expect(JSON.parse(body)).to.be.deep(user);
             });
             
             done();
         });
 
-        // Try to retrieve a member that does not exist
-        it('Retrieve an non-existent member', (done) => {
+        // Try to retrieve a user that does not exist
+        it('Retrieve an non-existent user', (done) => {
             
-            //Try to retrieve a member whose ID is 0 (fake id)
-            request.get(URL + '/members/0', (error, response, body) => {
+            //Try to retrieve a user whose ID is 0 (fake id)
+            request.get(URL + '/users/0', (error, response, body) => {
 
                 expect(response.statusCode).to.be.equal(400); //If response failed
             });
@@ -282,14 +282,14 @@ describe('Member model', () => {
         'id, department_major, name, photo_URL, password) | ' +
         'body: id, department_major, name, photo_URL, password', () => {
 
-        // Try to update a member. Make the department_major field a non-existent value.
-        it('Update a member with a non-existent department_major field', (done) => {
+        // Try to update a user. Make the department_major field a non-existent value.
+        it('Update a user with a non-existent department_major field', (done) => {
             
-            request.get(URL + '/members/1', (error, response, body) => {
+            request.get(URL + '/users/1', (error, response, body) => {
 
                 expect(response.statusCode).to.be.equal(200);
 
-                let oldMember = {
+                let oldUser = {
 
                     id: body.id,
                     department_major: body.department_major,
@@ -298,7 +298,7 @@ describe('Member model', () => {
                     password: body.password
                 };
 
-                let newMember = {
+                let newUser = {
 
                     id: body.id,
                     department_major: "NON_EXISTENT_VALUE", //non-existent value of a department_major
@@ -309,9 +309,9 @@ describe('Member model', () => {
 
                 let putOptions = {
 
-                    url: URL + '/members',
+                    url: URL + '/users',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(newMember)
+                    body: JSON.stringify(newUser)
                 }
 
                 // Make put request
@@ -320,16 +320,16 @@ describe('Member model', () => {
                     expect(response.statusCode).to.be.equal(400);
 
                     // Make a get request to verify that the object was not inserted
-                    request.get(URL + '/members', (error, response, body) => {
+                    request.get(URL + '/users', (error, response, body) => {
 
                         expect(response.statusCode).to.be.equal(200); //If response is successful
 
                         let list = JSON.parse(body);
-                        let found1 = findMember(list, newMember);
-                        expect(found1).to.be.false; //Check that the member was not updated
+                        let found1 = findUser(list, newUser);
+                        expect(found1).to.be.false; //Check that the user was not updated
 
-                        let found2 = findMember(list, oldMember);
-                        expect(found2).to.be.true; //Check that the member with old values still exists
+                        let found2 = findUser(list, oldUser);
+                        expect(found2).to.be.true; //Check that the user with old values still exists
                     });
 
                     done();
@@ -337,14 +337,14 @@ describe('Member model', () => {
             });
         });
 
-        // Try to update a member. Make the name field an empty string.
-        it('Update a member with an empty name field', (done) => {
+        // Try to update a user. Make the name field an empty string.
+        it('Update a user with an empty name field', (done) => {
             
-            request.get(URL + '/members/1', (error, response, body) => {
+            request.get(URL + '/users/1', (error, response, body) => {
 
                 expect(response.statusCode).to.be.equal(200);
 
-                let oldMember = {
+                let oldUser = {
 
                     id: body.id,
                     department_major: body.department_major,
@@ -353,7 +353,7 @@ describe('Member model', () => {
                     password: body.password
                 };
 
-                let newMember = {
+                let newUser = {
 
                     id: body.id,
                     department_major: body.department_major, 
@@ -364,9 +364,9 @@ describe('Member model', () => {
 
                 let putOptions = {
 
-                    url: URL + '/members',
+                    url: URL + '/users',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(newMember)
+                    body: JSON.stringify(newUser)
                 }
 
                 // Make put request
@@ -375,16 +375,16 @@ describe('Member model', () => {
                     expect(response.statusCode).to.be.equal(400);
 
                     // Make a get request to verify that the object was not inserted
-                    request.get(URL + '/members', (error, response, body) => {
+                    request.get(URL + '/users', (error, response, body) => {
 
                         expect(response.statusCode).to.be.equal(200); //If response is successful
 
                         let list = JSON.parse(body);
-                        let found1 = findMember(list, newMember);
-                        expect(found1).to.be.false; //Check that the member was not updated
+                        let found1 = findUser(list, newUser);
+                        expect(found1).to.be.false; //Check that the user was not updated
 
-                        let found2 = findMember(list, oldMember);
-                        expect(found2).to.be.true; //Check that the member with old values still exists
+                        let found2 = findUser(list, oldUser);
+                        expect(found2).to.be.true; //Check that the user with old values still exists
                     });
 
                     done();
@@ -393,13 +393,13 @@ describe('Member model', () => {
         });
 
         // Update the password and make sure it was hashed
-        it('Update the password of a member. Make sure it was hashed.', (done) => {
+        it('Update the password of a user. Make sure it was hashed.', (done) => {
             
-            request.get(URL + '/members/1', (error, response, body) => {
+            request.get(URL + '/users/1', (error, response, body) => {
 
                 expect(response.statusCode).to.be.equal(200);
 
-                let oldMember = {
+                let oldUser = {
 
                     id: body.id,
                     department_major: body.department_major,
@@ -408,7 +408,7 @@ describe('Member model', () => {
                     password: body.password
                 };
 
-                let newMember = {
+                let newUser = {
 
                     id: body.id,
                     department_major: body.department_major, 
@@ -419,9 +419,9 @@ describe('Member model', () => {
 
                 let putOptions = {
 
-                    url: URL + '/members',
+                    url: URL + '/users',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(newMember)
+                    body: JSON.stringify(newUser)
                 }
 
                 // Make the put request
@@ -430,13 +430,13 @@ describe('Member model', () => {
                     expect(response.statusCode).to.be.equal(400);
 
                     // Make a get request to verify that the password was hashed
-                    request.get(URL + '/members/' + oldMember.id, (error, response, body) => {
+                    request.get(URL + '/users/' + oldUser.id, (error, response, body) => {
 
                         expect(response.statusCode).to.be.equal(200); //If response is successful
-                        let updatedMember = JSON.parse(body);    
+                        let updatedUser = JSON.parse(body);    
 
                         //Compare the previously stored password and the currently stored password
-                        let areEqualPasswords = areEqualStrings(updatedMember.password, oldMember.password);
+                        let areEqualPasswords = areEqualStrings(updatedUser.password, oldUser.password);
                         //They must be different
                         expect(areEqualPasswords).to.be.false;
                     });
@@ -446,14 +446,14 @@ describe('Member model', () => {
             });
         });
 
-        // Update some or all of the fields of a member. Make sure that the update was successful.
-        it('Update some or all of the fields of a member. Make sure that the update was successful.', (done) => {
+        // Update some or all of the fields of a user. Make sure that the update was successful.
+        it('Update some or all of the fields of a user. Make sure that the update was successful.', (done) => {
             
-            request.get(URL + '/members/1', (error, response, body) => {
+            request.get(URL + '/users/1', (error, response, body) => {
 
                 expect(response.statusCode).to.be.equal(200);
 
-                let oldMember = {
+                let oldUser = {
 
                     id: body.id,
                     department_major: body.department_major,
@@ -462,7 +462,7 @@ describe('Member model', () => {
                     password: body.password
                 };
 
-                let newMember = {
+                let newUser = {
 
                     id: body.id,
                     department_major: body.department_major, 
@@ -473,9 +473,9 @@ describe('Member model', () => {
 
                 let putOptions = {
 
-                    url: URL + '/members',
+                    url: URL + '/users',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(newMember)
+                    body: JSON.stringify(newUser)
                 }
 
                 // Make a put request
@@ -484,18 +484,18 @@ describe('Member model', () => {
                     expect(response.statusCode).to.be.equal(200);
 
                     // Make a get request to verify that the object was successfully updated
-                    request.get(URL + '/members', (error, response, body) => {
+                    request.get(URL + '/users', (error, response, body) => {
 
                         //If response is successful
                         expect(response.statusCode).to.be.equal(200); 
 
                         let list = JSON.parse(body);
-                        let found1 = findMember(list, newMember);
-                        //Check that the member was indeed updated
+                        let found1 = findUser(list, newUser);
+                        //Check that the user was indeed updated
                         expect(found1).to.be.true; 
 
-                        let found2 = findMember(list, oldMember);
-                        //Check that the member with the old values does not exist anymore
+                        let found2 = findUser(list, oldUser);
+                        //Check that the user with the old values does not exist anymore
                         expect(found2).to.be.false; 
                     });
 
@@ -509,13 +509,13 @@ describe('Member model', () => {
     //Delete operation
     describe('Delete: #delete() | parameters: id', () => {
 
-        // Delete an existent member, response: successful
+        // Delete an existent user, response: successful
         // Careful: Cascade deletion should be implemented and verified!
-        it('Delete an existent member', (done) => {
+        it('Delete an existent user', (done) => {
             
             // Define POST request parameters and body
             let postOptions = {
-                url: URL + '/members',
+                url: URL + '/users',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -528,38 +528,38 @@ describe('Member model', () => {
                 })
             };
 
-            // Make post request to create a new member
+            // Make post request to create a new user
             request.post(postOptions, (error, response, body) => {
                 expect(response.statusCode).to.be.equal(201); // if response is successful
-                let newMember = JSON.parse(body);
+                let newUser = JSON.parse(body);
 
                 // Make get request to get the inserted object
-                request.get(URL + 'members/' + newMember.id, (error, response, body) => {
+                request.get(URL + 'users/' + newUser.id, (error, response, body) => {
                     expect(response.statusCode).to.be.equal(200); // if response is successful
-                    expect(newMember).to.deep.equal(JSON.parse(body)); // check that the object we created and the one obtain are equal
+                    expect(newUser).to.deep.equal(JSON.parse(body)); // check that the object we created and the one obtain are equal
                 });
             });
 
-            // Make delete request to delete the inserted member
-            request.delete( URL + '/members/' + postOptions.id, (error, response, body) => {
+            // Make delete request to delete the inserted user
+            request.delete( URL + '/users/' + postOptions.id, (error, response, body) => {
                 expect(response.statusCode).to.be.equal(200); // if response is successful
             });
 
-            //Now verify that the items associated to this member (member_project, member_task) were also deleted in the DB
+            //Now verify that the items associated to this user (user_project, user_task) were also deleted in the DB
 
-            // Query the instances of member_project of the member that was deleted
+            // Query the instances of user_project of the user that was deleted
             // request.get();
 
-            // Query the instances of member_task of the member that was deleted
+            // Query the instances of user_task of the user that was deleted
             // request.get();
 
             done();
         });
 
 
-        // Try to delete a non-existent member, response: unsuccesful
-        it('Delete a non-existent member', (done) => {
-            request.delete(URL + '/members/0', (error, response, body) => {
+        // Try to delete a non-existent user, response: unsuccesful
+        it('Delete a non-existent user', (done) => {
+            request.delete(URL + '/users/0', (error, response, body) => {
                 expect(response.statusCode).to.be.equal(400); //response should be unsuccesful
             });
             done();

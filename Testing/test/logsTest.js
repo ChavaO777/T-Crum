@@ -1,6 +1,6 @@
 const expect  = require('chai').expect;
 const request = require('request');
-const URL = 'http://localhost:8000/api';
+const URL = 'http://10.50.67.83:8000/api';
 
 /**
  * Tests for Log model and controller.

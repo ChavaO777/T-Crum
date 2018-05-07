@@ -1,6 +1,6 @@
 const expect  = require('chai').expect;
 const request = require('request');
-const URL = 'http://localhost:8080/api';
+const URL = 'http://10.50.67.83:8000/api';
 
 
 /**
@@ -102,7 +102,7 @@ describe('Technology model', () => {
         //Try to retrieve a technology that does not exist
         it('Retrieve a non-existent technology', (done) => {
 
-            //Try to retrieve a member whose ID is 0 (fake id)
+            //Try to retrieve a user whose ID is 0 (fake id)
             request.get(URL + '/technology/0', (error, response, body) => {
 
                 expect(response.statusCode).to.be.equal(400); //If response failed
@@ -196,7 +196,7 @@ describe('Technology model', () => {
                 });
             });
 
-            // Make delete request to delete the inserted member
+            // Make delete request to delete the inserted user
             request.delete( URL + '/technology/' + postOptions.id, (error, response, body) => {
                 expect(response.statusCode).to.be.equal(200); // if response is successful
             });

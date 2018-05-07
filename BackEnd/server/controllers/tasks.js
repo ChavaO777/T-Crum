@@ -1,29 +1,34 @@
 const tasks = require('../models').Task;
 const User_story = require('../models').User_story;
-const Member = require('../models').Member;
+const User = require('../models').User;
 
 module.exports = {
   create(req, res) {
 
-    if (!req.body.duration || (isNaN(req.body.duration) || req.body.duration < 0))
+    if (!req.body.duration || isNaN(req.body.duration) || req.body.duration < 0)
+    {
       return res.status(400).send({
         message: 'The post body must contain a valid duration field. '
       });
+    }
 
-    if (!req.body.name)
+    if (!req.body.name){
       return res.status(400).send({
         message: 'The post body must contain a valid name field.'
       });
+    }
 
-    if (!req.body.completed)
+    if (!req.body.completed){
       return res.status(400).send({
         message: 'The post body must contain a valid completed field.'
       });
+    }
 
-    if (!req.body.user_story_id || (isNaN(req.body.user_story_id)))
+    if (!req.body.user_story_id || parseInt(req.body.duration) < 1){
       return res.status(400).send({
         message: 'The post body must contain a valid user_story_id field.'
       });
+    }
 
     return tasks
       .create({
@@ -33,7 +38,9 @@ module.exports = {
         user_story_id: req.body.user_story_id,
       })
       .then(tasks => res.status(200).send(tasks))
-      .catch(error => res.status(400).send(error));
+      .catch(error => res.status(400).send({
+        message: 'Creation was unsuccessful.'
+      }));
   },
   list(req, res) {
     return tasks
@@ -44,8 +51,8 @@ module.exports = {
             as: 'user_story'
           },
           {
-            model: Member,
-            as: 'members'
+            model: User,
+            as: 'users'
           }
         ],
       })
@@ -54,10 +61,11 @@ module.exports = {
   },
   retrieve(req, res) {
 
-    if (!req.params.id || (isNaN(req.params.id)))
+    if (!req.params.id || (isNaN(req.params.id))){
       return res.status(400).send({
         message: 'The id field must be a valid integer.'
       });
+    }
 
     return tasks
       .findById(req.params.id, {
@@ -67,8 +75,8 @@ module.exports = {
             as: 'user_story'
           },
           {
-            model: Member,
-            as: 'members'
+            model: User,
+            as: 'users'
           }
         ],
       })
@@ -82,16 +90,17 @@ module.exports = {
       })
       .catch(error => res.status(400).send(tasks));
   },
-  listTaskWithUsers(req, res) //All users (members) that participate in a particular task
+  listTaskWithUsers(req, res) //All users that participate in a particular task
   {
-    if (!req.params.id || isNaN(req.params.id))
+    if (!req.params.id || isNaN(req.params.id)){
       return res.status(400).send({
         message: 'The must contain a valid id field.'
       });
+    }
 
     return tasks.findById(req.params.id, {
         include: [{
-          model: Member,
+          model: User,
           as: 'users'
         }]
       })
@@ -107,15 +116,23 @@ module.exports = {
   },
   update(req, res) {
 
-    if (!req.params.id || isNaN(req.params.id) || req.body.duration < 0)
+    if (!req.params.id || isNaN(req.params.id)){
       return res.status(400).send({
         message: 'The id is invalid'
       });
+    }
 
-    if (req.body.user_story_id && isNaN(req.body.user_story_id))
+    if (req.body.user_story_id && isNaN(req.body.user_story_id)){
       return res.status(400).send({
         message: 'The post body must contain a valid user_story_id field.'
       });
+    }
+
+    if (req.body.duration < 0){
+      return res.status(400).send({
+        message: 'The task duration cannot be negative.'
+      });
+    }
 
     return tasks
       .findById(req.params.id, {})
@@ -133,16 +150,19 @@ module.exports = {
             user_story_id: req.body.user_story_id || tasks.user_story_id,
           })
           .then(() => res.status(200).send(tasks)) // Send back the updated tuple.
-          .catch((error) => res.status(400).send(error));
+          .catch((error) => res.status(400).send({
+            message: 'Update was unsuccessful',
+          }));
       })
       .catch((error) => res.status(400).send(error));
   },
   destroy(req, res) {
 
-    if (!req.params.id || isNaN(req.params.id))
+    if (!req.params.id || isNaN(req.params.id)){
       return res.status(400).send({
         message: 'The provided id field is invalid.'
       });
+    }
 
     return tasks
       .findById(req.params.id)

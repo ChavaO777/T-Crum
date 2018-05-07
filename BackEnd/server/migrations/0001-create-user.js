@@ -1,7 +1,6 @@
-'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Members', {
+    return queryInterface.createTable('Users', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -35,10 +34,16 @@ module.exports = {
         allowNull: false,
         type: Sequelize.ENUM,
         values: ['root', 'user']
+      },
+      uuid: {
+        type: Sequelize.UUID
+      },
+      confirmed: {
+        type: Sequelize.BOOLEAN
       }
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Members');
+    return queryInterface.dropTable('Users');
   }
 };

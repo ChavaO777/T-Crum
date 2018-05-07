@@ -3,6 +3,7 @@ import { CrudService } from '../../../services/crud.service';
 import { Technology } from '../../../models/technology.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
   selector: 'app-technologies-update',
@@ -10,14 +11,12 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./technologies-update.component.css']
 })
 export class TechnologiesUpdateComponent implements OnInit {
-  message: string;
   technology: Technology;
 
-  constructor(private crud:CrudService, private route: ActivatedRoute, private router:Router) { }
+  constructor(private errorHandler:ErrorHandlerService, private crud:CrudService, private route: ActivatedRoute, private router:Router) { }
 
   ngOnInit() {
     this.technology = new Technology('', null, null);
-    this.message= '';
     let id = this.route.snapshot.params.id;
     this.crud.retrieve(this.crud.models.TECHNOLOGY, id)
     .subscribe(
@@ -26,12 +25,7 @@ export class TechnologiesUpdateComponent implements OnInit {
         console.log(this.technology);
       },
       (err: HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message;
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     )
   }
@@ -45,12 +39,7 @@ export class TechnologiesUpdateComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           console.log(err);
-          if(err.error){
-            this.message = err.error.message;
-          }
-          else{
-            this.message = err.error.errors[0].message;
-          }
+          this.errorHandler.handleError(err);
         }
       )
     }
@@ -60,10 +49,9 @@ export class TechnologiesUpdateComponent implements OnInit {
 
   validate(){
     if(!this.technology.name){
-      this.message = "El campo nombre no puede estar vacío.";
+      this.errorHandler.showErrorMessage("El campo nombre no puede estar vacío.");
       return false;
     }
-
     return true;
   }
 

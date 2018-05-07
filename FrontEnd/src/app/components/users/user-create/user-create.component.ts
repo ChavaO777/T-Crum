@@ -2,44 +2,41 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { CrudService } from '../../../services/crud.service';
 import { Router } from '@angular/router';
-import { Member } from '../../../models/member.model';
+import { User } from '../../../models/user.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
-  selector: 'app-member-create',
-  templateUrl: './member-create.component.html',
-  styleUrls: ['./member-create.component.css']
+  selector: 'app-user-create',
+  templateUrl: './user-create.component.html',
+  styleUrls: ['./user-create.component.css']
 })
-export class MemberCreateComponent implements OnInit {
-  errorMessage: string;
-  successMessage: string;
-  member: Member;
+export class UserCreateComponent implements OnInit {
+  user: User;
   //A string to store the password confirmation
   passwordConfirmation: string; 
 
-  constructor(private auth: AuthService, private router: Router, private crud: CrudService) { }
+  constructor(private errorHandler: ErrorHandlerService, private auth: AuthService, private router: Router, private crud: CrudService) { }
 
   ngOnInit() {
     if (this.auth.isLoggedIn()) {
       this.router.navigate(['home'])
     }
-    this.errorMessage = '';
-    this.successMessage = '';
     this.passwordConfirmation = '';
-    this.member = new Member('', '', '', '', '', null, null, '');
+    this.user = new User('', '', '', '', '', null, null, '');
   }
 
   /**
-   * Method to create a member with the parameters
+   * Method to create a user with the parameters
    * that are asked for in the registration view.
    */
-  createMember() {
+  createUser() {
 
     if (this.validateNonEmptyFields() && this.areEqualPasswords()) {
 
-      this.crud.registerMember(this.member)
+      this.crud.registerUser(this.user)
         .subscribe(
-          (res: Member) => {
+          (res: User) => {
 
             /*  
               Ideally, a errorMessage of success should be displayed
@@ -47,18 +44,12 @@ export class MemberCreateComponent implements OnInit {
               successful. So far, we're only taking the user 
               to the login view.
             */
-            this.successMessage = 'The registration was successful!';
+            this.errorHandler.showInformativeMessage('¡El registro fue exitoso! Revisa tu correo institucional para activar tu cuenta.');
             this.router.navigate(['login']);
           },
           (err: HttpErrorResponse) => {
-            console.log('Hello'); 
             console.log(err);
-            if (err.error) {
-              this.errorMessage = err.error.errorMessage;
-            }
-            else {
-              this.errorMessage = err.error.error[0].errorMessage;
-            }
+            this.errorHandler.handleError(err);
           }
         )
     }
@@ -76,16 +67,15 @@ export class MemberCreateComponent implements OnInit {
    * return false.
    */
   validateNonEmptyFields() {
-    if (!this.member.id || 
-        !this.member.name || 
-        !this.member.department_major || 
-        !this.member.password || 
+    if (!this.user.id || 
+        !this.user.name || 
+        !this.user.department_major || 
+        !this.user.password || 
         !this.passwordConfirmation) {
-      this.errorMessage = 'Debes introducir tu matrícula, nombre, carrera o departamento, contraseña y la confirmación de la misma.';
+          this.errorHandler.showErrorMessage('Debes introducir tu matrícula, nombre, carrera o departamento, contraseña y la confirmación de la misma.');
       return false;
     }
     else {
-      this.errorMessage = '';
       return true;
     }
   }
@@ -99,13 +89,12 @@ export class MemberCreateComponent implements OnInit {
    */
   areEqualPasswords() {
 
-    if (this.member.password == this.passwordConfirmation) {
+    if (this.user.password == this.passwordConfirmation) {
 
       return true;
     }
     else {
-
-      this.errorMessage = 'La contraseña no fue confirmada correctamente. Inténtalo de nuevo.'
+      this.errorHandler.showErrorMessage('La contraseña no fue confirmada correctamente. Inténtalo de nuevo.')
       return false;
     }
   }

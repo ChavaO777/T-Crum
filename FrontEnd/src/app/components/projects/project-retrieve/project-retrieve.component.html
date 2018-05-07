@@ -6,13 +6,6 @@
         <p>Id de proyecto: {{project.id}}</p>
       </div>
       <div class="card-body">
-        <div *ngIf="message" class="alert alert-danger">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <i class="material-icons">close</i>
-          </button>
-          <span>
-            <b> Error</b> {{message}}</span>
-        </div>
         <div class="col-md-12">
           <h4>
             <b>Visión:</b> {{project.vision}}</h4>
@@ -23,7 +16,7 @@
         </div>
         <div class="col-md-12">
           <h4>
-            <b>Fecha de termino:</b> {{project.end_date}}</h4>
+            <b>Fecha de término:</b> {{project.end_date}}</h4>
         </div>
         <div class="col-md-12">
           <h4>
@@ -53,7 +46,7 @@
   </div>
   <div class="col-md-6">
     <div class="card">
-      <app-project-member></app-project-member>
+      <app-project-user></app-project-user>
     </div>
   </div>
 </div>

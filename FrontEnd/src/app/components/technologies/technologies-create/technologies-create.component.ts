@@ -3,6 +3,7 @@ import { CrudService } from '../../../services/crud.service';
 import { Technology } from '../../../models/technology.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
   selector: 'app-technologies-create',
@@ -12,13 +13,11 @@ import { Router } from '@angular/router';
 export class TechnologiesCreateComponent implements OnInit {
   @Output() onSubmit = new EventEmitter<boolean>();
   technology: Technology;
-  message: string;
 
-  constructor(private crud:CrudService, private router:Router) { }
+  constructor(private errorHandler:ErrorHandlerService, private crud:CrudService, private router:Router) { }
 
   ngOnInit() {
     this.technology = new Technology('', null, null);
-    this.message = "";
   }
 
   createTechnology(){
@@ -31,12 +30,7 @@ export class TechnologiesCreateComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           console.log(err);
-          if(err.error){
-            this.message = err.error.message;
-          }
-          else{
-            this.message = err.error.errors[0].message;
-          }
+          this.errorHandler.handleError(err);
         }
       )
     }
@@ -46,7 +40,7 @@ export class TechnologiesCreateComponent implements OnInit {
 
   validate(){
     if(!this.technology.name){
-      this.message = "El campo nombre no puede estar vacío.";
+      this.errorHandler.showErrorMessage("El campo nombre no puede estar vacío.");
       return false;
     }
 

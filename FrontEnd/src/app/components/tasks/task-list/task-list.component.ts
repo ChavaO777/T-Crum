@@ -3,6 +3,7 @@ import { CrudService } from '../../../services/crud.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Task } from '../../../models/task.model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 
 @Component({
@@ -12,11 +13,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class TaskListComponent implements OnInit {
 
-  message: string;
   tasks: Task[];
   public user_story_id: number;
 
-  constructor(private crud:CrudService, private router:Router, private route:ActivatedRoute) { }
+  constructor(private crud:CrudService, private router:Router, private route:ActivatedRoute, private errorHandler: ErrorHandlerService) { }
 
   ngOnInit() {
 
@@ -39,12 +39,7 @@ export class TaskListComponent implements OnInit {
         this.tasks = tasksForUserStory;
       },
       (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     )
   }
@@ -54,7 +49,7 @@ export class TaskListComponent implements OnInit {
     this.crud.delete(this.crud.models.TASK, id)
     .subscribe(
       (res:Response) => {
-        this.message = "Success";
+        this.errorHandler.showInformativeMessage('Tarea eliminada exitosamente.');
         let x = 0;
         for(let task of this.tasks){
           if(task.id == id){
@@ -64,12 +59,7 @@ export class TaskListComponent implements OnInit {
         }
       },
       (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     )
   }

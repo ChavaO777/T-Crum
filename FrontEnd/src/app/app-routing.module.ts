@@ -10,7 +10,7 @@ import { LogoutComponent } from './components/authentication/logout/logout.compo
 import { HomeComponent } from './components/home/home.component';
 import { TechnologiesListComponent } from './components/technologies/technologies-list/technologies-list.component';
 import { AcceptanceCriteriaEditComponent } from './components/acceptance-criteria/acceptance-criteria-edit/acceptance-criteria-edit.component';
-import { MemberCreateComponent } from './components/member/member-create/member-create.component';
+import { UserCreateComponent } from './components/users/user-create/user-create.component';
 import { TechnologiesUpdateComponent } from './components/technologies/technologies-update/technologies-update.component';
 import { ProjectCreateComponent } from './components/projects/project-create/project-create.component';
 import { ProjectUpdateComponent } from './components/projects/project-update/project-update.component';
@@ -26,13 +26,15 @@ import { AcceptanceCriteriaListComponent } from './components/acceptance-criteri
 import { AcceptanceCriteriaCreateComponent } from './components/acceptance-criteria/acceptance-criteria-create/acceptance-criteria-create.component';
 import { UserStoryRetrieveComponent } from './components/user-stories/user-story-retrieve/user-story-retrieve.component';
 import { SprintRetrieveComponent } from './components/sprints/sprint-retrieve/sprint-retrieve.component';
+import { UserConfirmComponent } from './components/users/user-confirm/user-confirm.component';
 
 
 const routes: Routes = [
   // General
   { path:'login', component: LoginComponent},
   { path: 'logout', component: LogoutComponent},
-  {path: 'register', component: MemberCreateComponent},
+  { path: 'register', component: UserCreateComponent},
+  { path: 'confirmar/:uuid', component: UserConfirmComponent},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
 
   // Technologies

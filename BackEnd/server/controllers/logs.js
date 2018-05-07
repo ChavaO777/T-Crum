@@ -1,5 +1,5 @@
 const Log = require('../models').Log;
-const Member = require('../models').Member;
+const User = require('../models').User;
 
 module.exports = {
     create(req, res) {
@@ -8,14 +8,14 @@ module.exports = {
             return res.status(400).send({message: 'The post body must contain a query field.'});
         }
 
-        if(!req.body.member_id){
-            return res.status(400).send({message: 'The post body must contain a member_id field.'});
+        if(!req.body.user_id){
+            return res.status(400).send({message: 'The post body must contain a user_id field.'});
         }
 
         return Log
             .create({
                 query: req.body.query,
-                member_id: req.body.member_id
+                user_id: req.body.user_id
             })
             .then(log => res.status(200).send(log))
             .catch(error => res.status(400).send(error));
@@ -25,7 +25,7 @@ module.exports = {
         return Log
             .findAll({
                 include: [
-                    { model: Member, as: 'member' }
+                    { model: User, as: 'user' }
                 ],
             })
             .then(logs => res.status(200).send(logs))
@@ -41,7 +41,7 @@ module.exports = {
         return Log
             .findById(req.params.id, {
                 include: [
-                    { model: Member, as: 'member' }
+                    { model: User, as: 'user' }
                 ],
             })
             .then(log => {

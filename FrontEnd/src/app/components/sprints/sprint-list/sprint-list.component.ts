@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CrudService } from '../../../services/crud.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Sprint } from '../../../models/sprint.model';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
   selector: 'app-sprint-list',
@@ -10,10 +11,9 @@ import { Sprint } from '../../../models/sprint.model';
 })
 export class SprintListComponent implements OnInit {
 
-  message: string;
   sprints: Sprint[];
 
-  constructor(private crud: CrudService) { }
+  constructor(private errorHandler:ErrorHandlerService, private crud: CrudService) { }
 
   ngOnInit() {
 
@@ -24,12 +24,7 @@ export class SprintListComponent implements OnInit {
           this.sprints = res;
         },
         (err: HttpErrorResponse) => {
-          if (err.error) {
-            this.message = err.error.message
-          }
-          else {
-            this.message = err.error.errors[0].message;
-          }
+          this.errorHandler.handleError(err);
         }
       )
   }
@@ -40,7 +35,7 @@ export class SprintListComponent implements OnInit {
 
     .subscribe(
       (res: Response) => {
-        this.message = "Succes";
+        this.errorHandler.showInformativeMessage('Sprint eliminado correctamente');
         let x = 0;
 
         for (let sprint of this.sprints) {
@@ -51,14 +46,8 @@ export class SprintListComponent implements OnInit {
           x++;
         }
       },
-
       (err: HttpErrorResponse) => {
-        if (err.error) {
-          this.message = err.error.message
-        }
-        else {
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     )
   }
