@@ -74,6 +74,7 @@ export class MemberUpdateComponent implements OnInit {
                         .subscribe(
                             (resp: User_image) => {
                                 this.errorHandler.showInformativeMessage("Avatar actualizado.");
+                                this.router.navigate(["/profile"]);
                             },
                             (err: HttpErrorResponse) => {
                                 console.log(err);
