@@ -1,16 +1,9 @@
 <div class="card">
     <div class="card-header card-header-primary">
         <h4 class="card-title">Crear un proyecto</h4>
-        <p class="card-category">Ingresa la informacion del proyecto</p>
+        <p class="card-category">Ingresa la información del proyecto</p>
     </div>
     <div class="card-body">
-        <div *ngIf="message" class="alert alert-danger">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <i class="material-icons">close</i>
-            </button>
-            <span>
-                <b> Error</b> {{message}}</span>
-        </div>
         <form (submit)="updateProject()">
             <div class="form-group">
               <label class="bmd-label-floating" for="vision">Visión</label>
@@ -27,7 +20,7 @@
               <input class="form-control" type="date" id="begin_date" name="begin_date" [(ngModel)]="project.begin_date">
             </div>
             <div>
-                <label class="label">Fecha de termino</label>
+                <label class="label">Fecha de término</label>
             </div>
             <div class="form-group">
               <input class="form-control" type="date" id="end_date" name="end_date" [(ngModel)]="project.end_date">
@@ -47,9 +40,9 @@
             <div class="form-group">
                 <label class="bmd-label-floating" for="scrum_master_id">Scrum Master</label>
                 <select class="form-control" id="scrum_master_id" name="scrum_master_id" [(ngModel)]="project.scrum_master_id">
-                  <ng-container *ngFor="let member of members" class="form-group">
-                      <option *ngIf="project.scrum_master_id == member.id" value="{{member.id}}" selected>{{member.id}} || {{member.name}} </option>
-                      <option *ngIf="project.scrum_master_id != member.id" value="{{member.id}}">{{member.id}} || {{member.name}} </option>
+                  <ng-container *ngFor="let user of users" class="form-group">
+                      <option *ngIf="project.scrum_master_id == user.id" value="{{user.id}}" selected>{{user.id}} || {{user.name}} </option>
+                      <option *ngIf="project.scrum_master_id != user.id" value="{{user.id}}">{{user.id}} || {{user.name}} </option>
                   </ng-container>
                 </select>
             </div>

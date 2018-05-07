@@ -4,6 +4,7 @@ import { Acceptance_criteria } from '../../../models/acceptance_criteria.model';
 import { User_story } from '../../../models/user_story.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
   selector: 'app-acceptance-criteria-edit',
@@ -13,10 +14,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AcceptanceCriteriaEditComponent implements OnInit {
   acceptance_criteria: Acceptance_criteria;
   user_story: User_story;
-  message: String;
   user_story_id : number;
 
-  constructor(private crud: CrudService, private route:ActivatedRoute,private router:Router) { }
+  constructor(private errorHandler:ErrorHandlerService, private crud: CrudService, private route:ActivatedRoute,private router:Router) { }
 
   ngOnInit() {
     this.acceptance_criteria = new Acceptance_criteria(null, null, null, null, null, null);
@@ -28,12 +28,7 @@ export class AcceptanceCriteriaEditComponent implements OnInit {
         this.user_story_id = res.user_story_id;
       },
       (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message;
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     )
   }
@@ -48,13 +43,7 @@ export class AcceptanceCriteriaEditComponent implements OnInit {
           this.router.navigate(['/user-stories/'+this.user_story_id]);
         },
         (err:HttpErrorResponse) => {
-          console.log(err);
-          if(err.error){
-            this.message = err.error.message;
-          }
-          else{
-            this.message = err.error.errors[0].message;
-          }
+          this.errorHandler.handleError(err);
         }
       )
     }
@@ -63,19 +52,18 @@ export class AcceptanceCriteriaEditComponent implements OnInit {
 
   validate(){
     if(!this.acceptance_criteria.name){
-      this.message = 'Debes introducir el nombre del criterio de aceptación.';
+      this.errorHandler.showErrorMessage('Debes introducir el nombre del criterio de aceptación.')
       return false;
     }
     if(!this.acceptance_criteria.type){
-      this.message = 'Debes introducir el tipo del criterio de aceptación.';
+      this.errorHandler.showErrorMessage('Debes introducir el tipo del criterio de aceptación.');
       return false;
     }
     if(!this.acceptance_criteria.user_story_id){
-      this.message = 'No hay historia de usuario relacionada';
+      this.errorHandler.showErrorMessage('No hay historia de usuario relacionada');
       return false;
     }
     else{
-      this.message = '';
       console.log('Validado');
       return true;
     }

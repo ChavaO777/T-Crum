@@ -1,10 +1,10 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var Project = sequelize.define('Project', {
-    id:{
+    id: {
       allowNull: false,
       autoIncrement: true,
-      primaryKey:true,
+      primaryKey: true,
       type: DataTypes.INTEGER
     },
     vision: {
@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.TEXT
     },
-    reach:{
+    reach: {
       allowNull: false,
       type: DataTypes.TEXT
     }
@@ -39,26 +39,26 @@ module.exports = (sequelize, DataTypes) => {
 
   Project.associate = function (models) {
 
-    Project.belongsTo(models.Member, {
+    Project.belongsTo(models.User, {
 
-      foreignKey: 'scrum_master_id',
-      as: 'scrum_master',
-      onDelete: 'CASCADE',
-    }),
+        foreignKey: 'scrum_master_id',
+        as: 'scrum_master',
+        onDelete: 'CASCADE',
+      }),
 
-    Project.belongsToMany(models.Member, {
-      through: 'Member_projects',
-      foreignKey: 'project_id',
-      //otherKey: 'member_id',
-      as: 'members',
-      onDelete: 'CASCADE',
-    }),
+      Project.belongsToMany(models.User, {
+        through: 'User_projects',
+        foreignKey: 'project_id',
+        //otherKey: 'user_id',
+        as: 'users',
+        onDelete: 'CASCADE',
+      }),
 
-    Project.hasMany(models.Sprint, {
-      foreignKey: 'project_id',
-      as: 'sprints',
-      onDelete: 'Cascade'
-    })
+      Project.hasMany(models.Sprint, {
+        foreignKey: 'project_id',
+        as: 'sprints',
+        onDelete: 'Cascade'
+      })
 
     Project.belongsToMany(models.Technology, {
       through: 'Project_technologies',

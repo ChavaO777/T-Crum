@@ -9,17 +9,17 @@ export class LogService {
   Models: {};
 
   constructor(private auth:AuthService, private http:HttpClient) {
-    this.URL = 'http://localhost:8000/api';
-    this.headers = new HttpHeaders();
-    this.headers.append('ContentType', 'application/json');
-    this.headers.append('Access-Control-Allow-Origin', '*');
-    this.headers.append('Authorization', this.auth.getToken());
+    this.URL = 'http://10.50.67.83:8000/api';
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.auth.getToken()
+    });
   }
 
   record(model:string, operation:string) {
     let body = {
       query: model + " " + operation,
-      member_id: this.auth.getMember().id
+      user_id: this.auth.getUser().id
     }
 
     return this.http.post(

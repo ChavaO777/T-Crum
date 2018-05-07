@@ -1,6 +1,6 @@
 const expect  = require('chai').expect;
 const request = require('request');
-const URL = 'http://localhost:8000/api';
+const URL = 'http://10.50.67.83:8000/api';
 
 
 /**
@@ -371,9 +371,9 @@ describe('Sprints model', () => {
                 acceptanceID = newAcceptance.id;
             });
 
-            // Define POST request parameters and body: members table
-            let postOptionsMember = {
-                url: URL + '/member',
+            // Define POST request parameters and body: users table
+            let postOptionsUser = {
+                url: URL + '/user',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
                     department_major: 'Test department_major',
@@ -383,32 +383,32 @@ describe('Sprints model', () => {
                 })
             };
 
-            var memberID;
+            var userID;
 
-            // Make post request: members table
-            request.post(postOptionsMember, (error, response, body) => {
+            // Make post request: users table
+            request.post(postOptionsUser, (error, response, body) => {
                 expect(response.statusCode).to.be.equal(200); // if response is successful
-                let newMember = JSON.parse(body);
-                memberID = newMember.id;
+                let newUser = JSON.parse(body);
+                userID = newUser.id;
             });
 
-            // Define POST request parameters and body: member_task table
-            let postOptionsMemberTask = {
-                url: URL + '/member-task',
+            // Define POST request parameters and body: user_task table
+            let postOptionsUserTask = {
+                url: URL + '/user-task',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
-                    member_id: memberID,
+                    user_id: userID,
                     task_id: taskID
                 })
             };
 
-            var memberTaskID;
+            var userTaskID;
 
-            //Make post request: member_task table
-            request.post(postOptionsMemberTask, (error, response, body) => {
+            //Make post request: user_task table
+            request.post(postOptionsUserTask, (error, response, body) => {
                 expect(response.statusCode).to.be.equal(200); // if response is successful
-                let newMemberTask = JSON.parse(body);
-                memberTaskID = newMemberTask.id;
+                let newUserTask = JSON.parse(body);
+                userTaskID = newUserTask.id;
             });
             
             // Make delete request to delte the inserted sprint
@@ -436,8 +436,8 @@ describe('Sprints model', () => {
                 expect(response.statusCode).to.be.equal(400); // if response is unsuccessful
             });
 
-            // Make get request to get the deleted member_task
-            request.get( URL + '/member-task/' + memberTaskID, (error, response, body) => {
+            // Make get request to get the deleted user_task
+            request.get( URL + '/user-task/' + userTaskID, (error, response, body) => {
                 expect(response.statusCode).to.be.equal(400); // if response is unsuccessful
             });
 

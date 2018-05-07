@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
 
-    return queryInterface.bulkInsert('Members',
+    return queryInterface.bulkInsert('Users',
 
       [
         {
@@ -14,7 +14,9 @@ module.exports = {
           password: '$2a$10$Ke6Aa11a.k2fu3UZ1zEL9.UqM63U720h/EwJ.DZMoXIA8ZRMNPY6y',
           createdAt: Sequelize.fn('NOW'),
           updatedAt: Sequelize.fn('NOW'),
-          system_role: 'root'
+          system_role: 'root',
+          confirmed: true,
+          uuid: "cf8e17a0-518b-11e8-a3d8-3be89ca651f0"
         },
         {
           id: "a00000000",
@@ -24,7 +26,9 @@ module.exports = {
           password: '$2a$10$Ke6Aa11a.k2fu3UZ1zEL9.UqM63U720h/EwJ.DZMoXIA8ZRMNPY6y',
           createdAt: Sequelize.fn('NOW'),
           updatedAt: Sequelize.fn('NOW'),
-          system_role: 'user'
+          system_role: 'user',
+          confirmed: true,
+          uuid: "cf8e17a0-518b-11e8-a3d8-3be89ca651f1"
         },
         {
           id: "a11111111",
@@ -34,7 +38,9 @@ module.exports = {
           password: '$2a$10$Ke6Aa11a.k2fu3UZ1zEL9.UqM63U720h/EwJ.DZMoXIA8ZRMNPY6y',
           createdAt: Sequelize.fn('NOW'),
           updatedAt: Sequelize.fn('NOW'),
-          system_role: 'user'
+          system_role: 'user',
+          confirmed: true,
+          uuid: "cf8e17a0-518b-11e8-a3d8-3be89ca651f2"
         },
         {
           id: "a22222222",
@@ -44,7 +50,9 @@ module.exports = {
           password: '$2a$10$Ke6Aa11a.k2fu3UZ1zEL9.UqM63U720h/EwJ.DZMoXIA8ZRMNPY6y',
           createdAt: Sequelize.fn('NOW'),
           updatedAt: Sequelize.fn('NOW'),
-          system_role: 'user'
+          system_role: 'user',
+          confirmed: true,
+          uuid: "cf8e17a0-518b-11e8-a3d8-3be89ca651f3"
         },
         {
           id: "a33333333",
@@ -54,7 +62,9 @@ module.exports = {
           password: '$2a$10$Ke6Aa11a.k2fu3UZ1zEL9.UqM63U720h/EwJ.DZMoXIA8ZRMNPY6y',
           createdAt: Sequelize.fn('NOW'),
           updatedAt: Sequelize.fn('NOW'),
-          system_role: 'user'
+          system_role: 'user',
+          confirmed: true,
+          uuid: "cf8e17a0-518b-11e8-a3d8-3be89ca651f4"
         },
         {
           id: "a44444444",
@@ -64,14 +74,16 @@ module.exports = {
           password: '$2a$10$Ke6Aa11a.k2fu3UZ1zEL9.UqM63U720h/EwJ.DZMoXIA8ZRMNPY6y',
           createdAt: Sequelize.fn('NOW'),
           updatedAt: Sequelize.fn('NOW'),
-          system_role: 'user'
+          system_role: 'user',
+          confirmed: true,
+          uuid: "cf8e17a0-518b-11e8-a3d8-3be89ca651f5"
         }
       ], {});
   },
 
   down: (queryInterface, Sequelize) => {
 
-    return queryInterface.bulkDelete('Members', 
+    return queryInterface.bulkDelete('Users', 
     [
       {
         id: "l00000000"

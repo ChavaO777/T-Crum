@@ -1,6 +1,6 @@
 const expect  = require('chai').expect;
 const request = require('request');
-const URL = 'http://localhost:8000/api';
+const URL = 'http://10.50.67.83:8000/api';
 
 /**
  * Tests for User Story model and controller.
@@ -356,10 +356,10 @@ describe('User_story model', () => {
 
                         let list = JSON.parse(body);
                         let found1 = findUserStory(list, newUser_story);
-                        expect(found1).to.be.false; //Check that the member was not updated
+                        expect(found1).to.be.false; //Check that the user was not updated
 
                         let found2 = findUserStory(list, oldUser_story);
-                        expect(found2).to.be.true; //Check that the member with old values still exists
+                        expect(found2).to.be.true; //Check that the user with old values still exists
                     });
 
                     done();
@@ -414,10 +414,10 @@ describe('User_story model', () => {
 
                         let list = JSON.parse(body);
                         let found1 = findUserStory(list, newUser_story);
-                        expect(found1).to.be.false; //Check that the member was not updated
+                        expect(found1).to.be.false; //Check that the user was not updated
 
                         let found2 = findUserStory(list, oldUser_story);
-                        expect(found2).to.be.true; //Check that the member with old values still exists
+                        expect(found2).to.be.true; //Check that the user with old values still exists
                     });
 
                     done();
@@ -472,10 +472,10 @@ describe('User_story model', () => {
 
                         let list = JSON.parse(body);
                         let found1 = findUserStory(list, newUser_story);
-                        expect(found1).to.be.false; //Check that the member was not updated
+                        expect(found1).to.be.false; //Check that the user was not updated
 
                         let found2 = findUserStory(list, oldUser_story);
-                        expect(found2).to.be.true; //Check that the member with old values still exists
+                        expect(found2).to.be.true; //Check that the user with old values still exists
                     });
 
                     done();
@@ -530,10 +530,10 @@ describe('User_story model', () => {
 
                         let list = JSON.parse(body);
                         let found1 = findUserStory(list, newUser_story);
-                        expect(found1).to.be.false; //Check that the member was not updated
+                        expect(found1).to.be.false; //Check that the user was not updated
 
                         let found2 = findUserStory(list, oldUser_story);
-                        expect(found2).to.be.true; //Check that the member with old values still exists
+                        expect(found2).to.be.true; //Check that the user with old values still exists
                     });
 
                     done();
@@ -588,10 +588,10 @@ describe('User_story model', () => {
 
                         let list = JSON.parse(body);
                         let found1 = findUserStory(list, newUser_story);
-                        expect(found1).to.be.false; //Check that the member was not updated
+                        expect(found1).to.be.false; //Check that the user was not updated
 
                         let found2 = findUserStory(list, oldUser_story);
-                        expect(found2).to.be.true; //Check that the member with old values still exists
+                        expect(found2).to.be.true; //Check that the user with old values still exists
                     });
 
                     done();
@@ -646,10 +646,10 @@ describe('User_story model', () => {
 
                         let list = JSON.parse(body);
                         let found1 = findUserStory(list, newUser_story);
-                        expect(found1).to.be.false; //Check that the member was not updated
+                        expect(found1).to.be.false; //Check that the user was not updated
 
                         let found2 = findUserStory(list, oldUser_story);
-                        expect(found2).to.be.true; //Check that the member with old values still exists
+                        expect(found2).to.be.true; //Check that the user with old values still exists
                     });
 
                     done();
@@ -704,10 +704,10 @@ describe('User_story model', () => {
 
                         let list = JSON.parse(body);
                         let found1 = findUserStory(list, newUser_story);
-                        expect(found1).to.be.false; //Check that the member was not updated
+                        expect(found1).to.be.false; //Check that the user was not updated
 
                         let found2 = findUserStory(list, oldUser_story);
-                        expect(found2).to.be.true; //Check that the member with old values still exists
+                        expect(found2).to.be.true; //Check that the user with old values still exists
                     });
 
                     done();
@@ -762,10 +762,10 @@ describe('User_story model', () => {
 
                         let list = JSON.parse(body);
                         let found1 = findUserStory(list, newUser_story);
-                        expect(found1).to.be.false; //Check that the member was not updated
+                        expect(found1).to.be.false; //Check that the user was not updated
 
                         let found2 = findUserStory(list, oldUser_story);
-                        expect(found2).to.be.true; //Check that the member with old values still exists
+                        expect(found2).to.be.true; //Check that the user with old values still exists
                     });
 
                     done();
@@ -789,7 +789,7 @@ describe('User_story model', () => {
                 body: JSON.stringify({ weight: '2', scrum_board_status: '1', description: 'This is a description', priority: '2', sprint_id: '1', project_id: '1'})
             };
 
-            // Make post request to create a new member
+            // Make post request to create a new user
             request.post(postOptions, (error, response, body) => {
                 expect(response.statusCode).to.be.equal(201); // if response is successful
                 let newUser_story = JSON.parse(body);
@@ -801,7 +801,7 @@ describe('User_story model', () => {
                 });
             });
 
-            // Make delete request to delete the inserted member
+            // Make delete request to delete the inserted user
             request.delete( URL + '/user-stories/' + postOptions.id, (error, response, body) => {
                 expect(response.statusCode).to.be.equal(200); // if response is successful
             });

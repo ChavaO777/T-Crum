@@ -4,7 +4,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Project } from '../../../models/project.model';
 import { Router, NavigationExtras } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
-import { Member } from '../../../models/member.model';
+import { User } from '../../../models/user.model';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
   selector: 'app-project-list',
@@ -13,17 +14,16 @@ import { Member } from '../../../models/member.model';
 })
 export class ProjectListComponent implements OnInit {
 
-  message: string;
   projects: Project[];
 
-  constructor(private crud:CrudService, private router:Router, private auth:AuthService) { }
+  constructor(private errorHandler:ErrorHandlerService, private crud:CrudService, private router:Router, private auth:AuthService) { }
 
   ngOnInit() {
     if(this.auth.isRoot()){
       this.getAllProjects();
     }
     else{
-      this.getMemberProjects();
+      this.getUserProjects();
     }
     
   }
@@ -36,30 +36,20 @@ export class ProjectListComponent implements OnInit {
         this.projects = res;
       },
       (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     )
   }
 
-  getMemberProjects(){
-    this.crud.retrieve(this.crud.models.MEMBER, this.auth.getMember().id)
+  getUserProjects(){
+    this.crud.retrieve(this.crud.models.USER, this.auth.getUser().id)
     .subscribe(
-      (res:Member)=>{
+      (res:User)=>{
         console.log(res.projects);
         this.projects = res.projects;
       },
       (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     )
   }
@@ -81,7 +71,7 @@ export class ProjectListComponent implements OnInit {
     this.crud.delete(this.crud.models.PROJECT, id)
     .subscribe(
       (res:Response) => {
-        this.message = "Succes";
+        this.errorHandler.showInformativeMessage('Proyecto eliminado exitosamente.');
         let x = 0;
         for(let project of this.projects){
           if(project.id == id){
@@ -92,12 +82,7 @@ export class ProjectListComponent implements OnInit {
         }
       },
       (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     )
   }

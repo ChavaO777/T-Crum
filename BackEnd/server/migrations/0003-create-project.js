@@ -50,7 +50,7 @@ module.exports = {
         onDelete: 'CASCADE',
         references: {
 
-          model: 'Members',
+          model: 'Users',
           key: 'id',
           as: 'scrum_master_id'
         }

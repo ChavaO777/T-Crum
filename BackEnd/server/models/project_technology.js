@@ -6,21 +6,21 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER
-  },
+    },
     project_id: {
       allowNull: false,
       primaryKey: true,
       type: DataTypes.INTEGER
-  },
+    },
     technology_id: {
       allowNull: false,
       primaryKey: true,
       type: DataTypes.INTEGER
-  },
+    },
     version: {
       allowNull: false,
       type: DataTypes.TEXT
-  },
+    },
   }, {});
 
   return Project_technology;

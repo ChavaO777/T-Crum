@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Project } from '../../../models/project.model';
 import { Sprint } from '../../../models/sprint.model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
   selector: 'app-project-sprint-create',
@@ -12,16 +13,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ProjectSprintCreateComponent implements OnInit {
 
-  message: string;
   project: Project;
   psprints: Sprint[];
   sprint: Sprint;
   projectID: number;
 
-  constructor(private crud:CrudService, private router:Router, private route:ActivatedRoute) { }
+  constructor(private errorHandler:ErrorHandlerService, private crud:CrudService, private router:Router, private route:ActivatedRoute) { }
 
   ngOnInit() {
-    this.message = '';
     this.project =  new Project(null, null, null, null, null, null, null, null, null, null, null, null);
     this.psprints = null;
     this.projectID = parseInt(this.route.snapshot.paramMap.get("id"));
@@ -34,12 +33,7 @@ export class ProjectSprintCreateComponent implements OnInit {
         this.psprints = this.project.sprints;
       },
       (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message;
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     )
   }
@@ -51,17 +45,11 @@ export class ProjectSprintCreateComponent implements OnInit {
         (res:Sprint)=>{
           console.log(res);
           this.sprint = res;
-          this.router.navigate(['projects/retrieve/'+this.projectID]);
+          this.router.navigate(['projects/'+this.projectID]);
           this.psprints.push(this.sprint);
         },
         (err:HttpErrorResponse) => {
-          if(err.error){
-            this.message = err.error.message
-            
-          }
-          else{
-            this.message = err.error.errors[0].message;
-          }
+          this.errorHandler.handleError(err);
         }
       )
       
@@ -73,7 +61,7 @@ export class ProjectSprintCreateComponent implements OnInit {
     this.crud.delete(this.crud.models.SPRINT, sprintID)
     .subscribe(
       (res:Response) => {
-        this.message = "Succes";
+        this.errorHandler.showInformativeMessage('Se eliminó el sprint exitosamente.');
         let x = 0;
         for(let psprint of this.psprints){
           if(psprint.id == sprintID){
@@ -84,23 +72,17 @@ export class ProjectSprintCreateComponent implements OnInit {
         }
       },
       (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message
-        }
-        else{
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     )
   }
 
   validate(){
-    if(!this.sprint.days && !this.sprint.comment && !this.sprint.project_id ){
-      this.message = 'Debes introducir todos los campos';
+    if(!this.sprint.days || !this.sprint.comment || !this.sprint.project_id ){
+      this.errorHandler.showErrorMessage('Debes introducir todos los campos');
       return false;
     }
     else{
-      this.message = null;
       return true;
     }
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CrudService } from '../../../services/crud.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
 
 @Component({
   selector: 'app-user-story-create',
@@ -10,19 +11,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class UserStoryCreateComponent implements OnInit {
 
-  message: string;
-
   weight: number;
   scrum_board_status: number;
   description: string;
   priority: number;
   sprint_id: number;
 
-  constructor(private crud:CrudService, private router:Router, private route: ActivatedRoute) { }
+  constructor(private errorHandler:ErrorHandlerService, private crud:CrudService, private router:Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-
-    console.log("Creation component ready");
 
     this.weight = 0;
     this.scrum_board_status = 0;
@@ -33,8 +30,6 @@ export class UserStoryCreateComponent implements OnInit {
 
   createUserStory(){
 
-    console.log("Creating user story");
-
     let body = {
       id: null,
       weight: this.weight,
@@ -44,23 +39,48 @@ export class UserStoryCreateComponent implements OnInit {
       sprint_id: this.sprint_id
     };
 
-    this.crud.create(this.crud.models.USER_STORY, body)
-    .subscribe(
-      (res: Response) => {
-
-        console.log("User story successfully created");
-        this.router.navigate(['user-stories']);
-      },
-      (err:HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message;
+    if(this.validate()){
+      this.crud.create(this.crud.models.USER_STORY, body)
+      .subscribe(
+        (res: Response) => {
+          this.router.navigate(['sprints/' + this.sprint_id]);
+        },
+        (err:HttpErrorResponse) => {
+          this.errorHandler.handleError(err);
         }
-        else{
-          this.message = err.error.errors[0].message;
-        }
-      }
-    )
+      )
+    }
+    
     return false;
+  }
+
+  validate(){
+    if(!this.weight || this.weight <= 0){
+      this.errorHandler.showErrorMessage('El peso debe tener un valor numérico positivo');
+      return false;
+    }
+
+    if(!this.scrum_board_status || this.scrum_board_status <= 0){
+      this.errorHandler.showErrorMessage('El estado del scrum board debe tener un valor numérico positivo');
+      return false;
+    }
+
+    if(!this.description){
+      this.errorHandler.showErrorMessage('La descripción no debe estar vacía');
+      return false;
+    }
+
+    if(!this.priority || this.priority <= 0){
+      this.errorHandler.showErrorMessage('La prioridad debe tener un valor numérico positivo');
+      return false;
+    }
+
+    if(!this.sprint_id || this.sprint_id <= 0){
+      this.errorHandler.showErrorMessage('El sprint id debe tener un valor numérico positivo');
+      return false;
+    }
+
+    return true;
   }
 
 }

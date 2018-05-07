@@ -6,31 +6,31 @@ module.exports = {
     [
       {
         query: 'CREATE project',
-        member_id: 'a00000000',
+        user_id: 'a00000000',
         createdAt: Sequelize.fn('NOW'),
         updatedAt: Sequelize.fn('NOW')
       },
       {
         query: 'CREATE acceptance_criteria',
-        member_id: 'a11111111',
+        user_id: 'a11111111',
         createdAt: Sequelize.fn('NOW'),
         updatedAt: Sequelize.fn('NOW')
       },
       {
         query: 'DELETE project',
-        member_id: 'a00000000',
+        user_id: 'a00000000',
         createdAt: Sequelize.fn('NOW'),
         updatedAt: Sequelize.fn('NOW')
       },
       {
         query: 'UPDATE project',
-        member_id: 'a22222222',
+        user_id: 'a22222222',
         createdAt: Sequelize.fn('NOW'),
         updatedAt: Sequelize.fn('NOW')
       },
       {
         query: 'CREATE sprint',
-        member_id: 'a33333333',
+        user_id: 'a33333333',
         createdAt: Sequelize.fn('NOW'),
         updatedAt: Sequelize.fn('NOW')
       },
