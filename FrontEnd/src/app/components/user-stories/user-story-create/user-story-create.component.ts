@@ -39,16 +39,48 @@ export class UserStoryCreateComponent implements OnInit {
       sprint_id: this.sprint_id
     };
 
-    this.crud.create(this.crud.models.USER_STORY, body)
-    .subscribe(
-      (res: Response) => {
-        this.router.navigate(['sprints/' + this.sprint_id]);
-      },
-      (err:HttpErrorResponse) => {
-        this.errorHandler.handleError(err);
-      }
-    )
+    if(this.validate()){
+      this.crud.create(this.crud.models.USER_STORY, body)
+      .subscribe(
+        (res: Response) => {
+          this.router.navigate(['sprints/' + this.sprint_id]);
+        },
+        (err:HttpErrorResponse) => {
+          this.errorHandler.handleError(err);
+        }
+      )
+    }
+    
     return false;
+  }
+
+  validate(){
+    if(!this.weight || this.weight <= 0){
+      this.errorHandler.showErrorMessage('El peso debe tener un valor numérico positivo');
+      return false;
+    }
+
+    if(!this.scrum_board_status || this.scrum_board_status <= 0){
+      this.errorHandler.showErrorMessage('El estado del scrum board debe tener un valor numérico positivo');
+      return false;
+    }
+
+    if(!this.description){
+      this.errorHandler.showErrorMessage('La descripción no debe estar vacía');
+      return false;
+    }
+
+    if(!this.priority || this.priority <= 0){
+      this.errorHandler.showErrorMessage('La prioridad debe tener un valor numérico positivo');
+      return false;
+    }
+
+    if(!this.sprint_id || this.sprint_id <= 0){
+      this.errorHandler.showErrorMessage('El sprint id debe tener un valor numérico positivo');
+      return false;
+    }
+
+    return true;
   }
 
 }
