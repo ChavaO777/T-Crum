@@ -3,6 +3,8 @@ import { CrudService } from '../../../services/crud.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { User_story } from '../../../models/user_story.model';
 import { ErrorHandlerService } from '../../../services/error-handler.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Sprint } from '../../../models/sprint.model';
 
 @Component({
   selector: 'app-user-story-list',
@@ -13,15 +15,15 @@ export class UserStoryListComponent implements OnInit {
   sprint_id: number;
   user_stories: User_story[];
 
-  constructor(private errorHandler:ErrorHandlerService, private crud:CrudService) { }
+  constructor(private errorHandler:ErrorHandlerService, private crud:CrudService, private router:Router, private route:ActivatedRoute) { }
 
   ngOnInit() {
-    this.sprint_id = 2;
-    this.crud.list(this.crud.models.USER_STORY)
+    this.sprint_id = this.route.snapshot.params.id;
+    this.crud.retrieve(this.crud.models.SPRINT, this.sprint_id)
     .subscribe(
-      (res:User_story[])=>{
+      (res:Sprint)=>{
         console.log(res);
-        this.user_stories = res;
+        this.user_stories = res.user_stories;
       },
       (err:HttpErrorResponse) => {
         this.errorHandler.handleError(err);
