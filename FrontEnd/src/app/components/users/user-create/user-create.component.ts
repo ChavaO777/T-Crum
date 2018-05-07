@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { User } from '../../../models/user.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandlerService } from '../../../services/error-handler.service';
+import { User_image } from '../../../models/user_image';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'app-user-create',
@@ -13,17 +15,21 @@ import { ErrorHandlerService } from '../../../services/error-handler.service';
 })
 export class UserCreateComponent implements OnInit {
   user: User;
+  selected:string;
+  user_image: User_image;
+
   //A string to store the password confirmation
   passwordConfirmation: string; 
 
-  constructor(private errorHandler: ErrorHandlerService, private auth: AuthService, private router: Router, private crud: CrudService) { }
+  constructor(private errorHandler: ErrorHandlerService, private auth: AuthService, private router: Router, private crud: CrudService, private data: DataService) { }
 
   ngOnInit() {
     if (this.auth.isLoggedIn()) {
       this.router.navigate(['home'])
     }
-    this.passwordConfirmation = '';
-    this.user = new User('', '', '', '', '', null, null, '');
+    this.user = new User('', '', '', '', '', null, null);
+    this.selected = 'assets/img/faces/Picture1.png';
+    console.log(this.selected);
   }
 
   /**
@@ -37,15 +43,17 @@ export class UserCreateComponent implements OnInit {
       this.crud.registerUser(this.user)
         .subscribe(
           (res: User) => {
-
-            /*  
-              Ideally, a errorMessage of success should be displayed
-              to let the user know that the registration was
-              successful. So far, we're only taking the user 
-              to the login view.
-            */
-            this.errorHandler.showInformativeMessage('¡El registro fue exitoso! Revisa tu correo institucional para activar tu cuenta.');
-            this.router.navigate(['login']);
+           this.user_image = new User_image(res.id, this.selected);
+           this.data.create(this.user_image).subscribe(
+             (res: User_image) => {
+               this.errorHandler.showInformativeMessage('¡El registro fue exitoso! Revisa tu correo institucional para activar tu cuenta.');
+               this.router.navigate(['login']);
+             },
+             (err: HttpErrorResponse) => {
+               console.log(err);
+               this.errorHandler.handleError(err);
+             }
+           )
           },
           (err: HttpErrorResponse) => {
             console.log(err);
@@ -90,12 +98,15 @@ export class UserCreateComponent implements OnInit {
   areEqualPasswords() {
 
     if (this.user.password == this.passwordConfirmation) {
-
       return true;
     }
     else {
       this.errorHandler.showErrorMessage('La contraseña no fue confirmada correctamente. Inténtalo de nuevo.')
       return false;
     }
+  }
+
+  selectImage(number:string){
+    this.selected = number;
   }
 }

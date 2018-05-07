@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 
 import { AuthService } from './services/auth.service';
+import { DataService } from './services/data.service';
 import { CrudService } from './services/crud.service';
 import { LogService } from './services/log.service';
 
@@ -42,6 +43,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorHandlerService } from './services/error-handler.service';
 import { UserConfirmComponent } from './components/users/user-confirm/user-confirm.component';
+import { GetMemberComponent } from './components/member/get-member/get-member.component';
+import { MemberUpdateComponent } from './components/member/member-update/member-update.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +82,9 @@ import { UserConfirmComponent } from './components/users/user-confirm/user-confi
     ProjectSprintCreateComponent,
     ProjectTechnologyComponent,
     ProjectUserComponent,
-    UserConfirmComponent
+    UserConfirmComponent,
+    GetMemberComponent,
+    MemberUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +98,7 @@ import { UserConfirmComponent } from './components/users/user-confirm/user-confi
     AuthService,
     CrudService,
     LogService,
+    DataService,
     ErrorHandlerService
   ],
   bootstrap: [AppComponent]

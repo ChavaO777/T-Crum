@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CrudService } from '../../../services/crud.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Member } from '../../../models/member.model';
+import { User } from '../../../models/user.model';
+import { ErrorHandlerService } from '../../../services/error-handler.service';
+import { DataService } from '../../../services/data.service';
+import { User_image } from '../../../models/user_image';
 
 @Component({
   selector: 'app-member-update',
@@ -11,38 +14,71 @@ import { Member } from '../../../models/member.model';
 })
 
 export class MemberUpdateComponent implements OnInit {
+  message:string;
+  user_image: User_image;
+  selected:string;
+  passwordConfirmation: string;
+  user: User;
 
-  message: string;
-  user: Member;
-
-  constructor(private crud:CrudService, private route: ActivatedRoute, private router:Router) { }
+  constructor(private crud:CrudService, private route: ActivatedRoute, private router:Router, private errorHandler:ErrorHandlerService, private data:DataService) { }
 
   ngOnInit() {
-
-    this.user = new Member(null, null, null, null, null, null, null, null, null);
     this.message = '';
+    this.selected = 'assets/img/faces/Picture1.png';
+    this.user = new User('', '', '', '', '', null, null); 
     let id = this.route.snapshot.params.id;
-    this.crud.retrieve(this.crud.models.MEMBER, id)
+
+    this.crud.retrieve(this.crud.models.USER, id)
     .subscribe(
-      (res: Member) => {
+      (res: User) => {
         this.user = res;
-        console.log(this.user);
+        this.user.password = '';
+
+        /*this.data.retrive(res.id)
+        .subscribe(
+          (resp:User_image) => {
+            this.selected = resp.path;
+            console.log(resp);
+          },
+          (err: HttpErrorResponse) => {
+            this.errorHandler.handleError(err);
+          }
+        )*/
       },
       (err: HttpErrorResponse) => {
-        if(err.error){
-          this.message = err.error.message;
-        }
-        else {
-          this.message = err.error.errors[0].message;
-        }
+        this.errorHandler.handleError(err);
       }
     )
   }
 
-  updateMember(){
+  updateUser(){
+    console.log("Update member");
     if(this.validateNonEmptyFields()){
+      console.log("Valid");
+      this.crud.update(this.crud.models.USER, this.user.id, this.user)
+      .subscribe(
+        (res:User) => {
+          console.log(res);
+          this.errorHandler.showInformativeMessage("Información actualizada.");
 
+          this.user_image = new User_image(this.user.id, this.selected);
+          /*this.data.update(this.user.id, this.user_image)
+          .subscribe(
+            (resp: User_image) => {
+              this.errorHandler.showInformativeMessage("Avatar actualizado.");
+            },
+            (err: HttpErrorResponse) => {
+              this.errorHandler.handleError(err);
+            }
+          )*/
+        },
+        (err: HttpErrorResponse) => {
+          console.log(err);
+          this.errorHandler.handleError(err);
+        }
+      )
     }
+    return false;
   }
 
   validateNonEmptyFields() {
@@ -62,14 +98,17 @@ export class MemberUpdateComponent implements OnInit {
 
   areEqualPasswords() {
 
-    if (this.member.password == this.passwordConfirmation) {
+    if (this.user.password == this.passwordConfirmation) {
 
       return true;
     }
     else {
 
-      this.errorMessage = 'La contraseña no fue confirmada correctamente. Inténtalo de nuevo.'
       return false;
     }
+  }
+
+  selectImage(number:string){
+    this.selected = number;
   }
 }

@@ -18,11 +18,6 @@
               <td>
                 {{user.name}}
               </td>
-              <td>
-                <button class="btn btn-info pull-right" (click)="updateProject(project.id)">
-                  <i class="material-icons">edit</i>
-                </button>
-              </td>
             </tr>
             <tr>
               <td class="text-primary">
@@ -31,42 +26,24 @@
               <td>
                 {{user.department_major}}
               </td>
-              <td>
-                <button class="btn btn-info pull-right" (click)="updateProject(project.id)">
-                  <i class="material-icons">edit</i>
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-primary">
-                Contraseña:
-              </td>
-              <td>
-                {{user.password}}
-              </td>
-              <td>
-                <button class="btn btn-info pull-right" (click)="updateProject(project.id)">
-                  <i class="material-icons">edit</i>
-                </button>
-              </td>
             </tr>
             <tr>
               <td class="text-primary">
                 Fotografía de perfil:
               </td>
               <td>
-                {{user.photo_URL}}
-              </td>
-              <td>
-                <button class="btn btn-info pull-right" (click)="updateProject(project.id)">
-                  <i class="material-icons">edit</i>
-                </button>
+                <img src="{{user_image.path}}">
               </td>
             </tr>
 
 
           </tbody>
         </table>
+        <div class="col-md-12">
+          <a class="btn btn-info pull-right text-white" routerLink="/users/update/{{user.id}}">
+              <i class="material-icons">edit</i>
+          </a>
+        </div>
       </div>
     </div>
   </div>

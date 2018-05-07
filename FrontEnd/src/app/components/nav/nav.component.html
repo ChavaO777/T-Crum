@@ -2,7 +2,13 @@
     <li routerLinkActive="active">
         <a class="nav-link" routerLink="/projects">
             <i class="material-icons">dashboard</i>
-            <p>My projects</p>
+            <p>Mis proyectos</p>
+        </a>
+    </li>
+    <li routerLinkActive="active">
+        <a class="nav-link" routerLink="/profile">
+            <i class="material-icons">person</i>
+            <p>Mi perfil</p>
         </a>
     </li>
     <li routerLinkActive="active" *ngIf="auth.isRoot()">

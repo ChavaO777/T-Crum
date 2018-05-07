@@ -27,6 +27,9 @@ import { AcceptanceCriteriaCreateComponent } from './components/acceptance-crite
 import { UserStoryRetrieveComponent } from './components/user-stories/user-story-retrieve/user-story-retrieve.component';
 import { SprintRetrieveComponent } from './components/sprints/sprint-retrieve/sprint-retrieve.component';
 import { UserConfirmComponent } from './components/users/user-confirm/user-confirm.component';
+import { GetMemberComponent } from './components/member/get-member/get-member.component';
+import { MemberUpdateComponent } from './components/member/member-update/member-update.component';
+
 
 
 const routes: Routes = [
@@ -62,7 +65,11 @@ const routes: Routes = [
   {path: 'user-stories/:id', component: UserStoryRetrieveComponent, canActivate: [AuthGuard]},
 
   //Sprints
-  {path: 'sprints/:id', component: SprintRetrieveComponent, canActivate: [AuthGuard]},
+  { path: 'sprints/:id', component: SprintRetrieveComponent, canActivate: [AuthGuard]},
+
+  //Profile
+  { path: 'profile', component: GetMemberComponent},
+  { path: 'users/update/:id', component: MemberUpdateComponent},
 
   {path:'', redirectTo:'projects', pathMatch: 'full'},
 

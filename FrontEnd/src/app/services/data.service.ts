@@ -25,8 +25,9 @@ export class DataService {
   }
 
   create(body: any){
+    
     return this.http.post(
-      this.URL, body, {headers: this.headers}
+      this.URL + '/', body, {headers: this.headers}
     );
   }
 
