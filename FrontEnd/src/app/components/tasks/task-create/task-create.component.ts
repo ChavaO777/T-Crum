@@ -41,16 +41,41 @@ export class TaskCreateComponent implements OnInit {
       completed: this.completed,
       user_story_id: this.user_story_id
     };
+    if(this.validate()){
+      this.crud.create (this.crud.models.TASK, body)  
+      .subscribe (
+        (res: Response) => {
+          this.errorHandler.showInformativeMessage('Tarea creada correctamente');
+          this.router.navigate(['tasks']);
+        },
+        (err:HttpErrorResponse) => {
+          this.errorHandler.handleError(err);
+        }
+      );
+    }
+  }
 
-    this.crud.create (this.crud.models.TASK, body)  
-    .subscribe (
-      (res: Response) => {
-        this.errorHandler.showInformativeMessage('Tarea insertada correctamente');
-        this.router.navigate(['tasks']);
-      },
-      (err:HttpErrorResponse) => {
-        this.errorHandler.handleError(err);
-      }
-    );
+  validate(){
+    if(!this.duration || this.duration < 1){
+      this.errorHandler.showErrorMessage('La duración debe ser un número positivo.');
+      return false;
+    }
+
+    if(!this.name){
+      this.errorHandler.showErrorMessage('Debes agregar un nombre a tu tarea.');
+      return false;
+    }
+
+    if(!this.user_story_id || this.user_story_id < 1){
+      this.errorHandler.showErrorMessage('El ID de historia de usuario debe ser un número positivo.');
+      return false;
+    }
+
+    if(!this.completed){
+      this.errorHandler.showErrorMessage('Todos lo campos deben estar llenos.');
+      return false;
+    }
+
+    return true;
   }
 }

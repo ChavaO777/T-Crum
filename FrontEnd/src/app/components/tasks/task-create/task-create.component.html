@@ -1,7 +1,7 @@
 <div class="card">
 	<div class="card-header card-header-primary">
 		<h4 class="card-title">Crear una tarea</h4>
-		<p class="card-category">Ingresa la información de la tarea</p>
+		<p class="card-category">Ingresa la información de la tarea.</p>
 	</div>
 	<div class="card-body">
 		<form (submit)="createTask()">
@@ -21,10 +21,9 @@
 				</select>
 			</div>
 			<div class = "form-group">
-					<label class="bmd-label-floating" for="user_story_id">ID de historia de usuario</label>
-					<input class="form-control" type="number" id="user_story_id" name="user_story_id" [(ngModel)]="user_story_id">
-				</div>
-
+				<label class="bmd-label-floating" for="user_story_id">ID de historia de usuario</label>
+				<input class="form-control" type="number" id="user_story_id" name="user_story_id" [(ngModel)]="user_story_id">
+			</div>
 			<button type="submit" class="btn btn-primary pull-right">Agregar</button>
 			<div class="clearfix"></div>
 		</form>

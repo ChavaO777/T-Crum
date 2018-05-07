@@ -42,7 +42,7 @@ export class UserStoryCreateComponent implements OnInit {
     this.crud.create(this.crud.models.USER_STORY, body)
     .subscribe(
       (res: Response) => {
-        this.router.navigate(['user-stories']);
+        this.router.navigate(['sprints/' + this.sprint_id]);
       },
       (err:HttpErrorResponse) => {
         this.errorHandler.handleError(err);
