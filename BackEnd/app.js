@@ -8,16 +8,6 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const transporter	= mailer.createTransport({
-	host: 'smtp.office365.com',
-	port: 587,
-	secure: false, // true for 465, false for other ports
-	auth: {
-		user: 'carlosaam96@outlook.com', // generated ethereal user
-		pass: 'TEST_tcrum' // generated ethereal password
-	}
-});
-
 app.use((req, res, next) => {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Access-Control-Allow-Request-Method');

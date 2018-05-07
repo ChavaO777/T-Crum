@@ -1,9 +1,21 @@
+const mailer = require('nodemailer');
 const User = require('../models').User;
 const Task = require('../models').Task;
 const Log = require('../models').Log;
 const Project = require('../models').Project;
 const bcrypt = require('bcrypt-nodejs');
 //const Validation = require('../helpers/validations').Validation;
+
+const confirmationURL = 'http://localhost:4200/confirmar/';
+const transporter	= mailer.createTransport({
+	host: 'smtp.office365.com',
+	port: 587,
+	secure: false, // true for 465, false for other ports
+	auth: {
+		user: 'carlosaam96@outlook.com', // generated ethereal user
+		pass: 'TEST_tcrum' // generated ethereal password
+	}
+});
 
 function isAValidUserId(userId) {
 
@@ -50,21 +62,49 @@ module.exports = {
             });
         }
 
-        bcrypt.hash(req.body.password, null, null, (err, hash) => {
-            let hashed = hash;
-
-            return User
-                .create({
-                    id: String(req.body.id).toLowerCase(), //Store this as lower case
-                    department_major: req.body.department_major,
-                    name: req.body.name,
-                    photo_URL: req.body.photo_URL,
-                    password: hashed,
-                    system_role: 'user'
-                })
-                .then(user => res.status(201).send(user))
-                .catch(error => res.status(400).send(error));
-        });
+        transporter.verify(function(error, success) {
+            if (error) {
+                console.log(error);
+                return res.status(400).send({
+                    message: 'The mailing system is turned off. Try again later.'
+                });
+            }
+            if(success){
+                console.log(success);
+                bcrypt.hash(req.body.password, null, null, (err, hash) => {
+                    let hashed = hash;
+        
+                    return User
+                        .create({
+                            id: String(req.body.id).toLowerCase(), //Store this as lower case
+                            department_major: req.body.department_major,
+                            name: req.body.name,
+                            photo_URL: req.body.photo_URL,
+                            password: hashed,
+                            system_role: 'user'
+                        })
+                        .then(user => {
+                            let mailOptions = {
+                                from: '"TCRUM", <carlosaam96@outlook.com>', // sender address
+                                to: user.id + '@itesm.mx', // list of receivers
+                                subject: 'Confirma tu cuenta', // Subject line
+                                //text: , // plain text body
+                                html: '<h4>Para confirmar tu cuenta da <a href="' + confirmationURL + user.uuid + '">Click aquí</a></h4>'
+                            };
+        
+                            transporter.sendMail(mailOptions, (error, info) => {
+                                if (error) {
+                                    console.log(error);
+                                }
+                                
+                                console.log("Mensaje enviado.");
+                            });
+                            res.status(201).send(user)
+                        })
+                        .catch(error => res.status(400).send(error));
+                });
+            }
+         });
     },
 
     //Method for listing users
