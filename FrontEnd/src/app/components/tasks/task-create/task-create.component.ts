@@ -3,6 +3,7 @@ import { CrudService } from '../../../services/crud.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ErrorHandlerService } from '../../../services/error-handler.service';
+import { Task } from '../../../models/task.model';
 
 
 @Component({
@@ -44,9 +45,9 @@ export class TaskCreateComponent implements OnInit {
     if(this.validate()){
       this.crud.create (this.crud.models.TASK, body)  
       .subscribe (
-        (res: Response) => {
+        (res: Task) => {
           this.errorHandler.showInformativeMessage('Tarea creada correctamente');
-          this.router.navigate(['tasks']);
+          this.router.navigate(['user-stories/' + res.user_story_id]);
         },
         (err:HttpErrorResponse) => {
           this.errorHandler.handleError(err);

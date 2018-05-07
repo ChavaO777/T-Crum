@@ -51,27 +51,35 @@ export class MemberUpdateComponent implements OnInit {
 
     updateUser() {
         if (this.validateNonEmptyFields()) {
+            if(this.user.password){
+                if(!this.passwordConfirmation){
+                    this.errorHandler.showErrorMessage("Escribe la confirmación de tu contraseña.");                    
+                    return false;
+                }
+                else{
+                    if(this.user.password != this.passwordConfirmation){
+                        this.errorHandler.showErrorMessage("La confirmación de contraseña y la contraseña no coincide.");
+                        return false;
+                    }
+                }
+            }
+
             this.crud.update(this.crud.models.USER, this.user.id, this.user)
                 .subscribe(
                     (res: User) => {
                         console.log(res);
                         this.errorHandler.showInformativeMessage("Información actualizada.");
                         this.user_image = new User_image(this.user.id, this.selected);
-                        
-                        if(this.user_image.path != this.selected){
-                            console.log("Image changed.");
-                            this.data.update(this.user.id, this.selected)
-                            .subscribe(
-                                (resp: User_image) => {
-                                    this.errorHandler.showInformativeMessage("Avatar actualizado.");
-                                },
-                                (err: HttpErrorResponse) => {
-                                    console.log("Image");
-                                    console.log(err);
-                                    this.errorHandler.handleError(err);
-                                }
-                            )
-                        }
+                        this.data.update(this.user.id, this.user_image)
+                        .subscribe(
+                            (resp: User_image) => {
+                                this.errorHandler.showInformativeMessage("Avatar actualizado.");
+                            },
+                            (err: HttpErrorResponse) => {
+                                console.log(err);
+                                this.errorHandler.handleError(err);
+                            }
+                        )
                     },
                     (err: HttpErrorResponse) => {
                         console.log(err);
@@ -89,15 +97,6 @@ export class MemberUpdateComponent implements OnInit {
         }
         else {
             return true;
-        }
-    }
-
-    areEqualPasswords() {
-        if (this.user.password == this.passwordConfirmation) {
-            return true;
-        }
-        else {
-            return false;
         }
     }
 

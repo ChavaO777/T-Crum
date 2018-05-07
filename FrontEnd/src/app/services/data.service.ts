@@ -10,7 +10,7 @@ export class DataService {
   headers: HttpHeaders;
 
   constructor(private auth: AuthService, private http: HttpClient) {
-    this.URL = 'http://10.50.65.22:3500/userImage';
+    this.URL = 'http://10.50.67.83:3500/userImage';
 
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json'
@@ -32,7 +32,7 @@ export class DataService {
   }
 
   update(id: string, body: any){
-    return this.http.post(
+    return this.http.put(
       this.URL + '/' + id, body, {headers: this.headers}
     );
   }

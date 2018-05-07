@@ -20,12 +20,10 @@ export class UserConfirmComponent implements OnInit {
     this.crud.confirmUser(uuid)
     .subscribe(
       (res:User) => {
-        console.log("success");
         this.error.showInformativeMessage("Cuenta activida. Ya puedes iniciar sesión.");
         this.router.navigate(['/login']);
       },
       (err: HttpErrorResponse) => {
-        console.log("failed");
         this.error.handleError(err);
         this.router.navigate(['/login']);
       }
