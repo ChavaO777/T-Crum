@@ -1,0 +1,73 @@
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Mi perfil</h4>
+        <p>{{user.id}}</p>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td class="text-primary">
+                Nombre:
+              </td>
+              <td>
+                {{user.name}}
+              </td>
+              <td>
+                <button class="btn btn-info pull-right" (click)="updateProject(project.id)">
+                  <i class="material-icons">edit</i>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-primary">
+                Departamento o carrera:
+              </td>
+              <td>
+                {{user.department_major}}
+              </td>
+              <td>
+                <button class="btn btn-info pull-right" (click)="updateProject(project.id)">
+                  <i class="material-icons">edit</i>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-primary">
+                Contraseña:
+              </td>
+              <td>
+                {{user.password}}
+              </td>
+              <td>
+                <button class="btn btn-info pull-right" (click)="updateProject(project.id)">
+                  <i class="material-icons">edit</i>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-primary">
+                Fotografía de perfil:
+              </td>
+              <td>
+                {{user.photo_URL}}
+              </td>
+              <td>
+                <button class="btn btn-info pull-right" (click)="updateProject(project.id)">
+                  <i class="material-icons">edit</i>
+                </button>
+              </td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
