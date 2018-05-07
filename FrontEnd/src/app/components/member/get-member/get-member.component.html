@@ -1,50 +1,43 @@
-<!-- The Modal -->
-<div id="myModal" class="modal">
-  <!-- Modal content -->
-  <div class="modal-content">
-    <div class="card">
-      <div class="card-header card-header-primary">
-        <h4 class="card-title">Mi perfil</h4>
-        <p>{{user.id}}</p>
-      </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title">Mi perfil</h4>
+                <p class="card-category">{{user.id}}</p>
+            </div>
 
-      <div class="table-responsive">
-        <table class="table">
-          <tbody>
-            <tr>
-              <td class="text-primary">
-                Nombre:
-              </td>
-              <td>
-                {{user.name}}
-              </td>
-            </tr>
-            <tr>
-              <td class="text-primary">
-                Departamento o carrera:
-              </td>
-              <td>
-                {{user.department_major}}
-              </td>
-            </tr>
-            <tr>
-              <td class="text-primary">
-                Fotografía de perfil:
-              </td>
-              <td>
-                <img src="{{user_image.path}}">
-              </td>
-            </tr>
-
-
-          </tbody>
-        </table>
-        <div class="col-md-12">
-          <a class="btn btn-info pull-right text-white" routerLink="/users/update/{{user.id}}">
-              <i class="material-icons">edit</i>
-          </a>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <th>Información</th>
+                        <th></th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-primary">Nombre:</td>
+                            <td>{{user.name}}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="text-primary">Departamento o carrera:</td>
+                            <td>{{user.department_major}}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="text-primary">Fotografía de perfil:</td>
+                            <td><img src="{{user_image.path}}"></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="col-md-12">
+                    <a class="btn btn-info pull-right text-white" routerLink="/users/update/{{user.id}}">
+                        <i class="material-icons">edit</i>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
+
     </div>
-  </div>
 </div>

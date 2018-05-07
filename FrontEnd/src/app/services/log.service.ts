@@ -12,7 +12,7 @@ export class LogService {
     this.URL = 'http://10.50.67.83:8000/api';
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': this.auth.getToken()
+      //'Authorization': this.auth.getToken()
     });
   }
 

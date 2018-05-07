@@ -25,11 +25,9 @@ export class TechnologiesListComponent implements OnInit {
     this.crud.delete(this.crud.models.TECHNOLOGY, id)
     .subscribe(
       res => {
-        console.log(res);
         this.removeTechnology(id);
       },
       (err: HttpErrorResponse) => {
-        console.log(err.message);
         this.errorHandler.handleError(err);
       }
     )
@@ -49,7 +47,6 @@ export class TechnologiesListComponent implements OnInit {
     this.crud.list(this.crud.models.TECHNOLOGY)
     .subscribe(
       (res:Technology[]) => {
-        console.log(res);
         this.technologies = res;
       },
       (err:HttpErrorResponse) => {
