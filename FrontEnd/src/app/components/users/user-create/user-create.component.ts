@@ -44,7 +44,7 @@ export class UserCreateComponent implements OnInit {
               successful. So far, we're only taking the user 
               to the login view.
             */
-            this.errorHandler.showInformativeMessage('¡El registro fue exitoso!');
+            this.errorHandler.showInformativeMessage('¡El registro fue exitoso! Revisa tu correo institucional para activar tu cuenta.');
             this.router.navigate(['login']);
           },
           (err: HttpErrorResponse) => {

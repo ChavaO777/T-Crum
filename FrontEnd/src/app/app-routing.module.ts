@@ -26,13 +26,15 @@ import { AcceptanceCriteriaListComponent } from './components/acceptance-criteri
 import { AcceptanceCriteriaCreateComponent } from './components/acceptance-criteria/acceptance-criteria-create/acceptance-criteria-create.component';
 import { UserStoryRetrieveComponent } from './components/user-stories/user-story-retrieve/user-story-retrieve.component';
 import { SprintRetrieveComponent } from './components/sprints/sprint-retrieve/sprint-retrieve.component';
+import { UserConfirmComponent } from './components/users/user-confirm/user-confirm.component';
 
 
 const routes: Routes = [
   // General
   { path:'login', component: LoginComponent},
   { path: 'logout', component: LogoutComponent},
-  {path: 'register', component: UserCreateComponent},
+  { path: 'register', component: UserCreateComponent},
+  { path: 'confirmar/:uuid', component: UserConfirmComponent},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
 
   // Technologies

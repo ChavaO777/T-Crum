@@ -23,7 +23,7 @@ export class CrudService {
   };
 
   constructor(private auth: AuthService, private http: HttpClient, private log: LogService) {
-    this.URL = 'http://10.50.67.83:8000/api';
+    this.URL = 'http://localhost:8000/api';
 
     if(this.auth.isLoggedIn()){
       this.headers = new HttpHeaders({
@@ -57,6 +57,12 @@ export class CrudService {
       this.URL + "/" + this.models.USER,
       body,
       { headers: this.headers }
+    );
+  }
+
+  confirmUser(uuid:String){
+    return this.http.get(
+      this.URL + "/users/confirm/" + uuid
     );
   }
 

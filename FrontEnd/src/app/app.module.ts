@@ -41,6 +41,7 @@ import { ProjectUserComponent } from './components/projects/project-user/project
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorHandlerService } from './services/error-handler.service';
+import { UserConfirmComponent } from './components/users/user-confirm/user-confirm.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { ErrorHandlerService } from './services/error-handler.service';
     ProjectSprintCreateComponent,
     ProjectSprintCreateComponent,
     ProjectTechnologyComponent,
-    ProjectUserComponent
+    ProjectUserComponent,
+    UserConfirmComponent
   ],
   imports: [
     BrowserModule,
