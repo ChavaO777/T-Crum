@@ -56,6 +56,20 @@ module.exports = {
             });
         }
 
+        return Project
+            .create({
+                vision: req.body.vision,
+                name: req.body.name,
+                begin_date: req.body.begin_date,
+                end_date: req.body.end_date,
+                background: req.body.background,
+                risks: req.body.risks,
+                reach: req.body.reach,
+                scrum_master_id: req.body.scrum_master_id
+            })
+            .then(Project => res.status(200).send(Project))
+            .catch(error => res.status(400).send(error));
+        /*
         var db  = require('../models/index').db;
 
         db.serialize.query('SELECT insertProject('  + req.body.vision +
@@ -77,21 +91,8 @@ module.exports = {
             .catch(error => res.status(400).send(error));
         })
         .catch(error => res.status(400).send(error));
-
-        /*return Project
-            .create({
-                vision: req.body.vision,
-                name: req.body.name,
-                begin_date: req.body.begin_date,
-                end_date: req.body.end_date,
-                background: req.body.background,
-                risks: req.body.risks,
-                reach: req.body.reach,
-                scrum_master_id: req.body.scrum_master_id
-            })
-            .then(Project => res.status(200).send(Project))
-            .catch(error => res.status(400).send(error));
         */
+        
     },
 
     list(req, res) {

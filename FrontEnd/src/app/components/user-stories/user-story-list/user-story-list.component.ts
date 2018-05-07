@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CrudService } from '../../../services/crud.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { User_story } from '../../../models/user_story.model';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-story-list',
@@ -13,10 +14,10 @@ export class UserStoryListComponent implements OnInit {
   message: string;
   user_stories: User_story[];
 
-  constructor(private crud:CrudService) { }
+  constructor(private crud:CrudService, private router:Router, private route:ActivatedRoute) { }
 
   ngOnInit() {
-    this.sprint_id = 2;
+    this.sprint_id = parseInt(this.route.snapshot.params.id);
     this.crud.list(this.crud.models.USER_STORY)
     .subscribe(
       (res:User_story[])=>{
