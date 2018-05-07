@@ -5,7 +5,8 @@ const User = require('../models').User;
 module.exports = {
   create(req, res) {
 
-    if (!req.body.duration || parseInt(req.body.duration) < 1){
+    if (!req.body.duration || isNaN(req.body.duration) || req.body.duration < 0)
+    {
       return res.status(400).send({
         message: 'The post body must contain a valid duration field. '
       });
@@ -124,6 +125,12 @@ module.exports = {
     if (req.body.user_story_id && isNaN(req.body.user_story_id)){
       return res.status(400).send({
         message: 'The post body must contain a valid user_story_id field.'
+      });
+    }
+
+    if (req.body.duration < 0){
+      return res.status(400).send({
+        message: 'The task duration cannot be negative.'
       });
     }
 
