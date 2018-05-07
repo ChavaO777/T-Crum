@@ -41,25 +41,37 @@ $totalProjects$ LANGUAGE plpgsql;
 ####################################
 #########  PROCEDURES   ############
 ####################################
-CREATE OR REPLACE FUNCTION insertProject(p_vision text, p_name text,
-	p_begin_date timestamp, p_end_date timestamp, p_background
-	text, p_risks text, p_reach text, p_createdAt timestamp,
-	p_updatedAt timestamp, p_scrum_master_id VARCHAR)
-RETURNS integer AS $insertedID$
 
-DECLARE
-	insertedID integer;
-
+##Procedure to change user role for a given user
+CREATE OR REPLACE FUNCTION changeSystemRole (id_input varchar, new_role "enum_Users_system_role")
+RETURNS void AS $$
 BEGIN
-	INSERT INTO "Projects"(vision, name, begin_date, end_date,
-	background, risks, reach, "createdAt", "updatedAt",
-	scrum_master_id) 
-	VALUES (p_vision, p_name, p_begin_date, p_end_date,
-	p_background, p_risks, p_reach, p_createdAt, p_updatedAt, 
-	p_scrum_master_id);
-	SELECT currval(pg_get_serial_sequence('Projects','id')) 
-	INTO insertedID;
-
-	RETURN insertedID;
+    UPDATE "Members"
+    SET system_role = new_role
+    WHERE id = id_input;
 END;
-$insertedID$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql;
+
+###############################
+######### TRIGGER #############
+###############################
+
+##Trigger table and functions to insert a delete record when a project is deleted
+CREATE TABLE deleted_projects(
+id SERIAL PRIMARY KEY,
+project_id INTEGER,
+deleted_timestamp timestamp with time zone
+);
+
+CREATE OR REPLACE FUNCTION addToDeletedProjects()
+RETURNS TRIGGER AS $add_to_deleted_projects$
+BEGIN
+INSERT INTO deleted_projects(project_id, deleted_timestamp) VALUES (OLD.id, current_timestamp);
+RETURN NEW;
+END;
+$add_to_deleted_projects$ LANGUAGE plpgsql;
+
+CREATE TRIGGER add_to_deleted_projects
+AFTER DELETE ON "Projects" 
+FOR EACH ROW
+EXECUTE PROCEDURE addToDeletedProjects();
