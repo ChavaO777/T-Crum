@@ -44,10 +44,10 @@ module.exports = (app) => {
   //Routes for the USERS table
   app.post('/api/users', authMiddleware.ensureAuth,  usersController.create);
   app.get('/api/users', authMiddleware.ensureAuth,  usersController.list);
-  app.get('/api/users/confirm/:uuid', authMiddleware.ensureAuth,  usersController.confirm);
   app.get('/api/users/:id', authMiddleware.ensureAuth,  usersController.retrieve);
   app.put('/api/users/:id', authMiddleware.ensureAuth,  usersController.update);
   app.delete('/api/users/:id', authMiddleware.ensureAuth,  usersController.destroy);
+  app.get('/api/users/confirm/:uuid', usersController.confirm);
 
   //Routes for the PROJECTS table
   app.post('/api/projects', authMiddleware.ensureAuth,  projectsController.create);  
