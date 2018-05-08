@@ -22,12 +22,12 @@ module.exports = (app) => {
   app.post('/api/login', authenticationController.login);
 
   //Routes for the TASKS table
-  app.post('/api/tasks', tasksController.create);  
-  app.get('/api/tasks', tasksController.list);
-  app.get('/api/tasks-users/:id', tasksController.listTaskWithUsers);
-  app.get('/api/tasks/:id', tasksController.retrieve);
-  app.put('/api/tasks/:id', tasksController.update);
-  app.delete('/api/tasks/:id', tasksController.destroy);
+  app.post('/api/tasks',authMiddleware.ensureAuth, tasksController.create);  
+  app.get('/api/tasks', authMiddleware.ensureAuth,  tasksController.list);
+  app.get('/api/tasks-users/:id', authMiddleware.ensureAuth,  tasksController.listTaskWithUsers);
+  app.get('/api/tasks/:id', authMiddleware.ensureAuth,  tasksController.retrieve);
+  app.put('/api/tasks/:id', authMiddleware.ensureAuth,  tasksController.update);
+  app.delete('/api/tasks/:id', authMiddleware.ensureAuth,  tasksController.destroy);
 
   //Routes for the LOGS table
   app.post('/api/logs', authMiddleware.ensureAuth, logsController.create);  
@@ -42,19 +42,19 @@ module.exports = (app) => {
   app.delete('/api/sprints/:id', authMiddleware.ensureAuth, sprintsController.destroy);
 
   //Routes for the USERS table
-  app.post('/api/users', usersController.create);
-  app.get('/api/users', usersController.list);
-  app.get('/api/users/confirm/:uuid', usersController.confirm);
-  app.get('/api/users/:id', usersController.retrieve);
-  app.put('/api/users/:id', usersController.update);
-  app.delete('/api/users/:id', usersController.destroy);
+  app.post('/api/users', authMiddleware.ensureAuth,  usersController.create);
+  app.get('/api/users', authMiddleware.ensureAuth,  usersController.list);
+  app.get('/api/users/confirm/:uuid', authMiddleware.ensureAuth,  usersController.confirm);
+  app.get('/api/users/:id', authMiddleware.ensureAuth,  usersController.retrieve);
+  app.put('/api/users/:id', authMiddleware.ensureAuth,  usersController.update);
+  app.delete('/api/users/:id', authMiddleware.ensureAuth,  usersController.destroy);
 
   //Routes for the PROJECTS table
-  app.post('/api/projects', projectsController.create);  
-  app.get('/api/projects', projectsController.list);
-  app.get('/api/projects/:id', projectsController.retrieve);
-  app.put('/api/projects/:id', projectsController.update);
-  app.delete('/api/projects/:id', projectsController.destroy);
+  app.post('/api/projects', authMiddleware.ensureAuth,  projectsController.create);  
+  app.get('/api/projects', authMiddleware.ensureAuth,  projectsController.list);
+  app.get('/api/projects/:id', authMiddleware.ensureAuth,  projectsController.retrieve);
+  app.put('/api/projects/:id', authMiddleware.ensureAuth,  projectsController.update);
+  app.delete('/api/projects/:id', authMiddleware.ensureAuth,  projectsController.destroy);
   
   //Routes for the ACCEPTANCE_CRITERIA table
   app.post('/api/acceptance-criteria', authMiddleware.ensureAuth, acceptance_criteriaController.create);  
@@ -64,25 +64,25 @@ module.exports = (app) => {
   app.delete('/api/acceptance-criteria/:id', authMiddleware.ensureAuth, acceptance_criteriaController.destroy);
 
   //Routes for the USER_TASKS table
-  app.post('/api/user-task', user_taskController.create);  
-  app.get('/api/user-task', user_taskController.list);
-  app.get('/api/user-task/:id', user_taskController.retrieve);
-  app.put('/api/user-task/:id', user_taskController.update);
-  app.delete('/api/user-task/:id', user_taskController.destroy);
+  app.post('/api/user-task', authMiddleware.ensureAuth,  user_taskController.create);  
+  app.get('/api/user-task', authMiddleware.ensureAuth,  user_taskController.list);
+  app.get('/api/user-task/:id', authMiddleware.ensureAuth,  user_taskController.retrieve);
+  app.put('/api/user-task/:id', authMiddleware.ensureAuth,  user_taskController.update);
+  app.delete('/api/user-task/:id', authMiddleware.ensureAuth,  user_taskController.destroy);
 
   //Routes for the USER_PROJECT table
-  app.post('/api/user-project', user_projectController.create);  
-  app.get('/api/user-project', user_projectController.list);
-  app.get('/api/user-project/:id', user_projectController.retrieve);
-  app.put('/api/user-project/:id', user_projectController.update);
-  app.delete('/api/user-project/:id', user_projectController.destroy);
+  app.post('/api/user-project', authMiddleware.ensureAuth,  user_projectController.create);  
+  app.get('/api/user-project', authMiddleware.ensureAuth,  user_projectController.list);
+  app.get('/api/user-project/:id', authMiddleware.ensureAuth,  user_projectController.retrieve);
+  app.put('/api/user-project/:id', authMiddleware.ensureAuth,  user_projectController.update);
+  app.delete('/api/user-project/:id', authMiddleware.ensureAuth,  user_projectController.destroy);
 
   //Routes for the PROJECT_TECHNOLOGIES table
-  app.post('/api/project-technology', project_technologyController.create);  
-  app.get('/api/project-technology', project_technologyController.list);
-  app.get('/api/project-technology/:id', project_technologyController.retrieve);
-  app.put('/api/project-technology/:id', project_technologyController.update);
-  app.delete('/api/project-technology/:id', project_technologyController.destroy);
+  app.post('/api/project-technology', authMiddleware.ensureAuth,  project_technologyController.create);  
+  app.get('/api/project-technology', authMiddleware.ensureAuth,  project_technologyController.list);
+  app.get('/api/project-technology/:id', authMiddleware.ensureAuth,  project_technologyController.retrieve);
+  app.put('/api/project-technology/:id', authMiddleware.ensureAuth,  project_technologyController.update);
+  app.delete('/api/project-technology/:id', authMiddleware.ensureAuth,  project_technologyController.destroy);
 
   //Routes for the USER_STORIES table
   app.post('/api/user-stories', authMiddleware.ensureAuth, userStoriesController.create);  

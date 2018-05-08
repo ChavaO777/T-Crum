@@ -6,7 +6,7 @@ const Project = require('../models').Project;
 const bcrypt = require('bcrypt-nodejs');
 //const Validation = require('../helpers/validations').Validation;
 
-const confirmationURL = 'http://localhost:4200/confirmar/';
+const confirmationURL = 'http://10.50.65.22:4205/confirmar/';
 const transporter	= mailer.createTransport({
 	host: 'smtp.office365.com',
 	port: 587,
