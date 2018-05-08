@@ -10,7 +10,7 @@ export class AuthService {
 
 
   constructor(private http:HttpClient) {
-    this.URL = 'http://10.50.22.65:8005/api';
+    this.URL = 'http://10.50.65.22:8005/api';
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
