@@ -1,11 +1,11 @@
 version: '2.1'
  
 services:
- users-db:
-   container_name: users-db
-   build: ./users-api/db
+  tcrum-db:
+   container_name: tcrum-db
+   build: ./BackEnd/db
    ports:
-     - '5433:5432'
+     - '5432:5432'
    environment:
      - POSTGRES_USER=postgres
      - POSTGRES_PASSWORD=postgres
