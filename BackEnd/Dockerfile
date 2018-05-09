@@ -14,4 +14,4 @@ RUN npm install -g sequelize-cli
 RUN sequelize init
  
 # start app
-# CMD ["npm", "start"]
+CMD ["npm", "run start:dev"]
