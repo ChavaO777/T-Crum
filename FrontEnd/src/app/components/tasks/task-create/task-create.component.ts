@@ -87,4 +87,31 @@ export class TaskCreateComponent implements OnInit {
     
       return true;
   }
+
+  isValidName()
+  {
+    if (!this.name)
+    {
+      return false;
+    }
+    return true;
+  }
+
+  isValidUserStory()
+  {
+    if (!this.user_story_id || this.user_story_id < 1)
+    {
+      return false;
+    }
+    return true;
+  }
+
+  isValidCompleted()
+  {
+    if (!this.completed)
+    {
+      return false;
+    }
+    return true;
+  }
 }
