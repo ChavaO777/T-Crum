@@ -15,3 +15,4 @@ RUN sequelize init
  
 # start app
 # CMD ["npm", "run start:dev"]
+CMD ["npm", "run", "start:dev"]
