@@ -10,7 +10,7 @@ ENV PATH /usr/src/app/node_modules/.bin:$PATH
 # install and cache app dependencies
 ADD package.json /usr/src/app/package.json
 RUN npm i
-RUN npm i -g @angular/cli@1.4.10
+RUN npm i -g @angular/cli@1.4.10 --unsafe
  
 # start app
 # CMD ["npm", "start"]
