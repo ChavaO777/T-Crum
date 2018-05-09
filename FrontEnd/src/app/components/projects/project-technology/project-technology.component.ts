@@ -19,7 +19,7 @@ export class ProjectTechnologyComponent implements OnInit {
   technology_id: number;
   version: string;
   
-  constructor(private errorHandler:ErrorHandlerService, private auth:AuthService, private crud:CrudService, private route:ActivatedRoute) { }
+  constructor(private errorHandler:ErrorHandlerService, public auth:AuthService, private crud:CrudService, private route:ActivatedRoute) { }
 
   ngOnInit() {
     this.version = '';

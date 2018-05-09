@@ -16,7 +16,7 @@ export class GetMemberComponent implements OnInit {
   user_image:User_image;
   user: User;
 
-  constructor(private crud: CrudService, private auth:AuthService, private errorHandler: ErrorHandlerService, private data:DataService) { }
+  constructor(private crud: CrudService, public auth:AuthService, private errorHandler: ErrorHandlerService, private data:DataService) { }
 
   ngOnInit() {
     this.user = new User('', '', '', '', '', null, null);

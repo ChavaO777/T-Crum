@@ -16,7 +16,7 @@ export class ProjectListComponent implements OnInit {
 
   projects: Project[];
 
-  constructor(private errorHandler:ErrorHandlerService, private crud:CrudService, private router:Router, private auth:AuthService) { }
+  constructor(private errorHandler:ErrorHandlerService, private crud:CrudService, private router:Router, public auth:AuthService) { }
 
   ngOnInit() {
     if(this.auth.isRoot()){

@@ -9,7 +9,7 @@ export class DataService {
   URL: string;
   headers: HttpHeaders;
 
-  constructor(private auth: AuthService, private http: HttpClient) {
+  constructor(public auth: AuthService, private http: HttpClient) {
     this.URL = 'http://10.50.67.83:3500/userImage';
 
     this.headers = new HttpHeaders({

@@ -22,4 +22,11 @@ describe('TaskCreateComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it ('should return false on a negative duration', () => {
+    component.duration = -1
+    const res = component.isValidDuration()
+
+    expect (res).toBe(false)
+  });
 });

@@ -22,7 +22,7 @@ export class CrudService {
     TECHNOLOGY: "technologies" 
   };
 
-  constructor(private auth: AuthService, private http: HttpClient, private log: LogService) {
+  constructor(public auth: AuthService, private http: HttpClient, private log: LogService) {
     this.URL = 'http://localhost:8000/api';
 
     if(this.auth.isLoggedIn()){
