@@ -43,9 +43,7 @@ services:
      environment:
        - NODE_ENV=${NODE_ENV}
      depends_on:
-       users-api:
-         condition: service_started
-       images-api:
+       tcrum-backend:
          condition: service_started
      links:
        - tcrum-backend
