@@ -30,7 +30,7 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
 --
--- Name: enum_Users_department_major; Type: TYPE; Schema: public; Owner: root
+-- Name: enum_Users_department_major; Type: TYPE; Schema: public; Owner: postgres
 --
 
 CREATE TYPE public."enum_Users_department_major" AS ENUM (
@@ -41,10 +41,10 @@ CREATE TYPE public."enum_Users_department_major" AS ENUM (
 );
 
 
-ALTER TYPE public."enum_Users_department_major" OWNER TO root;
+ALTER TYPE public."enum_Users_department_major" OWNER TO postgres;
 
 --
--- Name: enum_Users_system_role; Type: TYPE; Schema: public; Owner: root
+-- Name: enum_Users_system_role; Type: TYPE; Schema: public; Owner: postgres
 --
 
 CREATE TYPE public."enum_Users_system_role" AS ENUM (
@@ -53,14 +53,14 @@ CREATE TYPE public."enum_Users_system_role" AS ENUM (
 );
 
 
-ALTER TYPE public."enum_Users_system_role" OWNER TO root;
+ALTER TYPE public."enum_Users_system_role" OWNER TO postgres;
 
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- Name: Acceptance_criteria; Type: TABLE; Schema: public; Owner: root
+-- Name: Acceptance_criteria; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public."Acceptance_criteria" (
@@ -73,10 +73,10 @@ CREATE TABLE public."Acceptance_criteria" (
 );
 
 
-ALTER TABLE public."Acceptance_criteria" OWNER TO root;
+ALTER TABLE public."Acceptance_criteria" OWNER TO postgres;
 
 --
--- Name: Acceptance_criteria_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+-- Name: Acceptance_criteria_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public."Acceptance_criteria_id_seq"
@@ -88,17 +88,17 @@ CREATE SEQUENCE public."Acceptance_criteria_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."Acceptance_criteria_id_seq" OWNER TO root;
+ALTER TABLE public."Acceptance_criteria_id_seq" OWNER TO postgres;
 
 --
--- Name: Acceptance_criteria_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+-- Name: Acceptance_criteria_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public."Acceptance_criteria_id_seq" OWNED BY public."Acceptance_criteria".id;
 
 
 --
--- Name: Logs; Type: TABLE; Schema: public; Owner: root
+-- Name: Logs; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public."Logs" (
@@ -110,10 +110,10 @@ CREATE TABLE public."Logs" (
 );
 
 
-ALTER TABLE public."Logs" OWNER TO root;
+ALTER TABLE public."Logs" OWNER TO postgres;
 
 --
--- Name: Logs_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+-- Name: Logs_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public."Logs_id_seq"
@@ -125,17 +125,17 @@ CREATE SEQUENCE public."Logs_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."Logs_id_seq" OWNER TO root;
+ALTER TABLE public."Logs_id_seq" OWNER TO postgres;
 
 --
--- Name: Logs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+-- Name: Logs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public."Logs_id_seq" OWNED BY public."Logs".id;
 
 
 --
--- Name: Project_technologies; Type: TABLE; Schema: public; Owner: root
+-- Name: Project_technologies; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public."Project_technologies" (
@@ -148,10 +148,10 @@ CREATE TABLE public."Project_technologies" (
 );
 
 
-ALTER TABLE public."Project_technologies" OWNER TO root;
+ALTER TABLE public."Project_technologies" OWNER TO postgres;
 
 --
--- Name: Project_technologies_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+-- Name: Project_technologies_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public."Project_technologies_id_seq"
@@ -163,17 +163,17 @@ CREATE SEQUENCE public."Project_technologies_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."Project_technologies_id_seq" OWNER TO root;
+ALTER TABLE public."Project_technologies_id_seq" OWNER TO postgres;
 
 --
--- Name: Project_technologies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+-- Name: Project_technologies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public."Project_technologies_id_seq" OWNED BY public."Project_technologies".id;
 
 
 --
--- Name: Projects; Type: TABLE; Schema: public; Owner: root
+-- Name: Projects; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public."Projects" (
@@ -191,10 +191,10 @@ CREATE TABLE public."Projects" (
 );
 
 
-ALTER TABLE public."Projects" OWNER TO root;
+ALTER TABLE public."Projects" OWNER TO postgres;
 
 --
--- Name: Projects_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+-- Name: Projects_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public."Projects_id_seq"
@@ -206,17 +206,17 @@ CREATE SEQUENCE public."Projects_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."Projects_id_seq" OWNER TO root;
+ALTER TABLE public."Projects_id_seq" OWNER TO postgres;
 
 --
--- Name: Projects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+-- Name: Projects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public."Projects_id_seq" OWNED BY public."Projects".id;
 
 
 --
--- Name: SequelizeMeta; Type: TABLE; Schema: public; Owner: root
+-- Name: SequelizeMeta; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public."SequelizeMeta" (
@@ -224,10 +224,10 @@ CREATE TABLE public."SequelizeMeta" (
 );
 
 
-ALTER TABLE public."SequelizeMeta" OWNER TO root;
+ALTER TABLE public."SequelizeMeta" OWNER TO postgres;
 
 --
--- Name: Sprints; Type: TABLE; Schema: public; Owner: root
+-- Name: Sprints; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public."Sprints" (
@@ -240,10 +240,10 @@ CREATE TABLE public."Sprints" (
 );
 
 
-ALTER TABLE public."Sprints" OWNER TO root;
+ALTER TABLE public."Sprints" OWNER TO postgres;
 
 --
--- Name: Sprints_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+-- Name: Sprints_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public."Sprints_id_seq"
@@ -255,17 +255,17 @@ CREATE SEQUENCE public."Sprints_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."Sprints_id_seq" OWNER TO root;
+ALTER TABLE public."Sprints_id_seq" OWNER TO postgres;
 
 --
--- Name: Sprints_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+-- Name: Sprints_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public."Sprints_id_seq" OWNED BY public."Sprints".id;
 
 
 --
--- Name: Tasks; Type: TABLE; Schema: public; Owner: root
+-- Name: Tasks; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public."Tasks" (
@@ -279,10 +279,10 @@ CREATE TABLE public."Tasks" (
 );
 
 
-ALTER TABLE public."Tasks" OWNER TO root;
+ALTER TABLE public."Tasks" OWNER TO postgres;
 
 --
--- Name: Tasks_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+-- Name: Tasks_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public."Tasks_id_seq"
@@ -294,17 +294,17 @@ CREATE SEQUENCE public."Tasks_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."Tasks_id_seq" OWNER TO root;
+ALTER TABLE public."Tasks_id_seq" OWNER TO postgres;
 
 --
--- Name: Tasks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+-- Name: Tasks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public."Tasks_id_seq" OWNED BY public."Tasks".id;
 
 
 --
--- Name: Technologies; Type: TABLE; Schema: public; Owner: root
+-- Name: Technologies; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public."Technologies" (
@@ -315,10 +315,10 @@ CREATE TABLE public."Technologies" (
 );
 
 
-ALTER TABLE public."Technologies" OWNER TO root;
+ALTER TABLE public."Technologies" OWNER TO postgres;
 
 --
--- Name: Technologies_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+-- Name: Technologies_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public."Technologies_id_seq"
@@ -330,17 +330,17 @@ CREATE SEQUENCE public."Technologies_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."Technologies_id_seq" OWNER TO root;
+ALTER TABLE public."Technologies_id_seq" OWNER TO postgres;
 
 --
--- Name: Technologies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+-- Name: Technologies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public."Technologies_id_seq" OWNED BY public."Technologies".id;
 
 
 --
--- Name: User_projects; Type: TABLE; Schema: public; Owner: root
+-- Name: User_projects; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public."User_projects" (
@@ -353,10 +353,10 @@ CREATE TABLE public."User_projects" (
 );
 
 
-ALTER TABLE public."User_projects" OWNER TO root;
+ALTER TABLE public."User_projects" OWNER TO postgres;
 
 --
--- Name: User_projects_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+-- Name: User_projects_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public."User_projects_id_seq"
@@ -368,17 +368,17 @@ CREATE SEQUENCE public."User_projects_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."User_projects_id_seq" OWNER TO root;
+ALTER TABLE public."User_projects_id_seq" OWNER TO postgres;
 
 --
--- Name: User_projects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+-- Name: User_projects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public."User_projects_id_seq" OWNED BY public."User_projects".id;
 
 
 --
--- Name: User_stories; Type: TABLE; Schema: public; Owner: root
+-- Name: User_stories; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public."User_stories" (
@@ -393,10 +393,10 @@ CREATE TABLE public."User_stories" (
 );
 
 
-ALTER TABLE public."User_stories" OWNER TO root;
+ALTER TABLE public."User_stories" OWNER TO postgres;
 
 --
--- Name: User_stories_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+-- Name: User_stories_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public."User_stories_id_seq"
@@ -408,17 +408,17 @@ CREATE SEQUENCE public."User_stories_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."User_stories_id_seq" OWNER TO root;
+ALTER TABLE public."User_stories_id_seq" OWNER TO postgres;
 
 --
--- Name: User_stories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+-- Name: User_stories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public."User_stories_id_seq" OWNED BY public."User_stories".id;
 
 
 --
--- Name: User_tasks; Type: TABLE; Schema: public; Owner: root
+-- Name: User_tasks; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public."User_tasks" (
@@ -430,10 +430,10 @@ CREATE TABLE public."User_tasks" (
 );
 
 
-ALTER TABLE public."User_tasks" OWNER TO root;
+ALTER TABLE public."User_tasks" OWNER TO postgres;
 
 --
--- Name: User_tasks_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+-- Name: User_tasks_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public."User_tasks_id_seq"
@@ -445,17 +445,17 @@ CREATE SEQUENCE public."User_tasks_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."User_tasks_id_seq" OWNER TO root;
+ALTER TABLE public."User_tasks_id_seq" OWNER TO postgres;
 
 --
--- Name: User_tasks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+-- Name: User_tasks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public."User_tasks_id_seq" OWNED BY public."User_tasks".id;
 
 
 --
--- Name: Users; Type: TABLE; Schema: public; Owner: root
+-- Name: Users; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public."Users" (
@@ -472,80 +472,80 @@ CREATE TABLE public."Users" (
 );
 
 
-ALTER TABLE public."Users" OWNER TO root;
+ALTER TABLE public."Users" OWNER TO postgres;
 
 --
--- Name: Acceptance_criteria id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: Acceptance_criteria id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Acceptance_criteria" ALTER COLUMN id SET DEFAULT nextval('public."Acceptance_criteria_id_seq"'::regclass);
 
 
 --
--- Name: Logs id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: Logs id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Logs" ALTER COLUMN id SET DEFAULT nextval('public."Logs_id_seq"'::regclass);
 
 
 --
--- Name: Project_technologies id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: Project_technologies id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Project_technologies" ALTER COLUMN id SET DEFAULT nextval('public."Project_technologies_id_seq"'::regclass);
 
 
 --
--- Name: Projects id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: Projects id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Projects" ALTER COLUMN id SET DEFAULT nextval('public."Projects_id_seq"'::regclass);
 
 
 --
--- Name: Sprints id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: Sprints id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Sprints" ALTER COLUMN id SET DEFAULT nextval('public."Sprints_id_seq"'::regclass);
 
 
 --
--- Name: Tasks id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: Tasks id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Tasks" ALTER COLUMN id SET DEFAULT nextval('public."Tasks_id_seq"'::regclass);
 
 
 --
--- Name: Technologies id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: Technologies id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Technologies" ALTER COLUMN id SET DEFAULT nextval('public."Technologies_id_seq"'::regclass);
 
 
 --
--- Name: User_projects id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: User_projects id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."User_projects" ALTER COLUMN id SET DEFAULT nextval('public."User_projects_id_seq"'::regclass);
 
 
 --
--- Name: User_stories id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: User_stories id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."User_stories" ALTER COLUMN id SET DEFAULT nextval('public."User_stories_id_seq"'::regclass);
 
 
 --
--- Name: User_tasks id; Type: DEFAULT; Schema: public; Owner: root
+-- Name: User_tasks id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."User_tasks" ALTER COLUMN id SET DEFAULT nextval('public."User_tasks_id_seq"'::regclass);
 
 
 --
--- Data for Name: Acceptance_criteria; Type: TABLE DATA; Schema: public; Owner: root
+-- Data for Name: Acceptance_criteria; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public."Acceptance_criteria" (id, name, type, user_story_id, "createdAt", "updatedAt") FROM stdin;
@@ -558,7 +558,7 @@ COPY public."Acceptance_criteria" (id, name, type, user_story_id, "createdAt", "
 
 
 --
--- Data for Name: Logs; Type: TABLE DATA; Schema: public; Owner: root
+-- Data for Name: Logs; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public."Logs" (id, query, "createdAt", "updatedAt", user_id) FROM stdin;
@@ -571,7 +571,7 @@ COPY public."Logs" (id, query, "createdAt", "updatedAt", user_id) FROM stdin;
 
 
 --
--- Data for Name: Project_technologies; Type: TABLE DATA; Schema: public; Owner: root
+-- Data for Name: Project_technologies; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public."Project_technologies" (id, project_id, technology_id, version, "createdAt", "updatedAt") FROM stdin;
@@ -584,7 +584,7 @@ COPY public."Project_technologies" (id, project_id, technology_id, version, "cre
 
 
 --
--- Data for Name: Projects; Type: TABLE DATA; Schema: public; Owner: root
+-- Data for Name: Projects; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public."Projects" (id, vision, name, begin_date, end_date, background, risks, reach, "createdAt", "updatedAt", scrum_master_id) FROM stdin;
@@ -597,7 +597,7 @@ COPY public."Projects" (id, vision, name, begin_date, end_date, background, risk
 
 
 --
--- Data for Name: SequelizeMeta; Type: TABLE DATA; Schema: public; Owner: root
+-- Data for Name: SequelizeMeta; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public."SequelizeMeta" (name) FROM stdin;
@@ -616,7 +616,7 @@ COPY public."SequelizeMeta" (name) FROM stdin;
 
 
 --
--- Data for Name: Sprints; Type: TABLE DATA; Schema: public; Owner: root
+-- Data for Name: Sprints; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public."Sprints" (id, days, comment, project_id, "createdAt", "updatedAt") FROM stdin;
@@ -629,7 +629,7 @@ COPY public."Sprints" (id, days, comment, project_id, "createdAt", "updatedAt") 
 
 
 --
--- Data for Name: Tasks; Type: TABLE DATA; Schema: public; Owner: root
+-- Data for Name: Tasks; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public."Tasks" (id, duration, name, completed, user_story_id, "createdAt", "updatedAt") FROM stdin;
@@ -642,7 +642,7 @@ COPY public."Tasks" (id, duration, name, completed, user_story_id, "createdAt", 
 
 
 --
--- Data for Name: Technologies; Type: TABLE DATA; Schema: public; Owner: root
+-- Data for Name: Technologies; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public."Technologies" (id, name, "createdAt", "updatedAt") FROM stdin;
@@ -653,7 +653,7 @@ COPY public."Technologies" (id, name, "createdAt", "updatedAt") FROM stdin;
 
 
 --
--- Data for Name: User_projects; Type: TABLE DATA; Schema: public; Owner: root
+-- Data for Name: User_projects; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public."User_projects" (id, project_id, user_id, project_role, "createdAt", "updatedAt") FROM stdin;
@@ -668,7 +668,7 @@ COPY public."User_projects" (id, project_id, user_id, project_role, "createdAt",
 
 
 --
--- Data for Name: User_stories; Type: TABLE DATA; Schema: public; Owner: root
+-- Data for Name: User_stories; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public."User_stories" (id, weight, scrum_board_status, description, priority, sprint_id, "createdAt", "updatedAt") FROM stdin;
@@ -681,7 +681,7 @@ COPY public."User_stories" (id, weight, scrum_board_status, description, priorit
 
 
 --
--- Data for Name: User_tasks; Type: TABLE DATA; Schema: public; Owner: root
+-- Data for Name: User_tasks; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public."User_tasks" (id, task_id, user_id, "createdAt", "updatedAt") FROM stdin;
@@ -694,7 +694,7 @@ COPY public."User_tasks" (id, task_id, user_id, "createdAt", "updatedAt") FROM s
 
 
 --
--- Data for Name: Users; Type: TABLE DATA; Schema: public; Owner: root
+-- Data for Name: Users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public."Users" (id, department_major, name, "photo_URL", password, "createdAt", "updatedAt", system_role, uuid, confirmed) FROM stdin;
@@ -704,82 +704,82 @@ a11111111	INT	Billy Joel	test_url	$2a$10$Ke6Aa11a.k2fu3UZ1zEL9.UqM63U720h/EwJ.DZ
 a22222222	ITC	Billy Joel	test_url	$2a$10$Ke6Aa11a.k2fu3UZ1zEL9.UqM63U720h/EwJ.DZMoXIA8ZRMNPY6y	2018-05-07 18:19:22.121645-05	2018-05-07 18:19:22.121645-05	user	cf8e17a0-518b-11e8-a3d8-3be89ca651f3	t
 a33333333	ISD	Juanito Banana	test_url	$2a$10$Ke6Aa11a.k2fu3UZ1zEL9.UqM63U720h/EwJ.DZMoXIA8ZRMNPY6y	2018-05-07 18:19:22.121645-05	2018-05-07 18:19:22.121645-05	user	cf8e17a0-518b-11e8-a3d8-3be89ca651f4	t
 a44444444	INT	Mary Vargas	test_url	$2a$10$Ke6Aa11a.k2fu3UZ1zEL9.UqM63U720h/EwJ.DZMoXIA8ZRMNPY6y	2018-05-07 18:19:22.121645-05	2018-05-07 18:19:22.121645-05	user	cf8e17a0-518b-11e8-a3d8-3be89ca651f5	t
-a07104218	ITC	root Orozco Villalever		$2a$10$jYmyjh2YC6C3lda.Ur3rKu6Zn91t9phzV7RLOJqG0mvWVItaLS9Su	2018-05-07 18:20:32.374-05	2018-05-07 18:20:51.768-05	user	3cf94a50-524d-11e8-9007-5546c03ef951	t
+a07104218	ITC	postgres Orozco Villalever		$2a$10$jYmyjh2YC6C3lda.Ur3rKu6Zn91t9phzV7RLOJqG0mvWVItaLS9Su	2018-05-07 18:20:32.374-05	2018-05-07 18:20:51.768-05	user	3cf94a50-524d-11e8-9007-5546c03ef951	t
 \.
 
 
 --
--- Name: Acceptance_criteria_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+-- Name: Acceptance_criteria_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public."Acceptance_criteria_id_seq"', 5, true);
 
 
 --
--- Name: Logs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+-- Name: Logs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public."Logs_id_seq"', 5, true);
 
 
 --
--- Name: Project_technologies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+-- Name: Project_technologies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public."Project_technologies_id_seq"', 5, true);
 
 
 --
--- Name: Projects_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+-- Name: Projects_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public."Projects_id_seq"', 5, true);
 
 
 --
--- Name: Sprints_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+-- Name: Sprints_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public."Sprints_id_seq"', 5, true);
 
 
 --
--- Name: Tasks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+-- Name: Tasks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public."Tasks_id_seq"', 5, true);
 
 
 --
--- Name: Technologies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+-- Name: Technologies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public."Technologies_id_seq"', 3, true);
 
 
 --
--- Name: User_projects_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+-- Name: User_projects_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public."User_projects_id_seq"', 7, true);
 
 
 --
--- Name: User_stories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+-- Name: User_stories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public."User_stories_id_seq"', 5, true);
 
 
 --
--- Name: User_tasks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+-- Name: User_tasks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public."User_tasks_id_seq"', 5, true);
 
 
 --
--- Name: Acceptance_criteria Acceptance_criteria_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: Acceptance_criteria Acceptance_criteria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Acceptance_criteria"
@@ -787,7 +787,7 @@ ALTER TABLE ONLY public."Acceptance_criteria"
 
 
 --
--- Name: Logs Logs_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: Logs Logs_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Logs"
@@ -795,7 +795,7 @@ ALTER TABLE ONLY public."Logs"
 
 
 --
--- Name: Project_technologies Project_technologies_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: Project_technologies Project_technologies_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Project_technologies"
@@ -803,7 +803,7 @@ ALTER TABLE ONLY public."Project_technologies"
 
 
 --
--- Name: Projects Projects_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: Projects Projects_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Projects"
@@ -811,7 +811,7 @@ ALTER TABLE ONLY public."Projects"
 
 
 --
--- Name: SequelizeMeta SequelizeMeta_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: SequelizeMeta SequelizeMeta_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."SequelizeMeta"
@@ -819,7 +819,7 @@ ALTER TABLE ONLY public."SequelizeMeta"
 
 
 --
--- Name: Sprints Sprints_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: Sprints Sprints_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Sprints"
@@ -827,7 +827,7 @@ ALTER TABLE ONLY public."Sprints"
 
 
 --
--- Name: Tasks Tasks_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: Tasks Tasks_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Tasks"
@@ -835,7 +835,7 @@ ALTER TABLE ONLY public."Tasks"
 
 
 --
--- Name: Technologies Technologies_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: Technologies Technologies_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Technologies"
@@ -843,7 +843,7 @@ ALTER TABLE ONLY public."Technologies"
 
 
 --
--- Name: User_projects User_projects_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: User_projects User_projects_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."User_projects"
@@ -851,7 +851,7 @@ ALTER TABLE ONLY public."User_projects"
 
 
 --
--- Name: User_stories User_stories_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: User_stories User_stories_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."User_stories"
@@ -859,7 +859,7 @@ ALTER TABLE ONLY public."User_stories"
 
 
 --
--- Name: User_tasks User_tasks_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: User_tasks User_tasks_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."User_tasks"
@@ -867,7 +867,7 @@ ALTER TABLE ONLY public."User_tasks"
 
 
 --
--- Name: Users Users_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+-- Name: Users Users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Users"
@@ -875,7 +875,7 @@ ALTER TABLE ONLY public."Users"
 
 
 --
--- Name: Acceptance_criteria Acceptance_criteria_user_story_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+-- Name: Acceptance_criteria Acceptance_criteria_user_story_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Acceptance_criteria"
@@ -883,7 +883,7 @@ ALTER TABLE ONLY public."Acceptance_criteria"
 
 
 --
--- Name: Logs Logs_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+-- Name: Logs Logs_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Logs"
@@ -891,7 +891,7 @@ ALTER TABLE ONLY public."Logs"
 
 
 --
--- Name: Project_technologies Project_technologies_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+-- Name: Project_technologies Project_technologies_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Project_technologies"
@@ -899,7 +899,7 @@ ALTER TABLE ONLY public."Project_technologies"
 
 
 --
--- Name: Project_technologies Project_technologies_technology_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+-- Name: Project_technologies Project_technologies_technology_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Project_technologies"
@@ -907,7 +907,7 @@ ALTER TABLE ONLY public."Project_technologies"
 
 
 --
--- Name: Projects Projects_scrum_master_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+-- Name: Projects Projects_scrum_master_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Projects"
@@ -915,7 +915,7 @@ ALTER TABLE ONLY public."Projects"
 
 
 --
--- Name: Sprints Sprints_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+-- Name: Sprints Sprints_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Sprints"
@@ -923,7 +923,7 @@ ALTER TABLE ONLY public."Sprints"
 
 
 --
--- Name: Tasks Tasks_user_story_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+-- Name: Tasks Tasks_user_story_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Tasks"
@@ -931,7 +931,7 @@ ALTER TABLE ONLY public."Tasks"
 
 
 --
--- Name: User_projects User_projects_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+-- Name: User_projects User_projects_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."User_projects"
@@ -939,7 +939,7 @@ ALTER TABLE ONLY public."User_projects"
 
 
 --
--- Name: User_projects User_projects_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+-- Name: User_projects User_projects_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."User_projects"
@@ -947,7 +947,7 @@ ALTER TABLE ONLY public."User_projects"
 
 
 --
--- Name: User_stories User_stories_sprint_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+-- Name: User_stories User_stories_sprint_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."User_stories"
@@ -955,7 +955,7 @@ ALTER TABLE ONLY public."User_stories"
 
 
 --
--- Name: User_tasks User_tasks_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+-- Name: User_tasks User_tasks_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."User_tasks"
@@ -963,7 +963,7 @@ ALTER TABLE ONLY public."User_tasks"
 
 
 --
--- Name: User_tasks User_tasks_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: root
+-- Name: User_tasks User_tasks_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."User_tasks"
