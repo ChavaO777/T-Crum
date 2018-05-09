@@ -79,4 +79,12 @@ export class TaskCreateComponent implements OnInit {
 
     return true;
   }
+
+  isValidDuration()
+  {
+    if (!this.duration || this.duration < 1)
+      return false;
+    
+      return true;
+  }
 }

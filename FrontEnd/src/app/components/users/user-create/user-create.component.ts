@@ -21,7 +21,7 @@ export class UserCreateComponent implements OnInit {
   //A string to store the password confirmation
   passwordConfirmation: string; 
 
-  constructor(private errorHandler: ErrorHandlerService, private auth: AuthService, private router: Router, private crud: CrudService, private data: DataService) { }
+  constructor(private errorHandler: ErrorHandlerService, public auth: AuthService, private router: Router, private crud: CrudService, private data: DataService) { }
 
   ngOnInit() {
     if (this.auth.isLoggedIn()) {

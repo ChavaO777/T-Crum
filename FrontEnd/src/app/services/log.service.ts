@@ -8,7 +8,7 @@ export class LogService {
   headers: HttpHeaders;
   Models: {};
 
-  constructor(private auth:AuthService, private http:HttpClient) {
+  constructor(public auth:AuthService, private http:HttpClient) {
     this.URL = 'http://10.50.67.83:8000/api';
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',

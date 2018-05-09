@@ -21,7 +21,7 @@ export class MemberUpdateComponent implements OnInit {
     passwordConfirmation: string;
     user: User;
 
-    constructor(private crud: CrudService, private route: ActivatedRoute, private router: Router, private errorHandler: ErrorHandlerService, private data: DataService, private auth: AuthService) { }
+    constructor(private crud: CrudService, private route: ActivatedRoute, private router: Router, private errorHandler: ErrorHandlerService, private data: DataService, public auth: AuthService) { }
 
     ngOnInit() {
         this.selected = '';

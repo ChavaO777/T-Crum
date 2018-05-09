@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   id: string;
   password: string;
 
-  constructor(private errorHandler:ErrorHandlerService, private auth:AuthService, private router:Router) { }
+  constructor(private errorHandler:ErrorHandlerService, public auth:AuthService, private router:Router) { }
 
   ngOnInit() {
     if(this.auth.isLoggedIn()){
