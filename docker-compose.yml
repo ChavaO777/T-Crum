@@ -18,7 +18,7 @@ services:
     build: ./BackEnd/
     volumes:
       - './BackEnd:/usr/src/app'
-      - './BackEnd/package.json:/usr/src/package.json'
+      - './BackEnd/package.json:/usr/src/app/package.json'
       - /usr/src/app/node_modules
     ports:
       - '8000:8000'
