@@ -1,4 +1,4 @@
 # Dependency
 FROM postgres
-# Do not run the following command. Recreate the DB through a dump 
-# ADD create.sql /docker-entrypoint-initdb.d
+# Recreate the DB through a dump 
+ADD ./sql/tcrum_development_XXXXXX.sql /docker-entrypoint-initdb.d
