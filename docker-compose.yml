@@ -23,7 +23,7 @@ services:
     ports:
       - '8000:8000'
     environment:
-      - DATABASE_URL=postgres://postgres:postgres@tcrum-db:5432
+      - DATABASE_URL=postgres://35.185.66.4:postgres@tcrum-db:5432
       - NODE_ENV=${NODE_ENV}
       - TOKEN_SECRET=ICzX8uISDW9Bv2ZcsPUbeZx8tpVa6ajS
     depends_on:
