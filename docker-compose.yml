@@ -1,13 +1,33 @@
 version: '2.1'
  
 services:
+
   tcrum-db:
-   container_name: tcrum-db
-   build: ./BackEnd/db
-   ports:
-     - '5432:5432'
-   environment:
-     - POSTGRES_USER=postgres
-     - POSTGRES_PASSWORD=postgres
-   healthcheck:
-     test: exit 0
+    container_name: tcrum-db
+    build: ./BackEnd/db
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: exit 0
+
+  tcrum-backend:
+    container_name: tcrum-backend
+    build: ./BackEnd/
+    volumes:
+      - './BackEnd:/usr/src/app'
+      - './BackEnd/package.json:/usr/src/package.json'
+      - /usr/src/app/node_modules
+    ports:
+      - '8000:8000'
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@tcrum-db:5432
+      - NODE_ENV=${NODE_ENV}
+      - TOKEN_SECRET=ICzX8uISDW9Bv2ZcsPUbeZx8tpVa6ajS
+    depends_on:
+      tcrum-db:
+        condition: service_healthy
+    links:
+      - tcrum-db
