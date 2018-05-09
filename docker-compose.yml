@@ -31,3 +31,21 @@ services:
         condition: service_healthy
     links:
       - tcrum-db
+
+  tcrum-frontend:
+     container_name: tcrum-frontend
+     build: ./FrontEnd/
+     volumes:
+       - './FrontEnd:/usr/src/app'
+       - /usr/src/app/node_modules
+     ports:
+       - '4200:4200'
+     environment:
+       - NODE_ENV=${NODE_ENV}
+     depends_on:
+       users-api:
+         condition: service_started
+       images-api:
+         condition: service_started
+     links:
+       - tcrum-backend
