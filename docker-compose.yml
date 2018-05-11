@@ -22,10 +22,9 @@ services:
       - /usr/src/app/node_modules
     ports:
       - '8000:8000'
-      - '5432:5432'
     environment:
     # DATABASE_URL=postgres://<user name>:<password>@<address>:<port>/<container>
-      # - DATABASE_URL=postgres://postgres:postgres@tcrum-db:5432
+      - DATABASE_URL=postgres://postgres:postgres@tcrum_development:5432
       - NODE_ENV=${NODE_ENV}
       - TOKEN_SECRET=ICzX8uISDW9Bv2ZcsPUbeZx8tpVa6ajS
 
