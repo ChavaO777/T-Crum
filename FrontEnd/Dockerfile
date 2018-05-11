@@ -14,4 +14,5 @@ RUN npm i -g @angular/cli@1.4.10 --unsafe
  
 # start app
 # CMD ["npm", "start"]
-CMD ["ng", "serve"]
+# ng serve --host 0.0.0.0 --port 4200
+CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200"]
