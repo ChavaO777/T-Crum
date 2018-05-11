@@ -24,14 +24,9 @@ services:
       - '8000:8000'
     environment:
     # DATABASE_URL=postgres://<user name>:<password>@<address>:<port>/<container>
-      - DATABASE_URL=postgres://postgres:postgres@tcrum-db:5432/tcrum-db
+      # - DATABASE_URL=postgres://postgres:postgres@tcrum-db:5432
       - NODE_ENV=${NODE_ENV}
       - TOKEN_SECRET=ICzX8uISDW9Bv2ZcsPUbeZx8tpVa6ajS
-    depends_on:
-      tcrum-db:
-        condition: service_healthy
-    links:
-      - tcrum-db
 
   tcrum-frontend:
      container_name: tcrum-frontend
